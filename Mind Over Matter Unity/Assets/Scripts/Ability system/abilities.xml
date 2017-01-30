@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AbilityCollection>
+  <Abilities>
+    <Ability name="Teleport">
+      <Description>An instant travel through space</Description>
+      <BaseEffectDamage>50</BaseEffectDamage>
+      <Cooldown>2</Cooldown>
+      <TravelDistance>3</TravelDistance>
+    </Ability>
+    <Ability name="MindShield">
+      <Description>A surrounding shield that blocks all incoming damage. Enemies inside the shield will get damaged, but damage is not blocked anymore</Description>
+      <BlockingDamage>100</BlockingDamage>
+      <Cooldown>4</Cooldown>
+      <Radius>2</Radius>
+      <EffectDuration>3</EffectDuration>
+      <BaseEffectDamage>10</BaseEffectDamage>
+      <DamageTickDuration>1</DamageTickDuration>
+      <SlowPercentage>30</SlowPercentage>
+    </Ability>
+    <Ability name="EnergyShot">
+      <Description>A ray dealing high damage.</Description>
+      <BaseEffectDamage>100</BaseEffectDamage>
+      <Cooldown>4</Cooldown>
+      <CastTime>0.2</CastTime>
+    </Ability>
+  </Abilities>
+</AbilityCollection>

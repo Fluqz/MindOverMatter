@@ -28,3 +28,10 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Mind Over Matter Unity/[Ll]ibrary/
+Mind Over Matter Unity/[Tt]emp/
+Mind Over Matter Unity/[Oo]bj/
+Mind Over Matter Unity/[Bb]uild/
+Mind Over Matter Unity/[Bb]uilds/
+Mind Over Matter Unity/Assets/AssetStoreTools*
