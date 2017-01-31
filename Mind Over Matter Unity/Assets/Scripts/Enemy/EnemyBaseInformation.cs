@@ -24,13 +24,13 @@ public class EnemyBaseInformation {
         this.movementSpeed = moveSpeed;
     }
 
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Health { get; set; }
-    public int Weight { get; set; }
-    public int BaseDamage { get; set; }
-    public int Degree { get; set; }
-    public int AttackRadius { get; set; }
-    public int TerretoryRadius { get; set; }
-    public int MovementSpeed { get; set; }
+    public string Name { get {return name; } set { name = value; } }
+    public string Description { get { return description; } set { name = description; } }
+    public int Health { get { return health; } set { health = value; } }
+    public int Weight { get { return weight; } set { weight = value; } }
+    public int BaseDamage { get { return baseDamage; } set { baseDamage = value; } }
+    public int Degree { get { return degree; } set { degree = value; } }
+    public float AttackRadius { get { return attackRadius; } set { attackRadius = value; } }
+    public float TerretoryRadius { get { return terretoryRadius; } set { terretoryRadius = value; } }
+    public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
 }

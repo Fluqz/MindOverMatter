@@ -20,4 +20,6 @@ public class Tek : Enemy {
 
         this.EnemyAbilities.Add(new EnergyShot());
     }
+
+    public string Name { get; set; }
 }

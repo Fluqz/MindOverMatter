@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     private Transform transf;
 
     private Vector3 startingPosition;
+    private Vector2 input;
 
     private Movement movement;
 
@@ -28,7 +29,10 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update(){
-        movement.moving(transform, anim);
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
+        if(input.x == 0 && input.y == 0) { }
+        else movement.moving(transf, anim, input);
     }
 
 	void FixedUpdate () {

@@ -5,9 +5,11 @@ public class EnemyAI {
 
     private Vector3 basePosition;
     private GameObject player;
+    private GameObject[] enemies;
     private Vector3 playerPosition;
     private float xDif, yDif;
     public float speed;
+    private string name;
 
     private Rigidbody2D rigid;
     private Animator anim;
@@ -18,12 +20,18 @@ public class EnemyAI {
     private bool entered,
                     canAttack;
 
-    public EnemyAI(float speed, float terretory, float attackRad) {
+    public EnemyAI(string name, float speed, float terretory, float attackRad) {
+        this.name = name;
         this.speed = speed;
         this.terretoryRadius = terretory;
         this.attackRadius = attackRad;
 
         player = GameObject.FindWithTag("Player");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject go in enemies) {
+            if (go.transform.name == name)
+                transf = go.transform;
+        }
         basePosition = transf.position;
         entered = false;
         canAttack = false;

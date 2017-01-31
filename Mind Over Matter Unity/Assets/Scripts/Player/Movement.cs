@@ -14,18 +14,16 @@ public class Movement {
         isWalking = false;
     }
     	
-	public void moving (Transform transf, Animator anim) {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+	public void moving (Transform transf, Animator anim, Vector2 input) {
 
-        isWalking = (Mathf.Abs(horizontal) + Mathf.Abs(vertical)) > 0;
+        isWalking = (Mathf.Abs(input.x) + Mathf.Abs(input.y)) > 0;
 
         if (isWalking) {
             anim.SetBool("isWalking", isWalking);
-            anim.SetFloat("x", horizontal);
-            anim.SetFloat("y", vertical);
+            anim.SetFloat("x", input.x);
+            anim.SetFloat("y", input.y);
 
-            transf.Translate(new Vector3(horizontal, vertical, 0).normalized * Time.deltaTime * (distance / time), Space.World);
+            transf.Translate(new Vector3(input.x, input.y, 0).normalized * Time.deltaTime * (distance / time), Space.World);
         }
     }
 
