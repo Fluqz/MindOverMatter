@@ -40,9 +40,9 @@ public class PlayerAbilities : MonoBehaviour {
         if (Input.GetButtonDown("Fire3") && Abilities[2].Useable) {
             Use(Abilities[2]);
         }
-        if (Input.GetButtonDown("Jump") && Abilities[3].Useable) {
-            Use(Abilities[3]);
-        }
+        //if (Input.GetButtonDown("Jump") && Abilities[3].Useable) {
+            //Use(Abilities[3]);
+        //}
     }
 
     public void Use(Ability ability) {
