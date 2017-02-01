@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PainfulCreature : Enemy {
+public class PainfulCreature : CreateEnemy {
 
     private const string name = "Painful Creature",
                        description = "A slow but nasty creature.";

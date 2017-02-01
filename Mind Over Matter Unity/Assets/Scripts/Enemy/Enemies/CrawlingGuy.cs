@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrawlingGuy : Enemy {
+public class CrawlingGuy : CreateEnemy {
 
     private const string name = "Crawling Guy",
                     description = "A slow creature that will shoot in the ground to make a explosion.";

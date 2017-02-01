@@ -31,18 +31,7 @@ public class PlayerAbilities : MonoBehaviour {
     }
 
     void HandleAbilityInputs() {
-        if (Input.GetButtonDown("Fire1") && Abilities[0].Useable) {
-            Use(Abilities[0]);
-        }
-        if (Input.GetButtonDown("Fire2") && Abilities[1].Useable) {
-            Use(Abilities[1]);
-        }
-        if (Input.GetButtonDown("Fire3") && Abilities[2].Useable) {
-            Use(Abilities[2]);
-        }
-        //if (Input.GetButtonDown("Jump") && Abilities[3].Useable) {
-            //Use(Abilities[3]);
-        //}
+        
     }
 
     public void Use(Ability ability) {

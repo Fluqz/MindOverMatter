@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tek : Enemy {
+public class Tek : CreateEnemy {
     
     private const string name = "Tek",
                     description = "A fast fighter.";

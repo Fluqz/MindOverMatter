@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AI : MonoBehaviour {
+public class AI {
 
     private Vector3 basePosition;
     private GameObject player;
-    private Vector3 playerPosition;
-    private float xDif, yDif, distance = 3, time = 2;
+    private GameObject enemy;
+    private float xDist, yDist, distance = 3, time = 2;
 
     private Rigidbody2D rigid;
     private Animator anim;
@@ -16,35 +16,25 @@ public class AI : MonoBehaviour {
     private bool entered,
                     canAttack;
 
-    void Awake() {
-        anim = GetComponent<Animator>();
+    public AI(GameObject enem) {
         player = GameObject.FindWithTag("Player");
-        basePosition = transform.position;
+        enemy = enem;
+        anim = enemy.GetComponent<Animator>();
+
         entered = false;
         canAttack = false;
     }
-
-    void Update() {
-        if (entered && !canAttack) {
-            Movement();
-        }
+    
+    public Vector2 getDistanceToPlayer() {
+        xDist = player.transform.position.x - enemy.transform.position.x;
+        yDist = player.transform.position.y - enemy.transform.position.y;
+        return new Vector2(xDist, yDist);
     }
 
-    void FixedUpdate() {
-        CheckTerritory();
-    }
-
-    void Movement() {
-        xDif = player.transform.position.x - this.transform.position.x;
-        yDif = player.transform.position.y - this.transform.position.y;
-
-        this.transform.Translate(new Vector3(xDif, yDif, 0).normalized * Time.deltaTime * (distance / time), Space.World);
-    }
-
-    void CheckTerritory() {
-        if (Vector3.Distance(this.transform.position, player.transform.position) <= terretoryRadius) {
+    public void CheckTerritory() {
+        if (Vector3.Distance(enemy.transform.position, player.transform.position) <= terretoryRadius) {
             entered = true;
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= attackRadius)
+            if (Vector3.Distance(enemy.transform.position, player.transform.position) <= attackRadius)
                 canAttack = true;
             else canAttack = false;
         }

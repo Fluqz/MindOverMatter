@@ -3,29 +3,44 @@ using System.Collections;
 
 public class Movement {
 
-    private float distance = 13f;
-    private float time = 5f;
+    private float distance;
+    private float time;
     private bool isWalking;
     private bool movementEnabled;
-    
-    public Movement(float dist, float t) {
+
+    private Transform transf;
+    private Animator anim;
+
+    public Movement(float dist, float t, Transform trans, Animator ani) {
         this.distance = dist;
         this.time = t;
+        this.transf = trans;
+        this.anim = ani;
+
         isWalking = false;
+        movementEnabled = true;
     }
     	
-	public void moving (Transform transf, Animator anim, Vector2 input) {
+	public void move (Vector2 direction) {
+        Debug.Log(distance);
 
-        isWalking = (Mathf.Abs(input.x) + Mathf.Abs(input.y)) > 0;
+        if (MovementEnabled) {
 
-        if (isWalking) {
-            anim.SetBool("isWalking", isWalking);
-            anim.SetFloat("x", input.x);
-            anim.SetFloat("y", input.y);
+            isWalking = (Mathf.Abs(direction.x) + Mathf.Abs(direction.y)) > 0;
 
-            transf.Translate(new Vector3(input.x, input.y, 0).normalized * Time.deltaTime * (distance / time), Space.World);
+            if (isWalking) {
+                anim.SetBool("isWalking", isWalking);
+                anim.SetFloat("x", direction.x);
+                anim.SetFloat("y", direction.y);
+
+                this.transf.Translate(new Vector3(direction.x, direction.y, 0).normalized * Time.deltaTime * (distance / time), Space.World);
+            }
+        }
+        else {
+            anim.SetBool("isWalking", false);
         }
     }
+
 
     public float MovementSpeed { get; set; }
     public bool MovementEnabled { get; set; }

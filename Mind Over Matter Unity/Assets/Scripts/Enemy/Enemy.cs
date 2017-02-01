@@ -1,28 +1,79 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class Enemy {
+public class Enemy : MonoBehaviour {
 
-    private int criticalStrikeChance;
+    private int maxHealth,
+                currentHealth;
+
+    private bool isDead,
+                    isDamaged;
+
+    // Movement speed
+    private float distance = 10f;
+    private float time = 5f;
+
+    private Rigidbody2D rigid;
+    protected Animator anim;
+    private Transform transf;
+
+    private Vector3 startingPosition;
+    private Vector2 input;
+
+    private AI ai;
+    private Movement movement;
     private EnemyBaseInformation enemyInfo;
-    private List<Ability> abilities;
-    private EnemyAI ai;
 
-    public Enemy(EnemyBaseInformation enemyBaseInfo) {
-        this.enemyInfo = enemyBaseInfo;
-        this.ai = new EnemyAI(enemyInfo.Name, enemyInfo.MovementSpeed, enemyInfo.TerretoryRadius, enemyInfo.AttackRadius);
+    float t;
+
+    void Awake() {
+        maxHealth = 7;
+
+        transf = GetComponent<Transform>();
+        rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        //enemyInfo = new EnemyBaseInformation();
+        movement = new Movement(distance, time, transf, anim);
+        ai = new AI(this.gameObject);
+
+        //transf.transform = startingPosition;
+        currentHealth = maxHealth;
+        movement.MovementEnabled = true;
     }
 
-    public Enemy(EnemyBaseInformation enemyBaseInfo, int eCriticalStrikeChance) {
-        this.enemyInfo = enemyBaseInfo;
-        this.criticalStrikeChance = eCriticalStrikeChance;
-        this.ai = new EnemyAI(enemyInfo.Name, enemyInfo.MovementSpeed, enemyInfo.TerretoryRadius, enemyInfo.AttackRadius);
+    void Update() {
+        ai.CheckTerritory();
+        movement.move(ai.getDistanceToPlayer());
+
+        if (currentHealth == 0)
+            Death();
+    }
+
+    void FixedUpdate() {
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+
+    }
+
+    private void TakeDamage(int damage) {
+        isDamaged = true;
+    }
+
+    private void Attack() {
+        //use ability
+    }
+
+    private void Death() {
+        isDead = true;
+        movement.MovementEnabled = false;
+        anim.SetBool("Death", isDead);
     }
 
 
-    public EnemyBaseInformation EnemyInformation { get; set; }
-    public int CriticalStrikeChance { get { return criticalStrikeChance; } set { criticalStrikeChance = value; } }
-    public List<Ability> EnemyAbilities { get { return abilities; } set { abilities = value; } }
-    public EnemyAI AI { get { return ai; } set { ai = value; } }
+    public int MaxHealth { get { return maxHealth; } }
+    public int CurrentHealth { get; set; }
+    public bool IsDead { get; set; }
+    public bool IsDamaged { get; set; }
 }
