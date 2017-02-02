@@ -23,9 +23,7 @@ public class Enemy : MonoBehaviour {
     private AI ai;
     private Movement movement;
     private EnemyBaseInformation enemyInfo;
-
-    float t;
-
+    
     void Awake() {
         maxHealth = 7;
 
@@ -40,6 +38,9 @@ public class Enemy : MonoBehaviour {
         //transf.transform = startingPosition;
         currentHealth = maxHealth;
         movement.MovementEnabled = true;
+    }
+
+    void Start() {
     }
 
     void Update() {

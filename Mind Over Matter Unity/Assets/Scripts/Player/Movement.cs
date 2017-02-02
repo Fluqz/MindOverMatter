@@ -22,7 +22,6 @@ public class Movement {
     }
     	
 	public void move (Vector2 direction) {
-        Debug.Log(distance);
 
         if (MovementEnabled) {
 

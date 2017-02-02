@@ -199,7 +199,7 @@ Prefab:
       value: 94449575
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114000011484141526, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
+    - {fileID: 0}
     - {fileID: 95000011750292816, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_IsPrefabParent: 0
@@ -311,7 +311,7 @@ Prefab:
       value: 94449575
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114000011484141526, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
+    - {fileID: 0}
     - {fileID: 95000011750292816, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_IsPrefabParent: 0
@@ -703,17 +703,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &625390955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 625390946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d11267631cbf347a11e216901774b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &663962506
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +835,7 @@ ParticleSystem:
   moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 1681078828
+  randomSeed: -1742956168
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -2930,7 +2919,8 @@ Prefab:
       propertyPath: m_SortingLayerID
       value: 94449575
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114000010428928582, guid: 06905b0277aa0d2418f98762b6ff37b5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 06905b0277aa0d2418f98762b6ff37b5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1298377210
@@ -3459,7 +3449,7 @@ Prefab:
       value: 94449575
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114000011484141526, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
+    - {fileID: 0}
     - {fileID: 95000011750292816, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_IsPrefabParent: 0
@@ -3641,7 +3631,7 @@ Prefab:
       value: 94449575
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114000011484141526, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
+    - {fileID: 0}
     - {fileID: 95000011750292816, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a6fcc08b18dd049439b69fb32160309e, type: 2}
   m_IsPrefabParent: 0

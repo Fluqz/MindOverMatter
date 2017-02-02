@@ -8,15 +8,15 @@ public class DamageOverTime : AbilityBehaviours {
                           description = "A damage over time effect";
     private const ImpactTime impactTime = ImpactTime.Beginning;
     private float effectDuration,
-                    baseEffectDamage,
+                    effectDamage,
                     damageTickDuration;
     private Stopwatch durationTimer = new Stopwatch();
 
-    public DamageOverTime(float ed, float bed, float dtd)
+    public DamageOverTime(float effectDur, float effectDmg, float dotDur)
         : base(new BasicObjectInformation(name, description), impactTime) {
-        effectDuration = ed;
-        baseEffectDamage = bed;
-        damageTickDuration = dtd;
+        effectDuration = effectDur;
+        effectDamage = effectDmg;
+        damageTickDuration = dotDur;
     }
 
     public override void Action(GameObject player, GameObject enemy) {

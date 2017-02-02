@@ -1,46 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 using Debug = UnityEngine.Debug;
-public class PlayerAbilities : MonoBehaviour {
+public class PlayerAbilities {
 
-    private List<Ability> abilities;
-    private Stopwatch cooldownTimer = new Stopwatch();
-    private List<string> chosenAbilities;
+    private Ability[] abilities;
+    private Stopwatch cooldownTimer;
     private bool abilitiesDisabled;
 
-    void Awake() {
-        abilities = new List<Ability>();
-        chosenAbilities = new List<string>();
-        chosenAbilities.Add("Teleport");
-        LoadAbilities(chosenAbilities);
-        abilitiesDisabled = false;
-}
+    public PlayerAbilities() {
+        abilities = new Ability[4];
+        cooldownTimer = new Stopwatch();
+    }
 
-    void Update() {
-        HandleAbilityInputs();
+    public void AddOrReplaceAbility(Ability ab, int index) {
+        PlayerInformation.Abilities[index] = ab;
+        abilities[index] = PlayerInformation.Abilities[index];
+    }
+
+    public void RemoveAbility(int index) {
+        PlayerInformation.Abilities[index] = null;
+        abilities[index] = PlayerInformation.Abilities[index];
     }
 
 
-    void LoadAbilities(List<string> chosenAbilities) {
-        //for(int i = 0; i < 4; i++) {
-            Abilities.Add(new Teleport());
-            Abilities.Add(new MindShield());
-    }
-
-    void HandleAbilityInputs() {
-        
-    }
-
-    public void Use(Ability ability) {
+    public void UseAbility(Ability ability) {
         cooldownTimer = new Stopwatch();
         cooldownTimer.Start();
         ability.Useable = false;
-        ability.UseAbility(this.gameObject, GameObject.FindWithTag("Enemy"));
-        
-        StartCoroutine(StartCooldown(ability));
+        ability.UseAbility(PlayerInformation.PlayerGO, GameObject.FindWithTag("Enemy"));
+
+        Job.make(StartCooldown(ability));
     }
 
     private IEnumerator StartCooldown(Ability ability) {
@@ -54,5 +45,5 @@ public class PlayerAbilities : MonoBehaviour {
         yield return null;
     }
     
-    public List<Ability> Abilities { get { return abilities; } }
+    public Ability[] Abilities { get { return abilities; } }
 }

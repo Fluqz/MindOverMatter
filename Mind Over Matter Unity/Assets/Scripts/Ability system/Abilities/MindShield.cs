@@ -9,17 +9,17 @@ public class MindShield : Ability {
                         cooldown = 4f,
                         radius = 2f,
                         effectDuration = 3f,
-                        baseEffectDamage = 10f,
+                        effectDamage = 10f,
                         damageTickDuration = 1f,
                         slowPercentage = 30f;
 
     public MindShield()
         : base(new BasicObjectInformation(name, description), cooldown) {
 
-        Protection protection = new Protection(blockingDamage);
+        Protection protection = new Protection();
         this.Behaviours.Add(protection);
 
-        AreaOfEffect aoe = new AreaOfEffect(radius, effectDuration, baseEffectDamage, damageTickDuration);
+        AreaOfEffect aoe = new AreaOfEffect(radius, effectDuration, effectDamage, damageTickDuration);
         this.Behaviours.Add(aoe);
 
         Snare snare = new Snare(effectDuration, slowPercentage);

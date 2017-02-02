@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Diagnostics;
 
-using Debug = UnityEngine.Debug;
 
 public class Player : MonoBehaviour {
 
@@ -21,31 +19,53 @@ public class Player : MonoBehaviour {
     private Transform transf;
 
     private Vector3 startingPosition;
+    private Vector2 startingDirection;
     private Vector2 input;
 
-    private Movement movement;
+    private PlayerInput playerInput;
+    private PlayerAbilities playerAbilities;
 
-    float t;
+    public void InitPlayer() {
+        PlayerInformation.Name = "Kaphale";
+        PlayerInformation.Description = "Brain Village guy";
+        PlayerInformation.Distance = 13f;
+        PlayerInformation.Time = 5f;
+        PlayerInformation.PlayerGO = this.gameObject;
+        PlayerInformation.Abilities = new Ability[4];
+    }
 
-	void Awake () {
+
+    void Awake () {
         maxHealth = 7;
+        InitPlayer();
 
         transf = GetComponent<Transform>();
 		rigid = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 
-        movement = new Movement(distance, time, transf, anim);
+        playerInput = new PlayerInput();
+        playerInput.Movement = new Movement(distance, time, transf, anim);
+        playerAbilities = playerInput.PlayerAbilities;
 
+        playerAbilities.AddOrReplaceAbility(new Teleport(), 0);
+        playerAbilities.AddOrReplaceAbility(new MindShield(), 1);
+        playerAbilities.AddOrReplaceAbility(new EnergyShot(), 2);
+        playerAbilities.AddOrReplaceAbility(new SwordThrust(), 3);
+
+        startingDirection = new Vector2(0, -1);
         transf.position = startingPosition = new Vector3(-13, -4, 0);
         currentHealth = maxHealth;
-        movement.MovementEnabled = true;
+        playerInput.Movement.MovementEnabled = true;
     }
 
-	void Update(){
-        HandleInputs();
+    void Start() {
+        anim.SetFloat("x", startingDirection.x);
+        anim.SetFloat("y", startingDirection.y);
+    }
 
-        if(input.x != 0 || input.y != 0)
-            movement.move(input);
+	void Update() {
+        playerInput.UpdateInput();
+
 
         if (currentHealth == 0)
             Death();
@@ -54,31 +74,17 @@ public class Player : MonoBehaviour {
 	void FixedUpdate () {
 	}
 
+
     void OnCollisionEnter2D(Collision2D other) {
 
-    }
-
-    private void HandleInputs() {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
-
-        /*if (Input.GetButtonDown("Fire1") && Abilities[0].Useable) {
-            Use(Abilities[0]);
-        }
-        if (Input.GetButtonDown("Fire2") && Abilities[1].Useable) {
-            Use(Abilities[1]);
-        }
-        if (Input.GetButtonDown("Fire3") && Abilities[2].Useable) {
-            Use(Abilities[2]);
-        }
-        if (Input.GetButtonDown("Jump") && Abilities[3].Useable) {
-        Use(Abilities[3]);
-        }*/
     }
 
     private void TakeDamage(int damage) {
         isDamaged = true;
     }
+
+    private void BlockDamage(int damage) { }
+    private void BlockDamage(int damage, Vector2 direction) { }
 
     private void Attack() {
         //use ability
@@ -86,7 +92,7 @@ public class Player : MonoBehaviour {
 
     private void Death() {
         isDead = true;
-        movement.MovementEnabled = false;
+        playerInput.Movement.MovementEnabled = false;
         anim.SetBool("Death", isDead);
     }
         

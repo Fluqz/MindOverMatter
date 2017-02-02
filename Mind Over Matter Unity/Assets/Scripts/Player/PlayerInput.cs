@@ -1,0 +1,84 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class PlayerInput {
+
+    private Movement movement;
+    public Movement Movement { get { return movement; } set { movement = value; } }
+
+    private PlayerAbilities playerAbilities;
+    public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
+
+    private Vector2 input;
+
+    private bool inGame;
+
+    public PlayerInput() {
+        playerAbilities = new PlayerAbilities();
+        inGame = true;
+    }
+
+    public void UpdateInput() {
+        this.input.x = Input.GetAxisRaw("Horizontal");
+        this.input.y = Input.GetAxisRaw("Vertical");
+
+
+        if (input.x != 0 || input.y != 0)
+            Move();
+
+        Ability1();
+        Ability2();
+        Ability3();
+        Ability4();
+    }
+
+    // WALK
+    public void Move() {
+        movement.move(this.input);
+    }
+
+    // 
+    public void RightStick(Vector2 input) { }
+
+    // A 
+   public void Ability1() {
+        if (Input.GetButtonDown("Fire1") && PlayerInformation.Abilities[0].Useable) {
+            Debug.Log("A");
+            playerAbilities.UseAbility(PlayerInformation.Abilities[0]);
+        }
+    }
+    // B
+    public void Ability2() {
+        if (Input.GetButtonDown("Fire2") && PlayerInformation.Abilities[1].Useable) {
+            Debug.Log("B");
+            playerAbilities.UseAbility(PlayerInformation.Abilities[1]);
+        }
+    }
+    // Y
+    public void Ability3() {
+        if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
+            Debug.Log("Y");
+            playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
+        }
+    }
+    // X
+    public void Ability4() {
+        if (Input.GetButtonDown("Fire3") && PlayerInformation.Abilities[3].Useable) {
+            Debug.Log("X");
+            playerAbilities.UseAbility(PlayerInformation.Abilities[3]);
+        }
+    }
+
+    // Left Trigger
+    public void ControlEnemy() { }
+    //
+    public void RightTrigger() { }
+    //
+    public void LeftBumper() { }
+    //
+    public void RightBumper() { }
+    //
+    public void StartButton() { }
+    //
+    public void BackButton() { }
+}

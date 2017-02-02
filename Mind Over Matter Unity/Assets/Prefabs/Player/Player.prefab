@@ -24,7 +24,6 @@ GameObject:
   - 61: {fileID: 61000011444921926}
   - 114: {fileID: 114000011653259958}
   - 95: {fileID: 95000012295913784}
-  - 114: {fileID: 114000010428928582}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -93,17 +92,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010428928582
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013142631590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d5664c1763bf14db52292ddf94a5a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000011653259958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,8 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6959bbdc37764599c364f837b810a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 13
-  time: 5
 --- !u!212 &212000011154656040
 SpriteRenderer:
   m_ObjectHideFlags: 1
