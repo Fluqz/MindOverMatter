@@ -17,7 +17,7 @@ public class AbilityBehaviours {
         End
     }
 
-    public virtual void Action(GameObject player, GameObject enemy) {
+    public virtual void Action(GameObject player) {
         Debug.LogWarning("Attach Action");
     }
 

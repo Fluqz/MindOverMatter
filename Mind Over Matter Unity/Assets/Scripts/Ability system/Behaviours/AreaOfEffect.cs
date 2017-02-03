@@ -9,7 +9,7 @@ public class AreaOfEffect : AbilityBehaviours {
     private const ImpactTime impactTime = ImpactTime.End;
     private float areaRadius,
                     effectDuration,
-                    baseEffectDamage;
+                    effectDamage;
     private Stopwatch durationTimer = new Stopwatch();
     private bool isOccupied;
     private float damageTickDuration;
@@ -19,12 +19,12 @@ public class AreaOfEffect : AbilityBehaviours {
         : base(new BasicObjectInformation(name, description), impactTime) {
         areaRadius = areaRad;
         effectDuration = effectDur;
-        baseEffectDamage = baseEffectDmg;
+        effectDamage = baseEffectDmg;
         damageTickDuration = damageTickDur;
         isOccupied = false;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
   /*      CircleCollider2D bc;
         if (this.gameObject.GetComponent<CircleCollider2D>() == null)
             bc = this.gameObject.AddComponent<CircleCollider2D>();

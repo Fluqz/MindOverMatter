@@ -29,7 +29,7 @@ public class PlayerAbilities {
         cooldownTimer = new Stopwatch();
         cooldownTimer.Start();
         ability.Useable = false;
-        ability.UseAbility(PlayerInformation.PlayerGO, GameObject.FindWithTag("Enemy"));
+        ability.PerformAbility(PlayerInformation.PlayerGO);
 
         Job.make(StartCooldown(ability));
     }

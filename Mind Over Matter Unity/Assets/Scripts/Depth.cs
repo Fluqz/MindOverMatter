@@ -1,31 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditorInternal;
+using System.Reflection;
+using System;
 
 public class Depth : MonoBehaviour {
 
-    public BoxCollider2D obj;
-    public BoxCollider2D objTrigger;
+    public Collider2D obj;
+    public Collider2D objTrigger;
     private SpriteRenderer objSprite, otherSprite;
+    private string oldSortingLayer;
+
     
     void Start () {
         Physics2D.IgnoreCollision(obj, objTrigger, true);
         objSprite = GetComponent<SpriteRenderer>();
-        
+        oldSortingLayer = objSprite.sortingLayerName;
     }
 	
 	void OnTriggerEnter2D(Collider2D other) {
         otherSprite = other.gameObject.GetComponent<SpriteRenderer>();
+        Debug.Log("entered");
 
         if (other.transform.position.y > transform.position.y)
-            objSprite.sortingOrder = otherSprite.sortingOrder + 1;
-        else objSprite.sortingOrder = otherSprite.sortingOrder - 1;
-        if (otherSprite.sortingOrder > objSprite.sortingOrder)
-            objSprite.sortingOrder = otherSprite.sortingOrder+1;
+            objSprite.sortingLayerName = "InFrontOfPlayer";
+        else objSprite.sortingLayerName = oldSortingLayer;
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        otherSprite = other.gameObject.GetComponent<SpriteRenderer>();
-        if (otherSprite.sortingOrder < objSprite.sortingOrder)
-            objSprite.sortingOrder = otherSprite.sortingOrder -1;
+        Debug.Log("entered");
+
+        if (other.transform.position.y < transform.position.y)
+            objSprite.sortingLayerName = oldSortingLayer;
+        else objSprite.sortingLayerName = "InFrontOfPlayer";
+    }
+
+
+    public string GetSortingLayerNames(string layer) {
+        Type internalEditorUtilityType = typeof(InternalEditorUtility);
+        PropertyInfo sortingLayersProperty = internalEditorUtilityType.GetProperty("sortingLayerNames", BindingFlags.Static | BindingFlags.NonPublic);
+        var temp = (string[])sortingLayersProperty.GetValue(null, new object[0]);
+        foreach(string s in temp) {
+            if (s.Contains(layer))
+                return s;
+        }
+        return null;
     }
 }

@@ -17,7 +17,7 @@ public class Snare : AbilityBehaviours {
         slowPercent = slowPerc;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
     }
 
     private IEnumerator Slowing(GameObject objectHit) {

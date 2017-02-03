@@ -14,7 +14,7 @@ public class SpaceTravel : AbilityBehaviours {
         distance = dist;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         // use distance

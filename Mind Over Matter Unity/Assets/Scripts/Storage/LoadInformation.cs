@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadInformation : MonoBehaviour {
+public class LoadInformation {
 
     public static void LoadAllInformation() {
         GameInformation.PlayerLevel = PlayerPrefs.GetInt(PlayerPrefs.GetString("PLAYERLEVEL"));

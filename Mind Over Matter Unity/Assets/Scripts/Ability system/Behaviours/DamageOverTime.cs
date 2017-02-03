@@ -19,7 +19,7 @@ public class DamageOverTime : AbilityBehaviours {
         damageTickDuration = dotDur;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
        // StartCoroutine(DOT());
     }
 

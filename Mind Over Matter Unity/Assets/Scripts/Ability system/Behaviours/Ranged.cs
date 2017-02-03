@@ -14,7 +14,7 @@ public class Ranged : AbilityBehaviours {
         distance = dist;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
     
     }
 

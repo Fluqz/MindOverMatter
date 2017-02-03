@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 public class AreaOfEffectSnare : AbilityBehaviours {
@@ -22,21 +23,15 @@ public class AreaOfEffectSnare : AbilityBehaviours {
         isOccupied = false;
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
-        if (Vector3.Distance(enemy.transform.position, player.transform.position) < areaRadius) {
-            
+    public override void Action(GameObject player) {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject go in enemies) {
+            if(Vector3.Distance(go.transform.position, player.transform.position) < areaRadius) {
+                
+            }
         }
+        //if (Vector3.Distance(enemy.transform.position, player.transform.position) < areaRadius) { }
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (isOccupied) {
-            //do damage
-        }
-        else
-            isOccupied = true;
-    }
-
-    void OnTriggerExit(Collider other) {
-        isOccupied = false;
-    }
 }

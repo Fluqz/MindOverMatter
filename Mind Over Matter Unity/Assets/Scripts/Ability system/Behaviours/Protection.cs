@@ -11,6 +11,6 @@ public class Protection : AbilityBehaviours {
         : base(new BasicObjectInformation(name, description), impactTime) {
     }
 
-    public override void Action(GameObject player, GameObject enemy) {
+    public override void Action(GameObject player) {
     }
 }

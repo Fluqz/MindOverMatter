@@ -3,11 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-
-    CreatePlayer createPlayer;
-    
+        
     public void StartNewGame() {
-        SaveInformation.SaveAllInformation();
         SceneManager.LoadScene("Game");
     }
 

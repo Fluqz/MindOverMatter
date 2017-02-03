@@ -46,11 +46,9 @@ public class Ability {
         useable = true;
     }
 
-    public void UseAbility(GameObject player, GameObject enemy) {
+    public void PerformAbility(GameObject player) {
         foreach(AbilityBehaviours b in this.behaviours) {
-            if(b.AbilityImpactTime == global::AbilityBehaviours.ImpactTime.Beginning) {
-                b.Action(player, enemy);
-            }
+            b.Action(player);
         }
     }
 
