@@ -6,15 +6,16 @@ public class EnergyShot : Ability {
 
     public const string name = "Energy Shot",
                         description = "A energy shot dealing high damage.";
-    private const float baseEffectDamage = 50f,
+    private const float effectDamage = 50f,
                         cooldown = 3f,
-                        castTime = .2f;
+                        castTime = .2f,
+                        distance = 30f,
+                        speed = 10 / 6;
 
-    public EnergyShot()
-        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, baseEffectDamage, castTime){
-
-        this.Behaviours.Add(new Ranged(15f));
-        this.Behaviours.Add(new AreaOfEffect(2f, 3f, 15f, 1f));
+    public EnergyShot(GameObject prefab)
+        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, castTime, prefab){
+        Prefab = prefab;
+        this.Behaviours.Add(new Ranged(distance, speed, effectDamage));
     }
 
 }

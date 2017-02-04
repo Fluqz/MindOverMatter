@@ -18,7 +18,6 @@ public class Tek : CreateEnemy {
     public Tek() 
         :base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
 
-        this.EnemyAbilities.Add(new EnergyShot());
     }
 
     public string Name { get; set; }

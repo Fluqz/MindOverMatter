@@ -44,6 +44,7 @@ public class PlayerInput {
    public void Ability1() {
         if (Input.GetButtonDown("Fire1") && PlayerInformation.Abilities[0].Useable) {
             Debug.Log("A");
+            Debug.Log(PlayerInformation.Abilities[0].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[0]);
         }
     }
@@ -51,6 +52,7 @@ public class PlayerInput {
     public void Ability2() {
         if (Input.GetButtonDown("Fire2") && PlayerInformation.Abilities[1].Useable) {
             Debug.Log("B");
+            Debug.Log(PlayerInformation.Abilities[1].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[1]);
         }
     }
@@ -58,6 +60,7 @@ public class PlayerInput {
     public void Ability3() {
         if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
             Debug.Log("Y");
+            Debug.Log(PlayerInformation.Abilities[2].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
         }
     }
@@ -65,6 +68,7 @@ public class PlayerInput {
     public void Ability4() {
         if (Input.GetButtonDown("Fire3") && PlayerInformation.Abilities[3].Useable) {
             Debug.Log("X");
+            Debug.Log(PlayerInformation.Abilities[3].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[3]);
         }
     }

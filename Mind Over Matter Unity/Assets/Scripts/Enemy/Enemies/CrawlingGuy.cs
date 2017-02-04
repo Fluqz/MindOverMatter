@@ -17,6 +17,5 @@ public class CrawlingGuy : CreateEnemy {
     public CrawlingGuy()
         : base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
 
-        this.EnemyAbilities.Add(new EnergyShot());
     }
 }

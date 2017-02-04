@@ -46,17 +46,37 @@ public class Ability {
         useable = true;
     }
 
+    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type, float dmg, float timeToCast, GameObject prefa) {
+        objectInfo = aBasicInfo;
+        cooldown = cd;
+        abilityType = type;
+        damage = dmg;
+        castTime = timeToCast;
+        behaviours = new List<AbilityBehaviours>();
+        prefab = prefa;
+        useable = true;
+    }
+
     public void PerformAbility(GameObject player) {
         foreach(AbilityBehaviours b in this.behaviours) {
-            b.Action(player);
+            if (prefab != null) {
+                b.Action(player, prefab);
+                Debug.Log("prefab");
+            }
+            else {
+                b.Action(player);
+                Debug.Log("no prefab");
+            }
         }
     }
 
+
+    public BasicObjectInformation AbilityInfo { get { return objectInfo; } }
     public List<AbilityBehaviours> Behaviours { get { return behaviours; } }
     public AbilityType GetAbilityType { get { return abilityType; } }
     public float Damage { get { return damage; } }
     public float Cooldown { get { return cooldown; } }
     public float CastTime { get { return castTime; } }
-    public GameObject Prefab { get { return prefab; } }
+    public GameObject Prefab { get { return prefab; } set { prefab = value; } }
     public bool Useable { get { return useable; } set { useable = value; } }
 }

@@ -44,8 +44,9 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        ai.CheckTerritory();
-        movement.move(ai.getDistanceToPlayer());
+        ai.CheckTerritory(movement);
+        if (movement.MovementEnabled)
+            movement.move(ai.getDistanceToPlayer());
 
         if (currentHealth == 0)
             Death();

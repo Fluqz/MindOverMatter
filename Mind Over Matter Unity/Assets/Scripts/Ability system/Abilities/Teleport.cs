@@ -6,16 +6,17 @@ public class Teleport : Ability {
     
     public const string name = "Teleport",
                         description = "An instant travel throughout space";
-    private const float baseEffectDamage = 50f,
+    private const float effectDamage = 50f,
                         cooldown = 2f,
-                        travelDistance = 3f;
+                        travelDistance = 3f,
+                        timeToCast = .2f;
 
     public Teleport()
-        : base(new BasicObjectInformation(name, description), cooldown){
+        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, timeToCast) {
 
         SpaceTravel spaceTravel = new SpaceTravel(travelDistance);
         this.Behaviours.Add(spaceTravel);
-        CollisionDamage collision = new CollisionDamage(baseEffectDamage);
+        CollisionDamage collision = new CollisionDamage(effectDamage);
         this.Behaviours.Add(collision);
 
     }

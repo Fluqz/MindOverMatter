@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    public GameObject energyShotPrefab;
+
     private int maxHealth,
                 currentHealth;
 
@@ -49,7 +51,7 @@ public class Player : MonoBehaviour {
 
         playerAbilities.AddOrReplaceAbility(new Teleport(), 0);
         playerAbilities.AddOrReplaceAbility(new MindShield(), 1);
-        playerAbilities.AddOrReplaceAbility(new EnergyShot(), 2);
+        playerAbilities.AddOrReplaceAbility(new EnergyShot(energyShotPrefab), 2);
         playerAbilities.AddOrReplaceAbility(new SwordThrust(), 3);
 
         startingDirection = new Vector2(0, -1);

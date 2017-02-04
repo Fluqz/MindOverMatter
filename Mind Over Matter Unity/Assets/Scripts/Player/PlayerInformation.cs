@@ -13,6 +13,9 @@ public static class PlayerInformation {
 
     private static GameObject playerGO;
     
+    public static void TakeDamage(float damage) {
+
+    }
 
     public static string Name { get; set; }
     public static string Description { get; set; }

@@ -6,13 +6,13 @@ public class AI {
     private Vector3 basePosition;
     private GameObject player;
     private GameObject enemy;
-    private float xDist, yDist, distance = 3, time = 2;
+    private float xDist, yDist, distance = 3f, time = 2f;
 
     private Rigidbody2D rigid;
     private Animator anim;
 
-    private float terretoryRadius = 20,
-                    attackRadius = 2;
+    private float terretoryRadius = 12f,
+                    attackRadius = 2f;
     private bool entered,
                     canAttack;
 
@@ -31,15 +31,21 @@ public class AI {
         return new Vector2(xDist, yDist);
     }
 
-    public void CheckTerritory() {
-        if (Vector3.Distance(enemy.transform.position, player.transform.position) <= terretoryRadius) {
+    public void CheckTerritory(Movement movement) {
+        float disToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
+        if (disToPlayer <= terretoryRadius) {
             entered = true;
-            if (Vector3.Distance(enemy.transform.position, player.transform.position) <= attackRadius)
+            anim.SetBool("enteredTerretory", entered);
+            if (disToPlayer <= attackRadius) {
                 canAttack = true;
+            }
             else canAttack = false;
+            movement.MovementEnabled = !canAttack;
+            return;
         }
         else entered = false;
-        anim.SetBool("enteredTerretory", entered);
+
+        movement.MovementEnabled = false;
     }
 
 }

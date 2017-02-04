@@ -10,28 +10,33 @@ public class Depth : MonoBehaviour {
 
     public Collider2D obj;
     public Collider2D objTrigger;
-    private SpriteRenderer objSprite, otherSprite;
+    private BoxCollider2D boxCol;
+    private SpriteRenderer objSprite;
     private string oldSortingLayer;
 
     
     void Start () {
+        boxCol = GetComponent<BoxCollider2D>();
         Physics2D.IgnoreCollision(obj, objTrigger, true);
+        Physics2D.IgnoreCollision(obj, boxCol);
         objSprite = GetComponent<SpriteRenderer>();
         oldSortingLayer = objSprite.sortingLayerName;
     }
 	
 	void OnTriggerEnter2D(Collider2D other) {
-        otherSprite = other.gameObject.GetComponent<SpriteRenderer>();
-        Debug.Log("entered");
-
-        if (other.transform.position.y > transform.position.y)
-            objSprite.sortingLayerName = "InFrontOfPlayer";
-        else objSprite.sortingLayerName = oldSortingLayer;
+        if (other.CompareTag("Enemy")) {
+            if (other.transform.position.y > transform.position.y)
+                other.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+            else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+        else if(other.CompareTag("Player")) {
+            if (other.transform.position.y > transform.position.y)
+                objSprite.sortingLayerName = "InFrontOfPlayer";
+            else objSprite.sortingLayerName = oldSortingLayer;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("entered");
-
         if (other.transform.position.y < transform.position.y)
             objSprite.sortingLayerName = oldSortingLayer;
         else objSprite.sortingLayerName = "InFrontOfPlayer";
