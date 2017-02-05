@@ -60,12 +60,10 @@ public class Ability {
     public void PerformAbility(GameObject player) {
         foreach(AbilityBehaviours b in this.behaviours) {
             if (prefab != null) {
-                b.Action(player, prefab);
-                Debug.Log("prefab");
+                b.Action(player, prefab, this);
             }
             else {
                 b.Action(player);
-                Debug.Log("no prefab");
             }
         }
     }

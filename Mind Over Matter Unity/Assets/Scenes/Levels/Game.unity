@@ -830,6 +830,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012708896170, guid: 88bda744e45ae924f812647232f4d7cd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013407418816, guid: 88bda744e45ae924f812647232f4d7cd,
+        type: 2}
+      propertyPath: energyShotPrefab
+      value: 
+      objectReference: {fileID: 1000013240881312, guid: a79e2ace72b717b4c8b4670662505c85,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88bda744e45ae924f812647232f4d7cd, type: 2}
   m_IsPrefabParent: 0

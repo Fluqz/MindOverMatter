@@ -37,9 +37,16 @@ public class Depth : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        if (other.transform.position.y < transform.position.y)
-            objSprite.sortingLayerName = oldSortingLayer;
-        else objSprite.sortingLayerName = "InFrontOfPlayer";
+        if (other.CompareTag("Enemy")) {
+            if (other.transform.position.y < transform.position.y)
+                other.GetComponent<SpriteRenderer>().sortingOrder += 1;
+            else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+        else if (other.CompareTag("Player")) {
+            if (other.transform.position.y < transform.position.y)
+                objSprite.sortingLayerName = oldSortingLayer;
+            else objSprite.sortingLayerName = "InFrontOfPlayer";
+        }
     }
 
 

@@ -38,7 +38,7 @@ public class Player : MonoBehaviour {
 
 
     void Awake () {
-        maxHealth = 7;
+        PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 7;
         InitPlayer();
 
         transf = GetComponent<Transform>();
@@ -56,7 +56,6 @@ public class Player : MonoBehaviour {
 
         startingDirection = new Vector2(0, -1);
         transf.position = startingPosition = new Vector3(-13, -4, 0);
-        currentHealth = maxHealth;
         playerInput.Movement.MovementEnabled = true;
     }
 

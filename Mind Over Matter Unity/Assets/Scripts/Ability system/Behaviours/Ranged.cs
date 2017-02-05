@@ -19,16 +19,28 @@ public class Ranged : AbilityBehaviours {
         effectDamage = effectDmg;
     }
 
-    public override void Action(GameObject player, GameObject prefab) {
-        GameObject bullet = GameObject.Instantiate(prefab, player.transform.position+1.0f*player.transform.forward, Quaternion.identity) as GameObject;
+    public override void Action(GameObject player, GameObject prefab, Ability ability) {
+        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        float degree = GetDirection(dir);
+        //Rigidbody2D bullet = GameObject.Instantiate(prefab, player.transform.position + 1.0f * player.transform.right, Quaternion.identity) as Rigidbody2D;
+        Rigidbody2D bullet = GameObject.Instantiate(prefab, new Vector3(player.transform.position.x, player.transform.position.y, degree), Quaternion.identity) as Rigidbody2D;
 
-        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(100,0));
+
+
     }
 
-    private IEnumerator checkDistance(Vector3 playerPosition, GameObject prefab) {
-       
+    private IEnumerator Shoot(GameObject player, GameObject bullet) {
+
 
         yield return null;
     }
-    
+
+    private float GetDirection(Vector2 input) {
+
+        float degree = (float)Math.Atan2(input.y, input.x);
+
+        return degree;
+    }
+
+
 }

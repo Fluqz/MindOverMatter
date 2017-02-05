@@ -23,6 +23,9 @@ public class AbilityBehaviours {
     public virtual void Action(GameObject player, GameObject prefab) {
         Debug.LogWarning("Attach Action");
     }
+    public virtual void Action(GameObject player, GameObject prefab, Ability ability) {
+        Debug.LogWarning("Attach Action");
+    }
 
     public BasicObjectInformation AbilityBehaviorInfo { get { return objectInfo; } }
     public ImpactTime AbilityImpactTime { get { return impactTime; } }
