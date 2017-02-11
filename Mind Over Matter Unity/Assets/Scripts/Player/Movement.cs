@@ -32,7 +32,7 @@ public class Movement {
                 anim.SetFloat("x", direction.x);
                 anim.SetFloat("y", direction.y);
 
-                this.transf.Translate(new Vector3(direction.x, direction.y, 0).normalized * Time.deltaTime * (distance / time), Space.World);
+                this.transf.Translate(new Vector3(direction.x, direction.y, 0).normalized * (distance / time) * Time.deltaTime, Space.World);
             }
         }
         else {
@@ -41,6 +41,6 @@ public class Movement {
     }
 
 
-    public float MovementSpeed { get; set; }
+    public float MovementSpeed { get { return (distance / time); } }
     public bool MovementEnabled { get; set; }
 }

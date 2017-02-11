@@ -32,7 +32,7 @@ public class PlayerInput {
         Ability4();
     }
 
-    // WALK
+    // WALK - LeftStick
     public void Move() {
         movement.move(this.input);
     }
@@ -73,14 +73,14 @@ public class PlayerInput {
         }
     }
 
-    // Left Trigger
-    public void ControlEnemy() { }
-    //
+    // 
     public void RightTrigger() { }
     //
-    public void LeftBumper() { }
+    public void LeftTrigger() { }
     //
     public void RightBumper() { }
+    // Left Bumper
+    public void ControlEnemy() { }
     //
     public void StartButton() { }
     //
