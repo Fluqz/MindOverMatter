@@ -8,6 +8,7 @@ TagManager:
   - Player
   - Background
   - UI
+  - Environment
   layers:
   - Default
   - TransparentFX
