@@ -17,6 +17,6 @@ public class PainfulCreature : CreateEnemy {
     public PainfulCreature() 
         :base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
 
-        this.EnemyAbilities.Add(new Teleport());
+        //this.EnemyAbilities.Add(new Teleport());
     }
 }

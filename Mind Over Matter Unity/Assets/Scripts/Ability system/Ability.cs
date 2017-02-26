@@ -8,12 +8,15 @@ public class Ability {
 
     private BasicObjectInformation objectInfo;
     private List<AbilityBehaviours> behaviours;
+    protected List<GameObject> prefabPaths;
     private AbilityType abilityType;
-    private GameObject prefab;
     private bool useable;
     private float damage,
                   cooldown,
-                  castTime;
+                  castTime,
+                    range;
+
+    private Animator anim;
 
     public enum AbilityType {
         ranged,
@@ -24,6 +27,7 @@ public class Ability {
         objectInfo = aBasicInfo;
         cooldown = cd;
         behaviours = new List<AbilityBehaviours>();
+        prefabPaths = new List<GameObject>();
         cooldown = cd;
         useable = true;
     }
@@ -33,6 +37,7 @@ public class Ability {
         cooldown = cd;
         abilityType = type;
         behaviours = new List<AbilityBehaviours>();
+        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
@@ -43,24 +48,27 @@ public class Ability {
         damage = dmg;
         castTime = timeToCast;
         behaviours = new List<AbilityBehaviours>();
+        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
-    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type, float dmg, float timeToCast, GameObject prefa) {
+    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type, float dmg, float timeToCast, float abilityRange) {
         objectInfo = aBasicInfo;
         cooldown = cd;
         abilityType = type;
         damage = dmg;
         castTime = timeToCast;
+        range = abilityRange;
         behaviours = new List<AbilityBehaviours>();
-        prefab = prefa;
+        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
+
     public void PerformAbility(GameObject player) {
         foreach(AbilityBehaviours b in this.behaviours) {
-            if (prefab != null) {
-                b.Action(player, prefab, this);
+            if (prefabPaths != null) {
+                b.Action(player, prefabPaths, this);
             }
             else {
                 b.Action(player);
@@ -75,6 +83,8 @@ public class Ability {
     public float Damage { get { return damage; } }
     public float Cooldown { get { return cooldown; } }
     public float CastTime { get { return castTime; } }
-    public GameObject Prefab { get { return prefab; } set { prefab = value; } }
+    public float Range { get; set; }
+    public List<GameObject> PrefabPaths { get { return prefabPaths; } }
     public bool Useable { get { return useable; } set { useable = value; } }
+    public Animator Anim { get; set; }
 }

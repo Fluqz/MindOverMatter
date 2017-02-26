@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SwordThrust : Ability {
 
@@ -9,14 +10,21 @@ public class SwordThrust : Ability {
     private const float dotDamage = 5,
                         effectDuration = 2,
                         dotDuration = .3f,
-                        cooldown = 1f;
+                        cooldown = .5f,
+                        range = .5f,
+                        timeToCast = 10f;
     
 
-    public SwordThrust()
-        : base(new BasicObjectInformation(name, description), cooldown) {
+    public SwordThrust(Animator animator)
+        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.meele, effectDamage, timeToCast, range) {
+
+        this.Anim = animator;
+
+        this.PrefabPaths.Add(Resources.Load("Prefabs/Abilities/SwordThrust") as GameObject);
+        this.Behaviours.Add(new Meele(range, effectDamage));
 
         // bleeding effect
-        DamageOverTime dot = new DamageOverTime(effectDuration, dotDamage, dotDuration);
-        this.Behaviours.Add(dot);
+        //DamageOverTime dot = new DamageOverTime(effectDuration, dotDamage, dotDuration);
+        //this.Behaviours.Add(dot);
     }
 }

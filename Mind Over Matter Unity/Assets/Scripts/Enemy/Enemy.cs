@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class Enemy : MonoBehaviour {
 
     private bool isDead,
                     isDamaged;
+    private float terretoryRadius = 12f,
+                    attackRadius = 2f;
 
     // Movement speed
     private float distance = 10f;
@@ -22,10 +25,17 @@ public class Enemy : MonoBehaviour {
 
     private AI ai;
     private Movement movement;
-    private EnemyBaseInformation enemyInfo;
+
+    private List<Ability> abilities = new List<Ability>();
     
+    void InitEnemy() {
+        abilities.Add(new Teleport(anim));
+
+        ai.Abilities = abilities;
+    }
+
     void Awake() {
-        maxHealth = 7;
+        maxHealth = 200;
 
         transf = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
@@ -33,8 +43,9 @@ public class Enemy : MonoBehaviour {
 
         //enemyInfo = new EnemyBaseInformation();
         movement = new Movement(distance, time, transf, anim);
-        ai = new AI(this.gameObject);
 
+        ai = new AI(this.gameObject, anim, movement, attackRadius, terretoryRadius);
+        InitEnemy();
         //transf.transform = startingPosition;
         currentHealth = maxHealth;
         movement.MovementEnabled = true;
@@ -44,22 +55,25 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        ai.CheckTerritory(movement);
-        if (movement.MovementEnabled)
-            movement.move(ai.getDistanceToPlayer());
+        ai.Update();
+        
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
             Death();
     }
 
     void FixedUpdate() {
     }
 
+    void OnGUI() {
+    }
+
     void OnCollisionEnter2D(Collision2D other) {
 
     }
 
-    private void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
+        currentHealth -= damage;
         isDamaged = true;
     }
 
@@ -71,6 +85,7 @@ public class Enemy : MonoBehaviour {
         isDead = true;
         movement.MovementEnabled = false;
         anim.SetBool("Death", isDead);
+        Destroy(this.gameObject);
     }
 
 

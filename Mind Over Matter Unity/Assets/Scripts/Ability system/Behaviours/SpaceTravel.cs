@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
-
+using Debug = UnityEngine.Debug;
 public class SpaceTravel : AbilityBehaviours {
 
     private const string name = "Space travel",
@@ -14,12 +15,11 @@ public class SpaceTravel : AbilityBehaviours {
         distance = dist;
     }
 
-    public override void Action(GameObject player) {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+    public override void Action(GameObject player, List<GameObject> prefabs, Ability ability) {
+        Vector2 direction = PlayerInformation.Direction;
+
         // use distance
-
-        player.transform.Translate(new Vector3(horizontal * distance, vertical * distance, 0));
+        Vector3 currentPlayerPosition = player.transform.position;
+        player.transform.position = currentPlayerPosition + new Vector3(direction.x * distance, direction.y * distance, 0);
     }
-
 }

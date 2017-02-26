@@ -13,8 +13,10 @@ public class MindShield : Ability {
                         damageTickDuration = 1f,
                         slowPercentage = 30f;
 
-    public MindShield()
+    public MindShield(Animator animator)
         : base(new BasicObjectInformation(name, description), cooldown) {
+
+        this.Anim = animator;
 
         Protection protection = new Protection();
         this.Behaviours.Add(protection);

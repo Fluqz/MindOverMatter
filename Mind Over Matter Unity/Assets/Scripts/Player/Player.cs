@@ -3,9 +3,7 @@ using System.Collections;
 
 
 public class Player : MonoBehaviour {
-
-    public GameObject energyShotPrefab;
-
+    
     private int maxHealth,
                 currentHealth;
 
@@ -38,7 +36,8 @@ public class Player : MonoBehaviour {
 
 
     void Awake () {
-        PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 7;
+        isDead = false;
+        PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         InitPlayer();
 
         transf = GetComponent<Transform>();
@@ -49,26 +48,27 @@ public class Player : MonoBehaviour {
         playerInput.Movement = new Movement(distance, time, transf, anim);
         playerAbilities = playerInput.PlayerAbilities;
 
-        playerAbilities.AddOrReplaceAbility(new Teleport(), 0);
-        playerAbilities.AddOrReplaceAbility(new MindShield(), 1);
-        playerAbilities.AddOrReplaceAbility(new EnergyShot(energyShotPrefab), 2);
-        playerAbilities.AddOrReplaceAbility(new SwordThrust(), 3);
+        playerAbilities.SetAbility(new Teleport(anim), 0);
+        playerAbilities.SetAbility(new MindShield(anim), 1);
+        playerAbilities.SetAbility(new EnergyShot(anim), 2);
+        playerAbilities.SetAbility(new SwordThrust(anim), 3);
 
+    }
+
+    void Start() {
         startingDirection = new Vector2(0, -1);
+        anim.SetFloat("DirectionX", startingDirection.x);
+        anim.SetFloat("DirectionY", startingDirection.y);
         transf.position = startingPosition = new Vector3(-13, -4, 0);
         playerInput.Movement.MovementEnabled = true;
     }
 
-    void Start() {
-        anim.SetFloat("x", startingDirection.x);
-        anim.SetFloat("y", startingDirection.y);
-    }
-
 	void Update() {
         playerInput.UpdateInput();
+        PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
 
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
             Death();
     }
 
@@ -81,6 +81,7 @@ public class Player : MonoBehaviour {
     }
 
     private void TakeDamage(int damage) {
+        currentHealth -= damage;
         isDamaged = true;
     }
 

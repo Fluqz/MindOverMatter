@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class Ranged : AbilityBehaviours {
@@ -19,28 +20,27 @@ public class Ranged : AbilityBehaviours {
         effectDamage = effectDmg;
     }
 
-    public override void Action(GameObject player, GameObject prefab, Ability ability) {
-        Vector2 dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        float degree = GetDirection(dir);
-        //Rigidbody2D bullet = GameObject.Instantiate(prefab, player.transform.position + 1.0f * player.transform.right, Quaternion.identity) as Rigidbody2D;
-        Rigidbody2D bullet = GameObject.Instantiate(prefab, new Vector3(player.transform.position.x, player.transform.position.y, degree), Quaternion.identity) as Rigidbody2D;
+    public override void Action(GameObject player, List<GameObject> prefab, Ability ability) {
+        Vector2 direction = PlayerInformation.Direction;
 
+        float degree = GetDegree(direction);
 
-
+        Rigidbody2D bullet = GameObject.Instantiate(prefab[0], player.transform.position, Quaternion.Euler(0, 0, degree)) as Rigidbody2D;
+    
+        Job.make(Shoot(direction, bullet));
     }
 
-    private IEnumerator Shoot(GameObject player, GameObject bullet) {
+    private IEnumerator Shoot(Vector2 direction, Rigidbody2D bullet) {
 
 
         yield return null;
     }
 
-    private float GetDirection(Vector2 input) {
+    private float GetDegree(Vector2 direction) {
 
-        float degree = (float)Math.Atan2(input.y, input.x);
+        float degree = (float)((Mathf.Atan2(direction.x, direction.y) / Math.PI) * 180f);
+        if (degree < 0) degree += 360f;
 
         return degree;
     }
-
-
 }

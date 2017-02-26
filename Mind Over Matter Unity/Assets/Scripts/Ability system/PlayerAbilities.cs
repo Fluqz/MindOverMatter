@@ -14,9 +14,8 @@ public class PlayerAbilities {
         cooldownTimer = new Stopwatch();
     }
 
-    public void AddOrReplaceAbility(Ability ab, int index) {
-        PlayerInformation.Abilities[index] = ab;
-        abilities[index] = PlayerInformation.Abilities[index];
+    public void SetAbility(Ability ability, int index) {
+        abilities[index] = PlayerInformation.Abilities[index] = ability;
     }
 
     public void RemoveAbility(int index) {
@@ -28,6 +27,7 @@ public class PlayerAbilities {
     public void UseAbility(Ability ability) {
         cooldownTimer = new Stopwatch();
         cooldownTimer.Start();
+
         ability.Useable = false;
         ability.PerformAbility(PlayerInformation.PlayerGO);
 
@@ -35,14 +35,14 @@ public class PlayerAbilities {
     }
 
     private IEnumerator StartCooldown(Ability ability) {
-        while(cooldownTimer.IsRunning && cooldownTimer.Elapsed.TotalSeconds <= ability.Cooldown) {
+        while (cooldownTimer.IsRunning && cooldownTimer.Elapsed.TotalSeconds <= ability.Cooldown) {
             yield return null;
         }
         cooldownTimer.Stop();
         cooldownTimer.Reset();
         ability.Useable = true;
 
-        yield return null;
+        yield break;
     }
     
     public Ability[] Abilities { get { return abilities; } }

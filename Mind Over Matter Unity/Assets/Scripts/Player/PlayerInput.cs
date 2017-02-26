@@ -4,10 +4,7 @@ using System.Collections;
 public class PlayerInput {
 
     private Movement movement;
-    public Movement Movement { get { return movement; } set { movement = value; } }
-
     private PlayerAbilities playerAbilities;
-    public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
 
     private Vector2 input;
 
@@ -18,13 +15,8 @@ public class PlayerInput {
         inGame = true;
     }
 
-    public void UpdateInput() {
-        this.input.x = Input.GetAxisRaw("Horizontal");
-        this.input.y = Input.GetAxisRaw("Vertical");
-
-
-        if (input.x != 0 || input.y != 0)
-            Move();
+    public void UpdateInput() {        
+        Move();
 
         Ability1();
         Ability2();
@@ -34,6 +26,8 @@ public class PlayerInput {
 
     // WALK - LeftStick
     public void Move() {
+        this.input.x = Input.GetAxisRaw("Horizontal");
+        this.input.y = Input.GetAxisRaw("Vertical");
         movement.move(this.input);
     }
 
@@ -43,7 +37,6 @@ public class PlayerInput {
     // A 
    public void Ability1() {
         if (Input.GetButtonDown("Fire1") && PlayerInformation.Abilities[0].Useable) {
-            Debug.Log("A");
             Debug.Log(PlayerInformation.Abilities[0].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[0]);
         }
@@ -51,7 +44,6 @@ public class PlayerInput {
     // B
     public void Ability2() {
         if (Input.GetButtonDown("Fire2") && PlayerInformation.Abilities[1].Useable) {
-            Debug.Log("B");
             Debug.Log(PlayerInformation.Abilities[1].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[1]);
         }
@@ -59,7 +51,6 @@ public class PlayerInput {
     // Y
     public void Ability3() {
         if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
-            Debug.Log("Y");
             Debug.Log(PlayerInformation.Abilities[2].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
         }
@@ -67,7 +58,6 @@ public class PlayerInput {
     // X
     public void Ability4() {
         if (Input.GetButtonDown("Fire3") && PlayerInformation.Abilities[3].Useable) {
-            Debug.Log("X");
             Debug.Log(PlayerInformation.Abilities[3].AbilityInfo.ObjectName);
             playerAbilities.UseAbility(PlayerInformation.Abilities[3]);
         }
@@ -85,4 +75,9 @@ public class PlayerInput {
     public void StartButton() { }
     //
     public void BackButton() { }
+    
+
+
+    public Movement Movement { get { return movement; } set { movement = value; } }
+    public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
 }

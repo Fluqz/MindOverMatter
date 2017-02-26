@@ -10,12 +10,15 @@ public class EnergyShot : Ability {
                         cooldown = 0f,
                         castTime = .2f,
                         distance = 30f,
-                        speed = 10 / 6;
+                        speed = 10 / 6;    
 
-    public EnergyShot(GameObject prefab)
-        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, castTime, prefab){
-        Prefab = prefab;
+    public EnergyShot(Animator animator)
+        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, castTime) {
+
+        this.Anim = animator;
+
+        this.PrefabPaths.Add(Resources.Load("Prefabs/Abilities/EnergyShot") as GameObject);
+
         this.Behaviours.Add(new Ranged(distance, speed, effectDamage));
     }
-
 }

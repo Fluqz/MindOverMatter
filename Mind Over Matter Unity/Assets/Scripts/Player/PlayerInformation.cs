@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public static class PlayerInformation {
     private static string name,
-                    description;
+                            description;
     private static int maxHealth, 
                         currentHealth;
     private static float distance,
-                    time;
+                            time;
+
+    private static Vector2 direction;
 
     private static Ability[] abilities;
 
@@ -28,6 +30,7 @@ public static class PlayerInformation {
     public static int CurrentHealth { get; set; }
     public static float Distance { get; set; }
     public static float Time { get; set; }
+    public static Vector2 Direction { get; set; }
     public static Ability[] Abilities { get; set; }
     public static GameObject PlayerGO { get; set; }
 }

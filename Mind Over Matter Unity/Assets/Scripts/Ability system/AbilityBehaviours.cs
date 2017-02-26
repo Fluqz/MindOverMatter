@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AbilityBehaviours {
 
@@ -20,10 +21,10 @@ public class AbilityBehaviours {
     public virtual void Action(GameObject player) {
         Debug.LogWarning("Attach Action");
     }
-    public virtual void Action(GameObject player, GameObject prefab) {
+    public virtual void Action(GameObject player, List<GameObject> prefab) {
         Debug.LogWarning("Attach Action");
     }
-    public virtual void Action(GameObject player, GameObject prefab, Ability ability) {
+    public virtual void Action(GameObject player, List<GameObject> prefab, Ability ability) {
         Debug.LogWarning("Attach Action");
     }
 
