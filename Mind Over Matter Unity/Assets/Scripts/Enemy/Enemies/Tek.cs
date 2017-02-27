@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Tek : CreateEnemy {
+public class Tek {
     
     private const string name = "Tek",
                     description = "A fast fighter.";
@@ -15,8 +15,7 @@ public class Tek : CreateEnemy {
                         terretoryRadius = 15,
                         movementSpeed = 10f;
 
-    public Tek() 
-        :base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
+    public Tek() {
 
     }
 

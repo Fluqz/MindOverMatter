@@ -10,9 +10,9 @@ public class SwordThrust : Ability {
     private const float dotDamage = 5,
                         effectDuration = 2,
                         dotDuration = .3f,
-                        cooldown = .5f,
+                        cooldown = .2f,
                         range = .5f,
-                        timeToCast = 10f;
+                        timeToCast = .1f;
     
 
     public SwordThrust(Animator animator)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CrawlingGuy : CreateEnemy {
+public class CrawlingGuy{
 
     private const string name = "Crawling Guy",
                     description = "A slow creature that will shoot in the ground to make a explosion.";
@@ -14,8 +14,7 @@ public class CrawlingGuy : CreateEnemy {
                         terretoryRadius = 10,
                         movementSpeed = 5f;
 
-    public CrawlingGuy()
-        : base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
+    public CrawlingGuy(){
 
     }
 }

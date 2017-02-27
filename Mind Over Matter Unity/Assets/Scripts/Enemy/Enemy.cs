@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
-    private int maxHealth,
-                currentHealth;
+    public Image healthbar;
 
-    private bool isDead,
-                    isDamaged;
-    private float terretoryRadius = 12f,
-                    attackRadius = 2f;
-
-    // Movement speed
-    private float distance = 10f;
-    private float time = 5f;
+    EnemyInformation enemyInfo;
 
     private Rigidbody2D rigid;
     protected Animator anim;
@@ -28,27 +21,21 @@ public class Enemy : MonoBehaviour {
 
     private List<Ability> abilities = new List<Ability>();
     
-    void InitEnemy() {
-        abilities.Add(new Teleport(anim));
-
-        ai.Abilities = abilities;
-    }
-
     void Awake() {
-        maxHealth = 200;
-
         transf = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
+        movement = new Movement(enemyInfo.Distance, enemyInfo.Time, transf, anim);
+        ai = new AI(enemyInfo, this.gameObject, anim, movement, enemyInfo.AttackRadius, enemyInfo.TerretoryRadius);
 
-        //enemyInfo = new EnemyBaseInformation();
-        movement = new Movement(distance, time, transf, anim);
+        abilities.Add(new Teleport(anim));
+        ai.Abilities = abilities;
 
-        ai = new AI(this.gameObject, anim, movement, attackRadius, terretoryRadius);
-        InitEnemy();
-        //transf.transform = startingPosition;
-        currentHealth = maxHealth;
+        enemyInfo.CurrentHealth = enemyInfo.MaxHealth;
         movement.MovementEnabled = true;
+
+        healthbar.fillAmount = 1;
     }
 
     void Start() {
@@ -58,7 +45,7 @@ public class Enemy : MonoBehaviour {
         ai.Update();
         
 
-        if (currentHealth <= 0)
+        if (enemyInfo.CurrentHealth <= 0)
             Death();
     }
 
@@ -73,24 +60,24 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(int damage) {
-        currentHealth -= damage;
-        isDamaged = true;
+        enemyInfo.CurrentHealth -= damage;
+        anim.SetTrigger("isDamaged");
+        ReduceHealthbar(enemyInfo.CurrentHealth, enemyInfo.MaxHealth, 0);
     }
 
-    private void Attack() {
-        //use ability
+    public void ReduceHealthbar(float currentHealth, float MaxHealth, float minHealth) {
+        healthbar.fillAmount = ((currentHealth - minHealth) * (1 - 0) / (MaxHealth - minHealth) + 0);
     }
 
     private void Death() {
-        isDead = true;
+        enemyInfo.IsDead = true;
         movement.MovementEnabled = false;
-        anim.SetBool("Death", isDead);
+        anim.SetBool("Death", enemyInfo.IsDead);
         Destroy(this.gameObject);
     }
 
 
-    public int MaxHealth { get { return maxHealth; } }
-    public int CurrentHealth { get; set; }
-    public bool IsDead { get; set; }
-    public bool IsDamaged { get; set; }
+    public Movement Movement { get { return movement; } }
+    public EnemyInformation EnemyInfo { get { return enemyInfo; } }
+
 }

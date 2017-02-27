@@ -9,8 +9,11 @@ public class SwordCollider : MonoBehaviour {
 
     private Ability ability;
 
+    private bool hit;
+
     // Use this for initialization
     void Start() {
+        hit = false;
         foreach (Ability a in PlayerInformation.Abilities) {
             if (a.AbilityInfo.ObjectName == "Sword Thrust")
                 ability = a;
@@ -25,15 +28,20 @@ public class SwordCollider : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.transform.tag);
-        if(other.gameObject.tag == "Player") {
-            Physics2D.IgnoreCollision(other.gameObject.GetComponent<Collider2D>(), this.coller);
-        }
-        else {
-            if(other.gameObject.tag == "Enemy") {
-                Debug.Log("Hit Enemy");
+        if (!hit) {
+            if (other.gameObject.tag == "Enemy") {
+                hit = true;
+                Debug.Log(other.transform.name);
                 other.transform.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
             }
+            else if (other.gameObject.tag == "Player")
+                Physics2D.IgnoreCollision(other, this.coller);
         }
+        else hit = false;
+    }
+
+    void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(coller.transform.position, 0.47f);
     }
 }

@@ -46,6 +46,12 @@ public class Movement {
         }
     }
 
+    public void UpdateVelocity(float dist) {
+        this.distance = dist;
+        PlayerInformation.Distance = dist;
+    }
+
     public float MovementSpeed { get { return (distance / time); } }
     public bool MovementEnabled { get; set; }
+    public float Distance { get { return distance; } }
 }

@@ -17,40 +17,70 @@ public class AI {
     private Animator anim;
 
     private Movement movement;
+    private EnemyInformation enemyInfo;
 
     private bool inCombat,
-                    canAttack;
+                    canAttack,
+                    isAttacking;
 
     private List<Ability> abilities;
 
-    public AI(GameObject enem, Animator animator, Movement movemen, float attackRad, float terretory) {
+    public AI(EnemyInformation enemyInformation, GameObject enem, Animator animator, Movement movemen, float attackRad, float terretory) {
         player = GameObject.FindWithTag("Player");
+        enemyInfo = enemyInformation;
+        enemy = enem;
         anim = animator;
 
         movement = movemen;
-        enemy = enem;
         attackRadius = attackRad;
         terretoryRadius = terretory;
 
         inCombat = false;
         canAttack = false;
-
+        isAttacking = false;
     }
 
     public void Update() {
-        inCombat = CheckTerritory(terretoryRadius);
-        movement.MovementEnabled = inCombat;
+            
 
-        if (inCombat) {
-            anim.SetBool("EnteredTerretory", inCombat);
-            movement.move(getDistanceToPlayer());
+        if (!CheckTerritory(0.1f)) {
+            inCombat = CheckTerritory(terretoryRadius);
+            movement.MovementEnabled = inCombat;
 
-            foreach(Ability a in abilities) {
-                if (CheckTerritory(a.Range))
-                    canAttack = true;
+            if (inCombat) {
+                anim.SetBool("EnteredTerretory", inCombat);
+                movement.move(getDistanceToPlayer());
+
+                foreach (Ability a in abilities) {
+                    //if (CheckTerritory(a.Range)) {
+                    if (CheckTerritory(2)) { 
+                        canAttack = true;
+                            Job.make(Stopwatch(1f));
+                    }
+                    else canAttack = false;
+                }
             }
         }
+        else {
 
+        }
+    }
+    float t = 0;
+    public IEnumerator Stopwatch(float wait) {
+        isAttacking = true;
+         t += Time.deltaTime;
+
+        if (t >= wait) {
+            Attack();
+            t = 0;
+        }
+
+        yield break;
+    }
+
+    void Attack() {
+        player.GetComponent<Player>().TakeDamage(enemyInfo.Damage);
+        isAttacking = false;
     }
 
     public Vector2 getDistanceToPlayer() {
@@ -61,9 +91,10 @@ public class AI {
 
     public bool CheckTerritory(float radius) {
         float disToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
+        UnityEngine.Debug.DrawLine(enemy.transform.position, player.transform.position, Color.cyan, 0, false);
         if (disToPlayer <= radius)
             return true;
-        else return false;
+        return false;
     }
 
 

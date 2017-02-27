@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PainfulCreature : CreateEnemy {
+public class PainfulCreature {
 
     private const string name = "Painful Creature",
                        description = "A slow but nasty creature.";
@@ -14,8 +14,7 @@ public class PainfulCreature : CreateEnemy {
                         terretoryRadius = 14f,
                         movementSpeed = 10f;
 
-    public PainfulCreature() 
-        :base(new EnemyBaseInformation(name, description, health, weight, baseDamage, attackRadius, terretoryRadius, movementSpeed, degree), criticalStrikeChance) {
+    public PainfulCreature() {
 
         //this.EnemyAbilities.Add(new Teleport());
     }

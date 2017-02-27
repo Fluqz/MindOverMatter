@@ -3,20 +3,17 @@ using System.Collections;
 
 
 public class Player : MonoBehaviour {
-    
-    private int maxHealth,
-                currentHealth;
 
-    private bool isDead,
-                    isDamaged;
-
+    private int maxHealth, currentHealth;
+    private bool isDead, isDamaged;
     // Movement speed
-    private float distance = 13f;
-    private float time = 5f;
+    [SerializeField]
+    private float distance = 13f, time = 5f;
 
 	private Rigidbody2D rigid;
     private Animator anim;
     private Transform transf;
+    private GameObject healthbar;
 
     private Vector3 startingPosition;
     private Vector2 startingDirection;
@@ -25,34 +22,35 @@ public class Player : MonoBehaviour {
     private PlayerInput playerInput;
     private PlayerAbilities playerAbilities;
 
-    public void InitPlayer() {
+    void InitPlayer() {
+
+        isDead = false;
+        PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.Distance = 13f;
+        PlayerInformation.Distance = 25f;
         PlayerInformation.Time = 5f;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
-    }
-
-
-    void Awake () {
-        isDead = false;
-        PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
-        InitPlayer();
-
-        transf = GetComponent<Transform>();
-		rigid = GetComponent<Rigidbody2D> ();
-		anim = GetComponent<Animator> ();
-
-        playerInput = new PlayerInput();
-        playerInput.Movement = new Movement(distance, time, transf, anim);
-        playerAbilities = playerInput.PlayerAbilities;
 
         playerAbilities.SetAbility(new Teleport(anim), 0);
         playerAbilities.SetAbility(new MindShield(anim), 1);
         playerAbilities.SetAbility(new EnergyShot(anim), 2);
         playerAbilities.SetAbility(new SwordThrust(anim), 3);
+    }
 
+
+    void Awake () {
+        transf = GetComponent<Transform>();
+		rigid = GetComponent<Rigidbody2D> ();
+		anim = GetComponent<Animator> ();
+        healthbar = GameObject.Find("UI/Healthbar");
+
+        playerInput = new PlayerInput();
+        playerInput.Movement = new Movement(distance, time, transf, anim);
+        playerAbilities = playerInput.PlayerAbilities;
+
+        InitPlayer();
     }
 
     void Start() {
@@ -67,22 +65,19 @@ public class Player : MonoBehaviour {
         playerInput.UpdateInput();
         PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
 
-
         if (currentHealth <= 0)
             Death();
     }
 
 	void FixedUpdate () {
+        //playerInput.Movement.UpdateVelocity(distance); // --------------------------> DELETE
 	}
 
 
-    void OnCollisionEnter2D(Collision2D other) {
-
-    }
-
-    private void TakeDamage(int damage) {
+    public void TakeDamage(int damage) {
         currentHealth -= damage;
         isDamaged = true;
+        healthbar.GetComponent<Healthbar>().ReduceHealthbar(currentHealth, maxHealth, 0);
     }
 
     private void BlockDamage(int damage) { }
@@ -93,7 +88,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Death() {
-        isDead = true;
+        playerInput.IsDead = isDead = true;
         playerInput.Movement.MovementEnabled = false;
         anim.SetBool("Death", isDead);
     }
@@ -103,4 +98,5 @@ public class Player : MonoBehaviour {
     public int CurrentHealth { get; set; }
     public bool IsDead { get; set; }
     public bool IsDamaged { get; set; }
+    public PlayerInput PlayerInput { get { return playerInput; } }
 }

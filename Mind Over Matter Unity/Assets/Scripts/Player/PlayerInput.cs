@@ -9,19 +9,26 @@ public class PlayerInput {
     private Vector2 input;
 
     private bool inGame;
+    private bool isDead;
 
     public PlayerInput() {
         playerAbilities = new PlayerAbilities();
         inGame = true;
+        isDead = false;
     }
 
-    public void UpdateInput() {        
-        Move();
+    public void UpdateInput() {
+        if (!isDead) {
 
-        Ability1();
-        Ability2();
-        Ability3();
-        Ability4();
+            Move();
+
+            Ability1();
+            Ability2();
+            Ability3();
+            Ability4();
+
+            
+        }
     }
 
     // WALK - LeftStick
@@ -80,4 +87,5 @@ public class PlayerInput {
 
     public Movement Movement { get { return movement; } set { movement = value; } }
     public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
 }

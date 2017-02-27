@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour {
     private Camera cam;
     private Vector3 currentCameraPosition;
     private float followSpeed = 3f;
-    private int ppu = 64;
+    private int ppu = 32;
     private Vector2 adjustToCenter = new Vector2(.5f, 1);
 
 	void Awake(){
