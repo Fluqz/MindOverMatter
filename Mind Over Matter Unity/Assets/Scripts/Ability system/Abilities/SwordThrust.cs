@@ -12,7 +12,7 @@ public class SwordThrust : Ability {
                         dotDuration = .3f,
                         cooldown = .2f,
                         range = .5f,
-                        timeToCast = .1f;
+                        timeToCast = 20f;
     
 
     public SwordThrust(Animator animator)

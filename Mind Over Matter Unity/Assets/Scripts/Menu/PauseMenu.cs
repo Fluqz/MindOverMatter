@@ -6,7 +6,6 @@ public class PauseMenu : MonoBehaviour {
 
     public static bool paused;
 
-
     void Start() {
     }
 
