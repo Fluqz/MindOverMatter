@@ -16,6 +16,8 @@ public class CameraControl : MonoBehaviour {
 	void Awake(){
 		cam = GetComponent<Camera> ();
         setCamToOrthographicSize();
+        if (player == null)
+            player = gameObject.transform.Find("Player");
         Debug.Log ("Ortho camera pixel perfect size is: " + cam.orthographicSize);
 
         currentPlayerPosition = new Vector3(player.transform.position.x + adjustToCenter.x, player.transform.position.y + adjustToCenter.y, transform.position.z);
@@ -34,11 +36,11 @@ public class CameraControl : MonoBehaviour {
         cam.orthographicSize = (Screen.height / ppu / 2.0f);
     }
 
-    /*public float RoundToNearestPixel(float unityUnits) {
-        float valueInPixels = unityUnits * pixelToUnits;
+    public float RoundToNearestPixel(float unityUnits) {
+        float valueInPixels = unityUnits * ppu;
         valueInPixels = Mathf.Round(valueInPixels);
-        float roundedUnityUnits = valueInPixels * (1 / pixelToUnits);
+        float roundedUnityUnits = valueInPixels * (1 / ppu);
         return roundedUnityUnits;
-    }*/
+    }
 }
 

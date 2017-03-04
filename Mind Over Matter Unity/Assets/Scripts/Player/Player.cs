@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     private bool isDead, isDamaged;
     // Movement speed
     [SerializeField]
-    private float distance = 13f, time = 5f;
+    private float movementSpeed;
 
 	private Rigidbody2D rigid;
     private Animator anim;
@@ -28,29 +28,28 @@ public class Player : MonoBehaviour {
         PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.Distance = 25f;
-        PlayerInformation.Time = 5f;
+        PlayerInformation.MovementSpeed = movementSpeed = 5f;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
 
-        playerAbilities.SetAbility(new Teleport(anim), 0);
-        playerAbilities.SetAbility(new MindShield(anim), 1);
-        playerAbilities.SetAbility(new EnergyShot(anim), 2);
-        playerAbilities.SetAbility(new SwordThrust(anim), 3);
+        playerAbilities.SetAbility(new Teleport(anim, 0), 0);
+        playerAbilities.SetAbility(new MindShield(anim, 1), 1);
+        playerAbilities.SetAbility(new EnergyShot(anim, 2), 2);
+        playerAbilities.SetAbility(new SwordThrust(anim, 3), 3);
     }
 
 
     void Awake () {
-        transf = GetComponent<Transform>();
 		rigid = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
+        transf = GetComponent<Transform>();
         healthbar = GameObject.Find("UI/Healthbar");
-
         playerInput = new PlayerInput();
-        playerInput.Movement = new Movement(distance, time, transf, anim);
         playerAbilities = playerInput.PlayerAbilities;
 
         InitPlayer();
+        playerInput.Movement = new Movement(movementSpeed, this.gameObject);
+
     }
 
     void Start() {
@@ -62,7 +61,6 @@ public class Player : MonoBehaviour {
     }
 
 	void Update() {
-        playerInput.UpdateInput();
         PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
 
         if (currentHealth <= 0)
@@ -70,11 +68,12 @@ public class Player : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-        //playerInput.Movement.UpdateVelocity(distance); // --------------------------> DELETE
-	}
+        playerInput.FixedUpdate();
+    }
 
 
     public void TakeDamage(int damage) {
+        Debug.Log(damage + " on player");
         currentHealth -= damage;
         isDamaged = true;
         healthbar.GetComponent<Healthbar>().ReduceHealthbar(currentHealth, maxHealth, 0);
@@ -93,6 +92,15 @@ public class Player : MonoBehaviour {
         anim.SetBool("Death", isDead);
     }
         
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.transform.tag == "Environment") {
+            playerInput.Movement.OnWall = true;
+        }
+    }
+    void OnCollisionExit2D(Collision2D other) {
+        if (other.transform.tag == "Environment")
+            playerInput.Movement.OnWall = false;
+    }
 
     public int MaxHealth { get { return maxHealth; } }
     public int CurrentHealth { get; set; }

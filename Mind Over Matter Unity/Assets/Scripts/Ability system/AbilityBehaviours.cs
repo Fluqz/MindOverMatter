@@ -18,13 +18,13 @@ public class AbilityBehaviours {
         End
     }
 
-    public virtual void Action(GameObject player) {
+    public virtual void Action(GameObject user) {
         Debug.LogWarning("Attach Action");
     }
-    public virtual void Action(GameObject player, List<GameObject> prefab) {
+    public virtual void Action(GameObject user, GameObject prefab) {
         Debug.LogWarning("Attach Action");
     }
-    public virtual void Action(GameObject player, List<GameObject> prefab, Ability ability) {
+    public virtual void Action(GameObject user, Ability ability) {
         Debug.LogWarning("Attach Action");
     }
 

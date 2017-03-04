@@ -29,12 +29,13 @@ public class PlayerAbilities {
         cooldownTimer.Start();
 
         ability.Useable = false;
+        ability.Anim.SetTrigger("Ability " + (ability.Index+1));
         ability.PerformAbility(PlayerInformation.PlayerGO);
 
-        Job.make(StartCooldown(ability));
+        Job.make(AbilityCooldown(ability));
     }
 
-    private IEnumerator StartCooldown(Ability ability) {
+    private IEnumerator AbilityCooldown(Ability ability) {
         while (cooldownTimer.IsRunning && cooldownTimer.Elapsed.TotalSeconds <= ability.Cooldown) {
             yield return null;
         }

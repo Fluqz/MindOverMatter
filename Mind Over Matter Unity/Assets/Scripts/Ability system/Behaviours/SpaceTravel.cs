@@ -15,11 +15,12 @@ public class SpaceTravel : AbilityBehaviours {
         distance = dist;
     }
 
-    public override void Action(GameObject player, List<GameObject> prefabs, Ability ability) {
-        Vector2 direction = PlayerInformation.Direction;
+    public override void Action(GameObject user, Ability ability) {
+        Animator anim = user.GetComponent<Animator>();
+        Vector2 direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
 
         // use distance
-        Vector3 currentPlayerPosition = player.transform.position;
-        player.transform.position = currentPlayerPosition + new Vector3(direction.x * distance, direction.y * distance, 0);
+        Vector3 currentPosition = user.transform.position;
+        user.transform.position = currentPosition + new Vector3(direction.x * distance, direction.y * distance, 0);
     }
 }

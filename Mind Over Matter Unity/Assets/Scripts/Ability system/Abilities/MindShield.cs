@@ -13,18 +13,20 @@ public class MindShield : Ability {
                         damageTickDuration = 1f,
                         slowPercentage = 30f;
 
-    public MindShield(Animator animator)
+    private GameObject aoe = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
+    private GameObject snare = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
+    private GameObject shield = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
+
+    public MindShield(Animator animator, int index)
         : base(new BasicObjectInformation(name, description), cooldown) {
 
         this.Anim = animator;
+        this.Index = index;
 
-        Protection protection = new Protection();
-        this.Behaviours.Add(protection);
+        Behaviours.Add(new Protection(shield));
 
-        AreaOfEffect aoe = new AreaOfEffect(radius, effectDuration, effectDamage, damageTickDuration);
-        this.Behaviours.Add(aoe);
+        Behaviours.Add(new AreaOfEffect(radius, effectDuration, effectDamage, damageTickDuration, aoe));
 
-        Snare snare = new Snare(effectDuration, slowPercentage);
-        this.Behaviours.Add(snare);
+        Behaviours.Add(new Snare(effectDuration, slowPercentage, snare));
     }
 }

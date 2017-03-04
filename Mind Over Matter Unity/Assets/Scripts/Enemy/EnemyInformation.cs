@@ -13,12 +13,11 @@ public class EnemyInformation {
                 degree;
     private float attackRadius,
                     terretoryRadius,
-                    distance,
-                    time;
+                    movementSpeed;
     private bool isDead,
                     isDamaged;
     
-    public EnemyInformation(string eName, string eDescription, int mHealth, int eWeight, int eBaseDamage, float attackRad, float terretory, float d, float t) {
+    public EnemyInformation(string eName, string eDescription, int mHealth, int eWeight, int eBaseDamage, float attackRad, float terretory, float speed) {
         this.name = eName;
         this.description = eDescription;
         this.maxHealth = mHealth;
@@ -26,8 +25,7 @@ public class EnemyInformation {
         this.damage = eBaseDamage;
         this.attackRadius = attackRad;
         this.terretoryRadius = terretory;
-        this.distance = d;
-        this.time = t;
+        this.movementSpeed = speed;
         
         this.currentHealth = this.maxHealth;
         this.isDead = false;
@@ -44,8 +42,7 @@ public class EnemyInformation {
     public int Degree { get { return degree; } set { degree = value; } }
     public float AttackRadius { get { return attackRadius; } set { attackRadius = value; } }
     public float TerretoryRadius { get { return terretoryRadius; } set { terretoryRadius = value; } }
-    public float Distance { get { return distance; } set { distance = value; } }
-    public float Time { get { return time; } set { time = value; } }
+    public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool IsDamaged { get { return isDamaged; } set { isDamaged = value; } }
 }

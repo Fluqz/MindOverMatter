@@ -25,12 +25,14 @@ public class Enemy : MonoBehaviour {
         transf = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
-        movement = new Movement(enemyInfo.Distance, enemyInfo.Time, transf, anim);
-        ai = new AI(enemyInfo, this.gameObject, anim, movement, enemyInfo.AttackRadius, enemyInfo.TerretoryRadius);
 
-        abilities.Add(new Teleport(anim));
-        ai.Abilities = abilities;
+        //abilities.Add(new Teleport(anim, 0));
+        abilities.Add(new EnergyShot(anim, 0));
+
+        enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
+        movement = new Movement(enemyInfo.MovementSpeed, this.gameObject);
+        ai = new AI(enemyInfo, this.gameObject, abilities, movement);
+
 
         enemyInfo.CurrentHealth = enemyInfo.MaxHealth;
         movement.MovementEnabled = true;
@@ -42,14 +44,13 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        ai.Update();
-        
 
         if (enemyInfo.CurrentHealth <= 0)
             Death();
     }
 
     void FixedUpdate() {
+        ai.FixedUpdate();
     }
 
     void OnGUI() {
@@ -79,5 +80,6 @@ public class Enemy : MonoBehaviour {
 
     public Movement Movement { get { return movement; } }
     public EnemyInformation EnemyInfo { get { return enemyInfo; } }
+    public List<Ability> Abilities { get { return abilities; } }
 
 }

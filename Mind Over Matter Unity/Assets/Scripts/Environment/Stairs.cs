@@ -1,46 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Stairs : MonoBehaviour {
-
-    private Enemy enemy;
-
+    
     private float slow;
-    private bool entered, exited;
 
     void Awake() {
-        slow = 8f;
-        entered = false;
-        exited = true;
+        slow = 80f;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!entered && exited) {
-            entered = true;
-            exited = false;
-            Debug.Log("hi");
-            if (other.transform.tag == "Player") {
-                other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(PlayerInformation.Distance - slow);
-            }
-            else if (other.transform.tag == "Enemy") {
-                enemy = other.GetComponent<Enemy>();
-                enemy.Movement.UpdateVelocity(enemy.EnemyInfo.Distance - slow);
-            }
-        }
+        if (other.transform.tag == "Player")
+            other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(slow);
+        else if (other.transform.tag == "Enemy")
+            other.GetComponent<Enemy>().Movement.UpdateVelocity(slow);
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        if (entered && !exited) {
-            entered = false;
-            exited = true;
-            Debug.Log("bye");
-            if (other.transform.tag == "Player") {
-                other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(PlayerInformation.Distance + slow);
-            }
-            else if (other.transform.tag == "Enemy") {
-                enemy = other.GetComponent<Enemy>();
-                enemy.Movement.UpdateVelocity(enemy.EnemyInfo.Distance + slow);
-            }
-        }
+        if (other.transform.tag == "Player")
+            other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(100);
+        else if (other.transform.tag == "Enemy")
+            other.GetComponent<Enemy>().Movement.UpdateVelocity(100);
     }
 }

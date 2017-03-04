@@ -17,8 +17,8 @@ public class PlayerInput {
         isDead = false;
     }
 
-    public void UpdateInput() {
-        if (!isDead) {
+    public void FixedUpdate() {
+        if (!isDead && inGame) {
 
             Move();
 
@@ -36,6 +36,7 @@ public class PlayerInput {
         this.input.x = Input.GetAxisRaw("Horizontal");
         this.input.y = Input.GetAxisRaw("Vertical");
         movement.move(this.input);
+        movement.SetPlayerDirection();
     }
 
     // 
@@ -44,28 +45,28 @@ public class PlayerInput {
     // A 
    public void Ability1() {
         if (Input.GetButtonDown("Fire1") && PlayerInformation.Abilities[0].Useable) {
-            Debug.Log(PlayerInformation.Abilities[0].AbilityInfo.ObjectName);
+            Debug.Log(PlayerInformation.Abilities[0].AbilityInfo.ObjectName + " " + PlayerInformation.Abilities[0].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[0]);
         }
     }
     // B
     public void Ability2() {
         if (Input.GetButtonDown("Fire2") && PlayerInformation.Abilities[1].Useable) {
-            Debug.Log(PlayerInformation.Abilities[1].AbilityInfo.ObjectName);
+            Debug.Log(PlayerInformation.Abilities[1].AbilityInfo.ObjectName + " " + PlayerInformation.Abilities[1].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[1]);
         }
     }
     // Y
     public void Ability3() {
         if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
-            Debug.Log(PlayerInformation.Abilities[2].AbilityInfo.ObjectName);
+            Debug.Log(PlayerInformation.Abilities[2].AbilityInfo.ObjectName + " " + PlayerInformation.Abilities[2].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
         }
     }
     // X
     public void Ability4() {
         if (Input.GetButtonDown("Fire3") && PlayerInformation.Abilities[3].Useable) {
-            Debug.Log(PlayerInformation.Abilities[3].AbilityInfo.ObjectName);
+            Debug.Log(PlayerInformation.Abilities[3].AbilityInfo.ObjectName + " " + PlayerInformation.Abilities[3].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[3]);
         }
     }
@@ -88,4 +89,5 @@ public class PlayerInput {
     public Movement Movement { get { return movement; } set { movement = value; } }
     public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
     public bool IsDead { get { return isDead; } set { isDead = value; } }
+    public bool InGame { get { return inGame; } set { inGame = value; } }
 }

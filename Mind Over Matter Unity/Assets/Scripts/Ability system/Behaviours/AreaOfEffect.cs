@@ -13,14 +13,17 @@ public class AreaOfEffect : AbilityBehaviours {
     private Stopwatch durationTimer = new Stopwatch();
     private bool isOccupied;
     private float damageTickDuration;
+    private GameObject prefab;
 
 
-    public AreaOfEffect(float areaRad, float effectDur, float baseEffectDmg, float damageTickDur)
+    public AreaOfEffect(float areaRad, float effectDur, float baseEffectDmg, float damageTickDur, GameObject prefab)
         : base(new BasicObjectInformation(name, description), impactTime) {
         areaRadius = areaRad;
         effectDuration = effectDur;
         effectDamage = baseEffectDmg;
         damageTickDuration = damageTickDur;
+        this.prefab = prefab;
+
         isOccupied = false;
     }
 

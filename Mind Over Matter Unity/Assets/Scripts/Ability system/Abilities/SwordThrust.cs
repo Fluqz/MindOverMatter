@@ -12,19 +12,18 @@ public class SwordThrust : Ability {
                         dotDuration = .3f,
                         cooldown = .2f,
                         range = .5f,
-                        timeToCast = 20f;
-    
+                        timeToCast = .1f;
+    private GameObject sword = Resources.Load("Prefabs/Abilities/SwordThrust") as GameObject;
+    private GameObject dot = Resources.Load("Prefabs/Abilities/DOT") as GameObject;
 
-    public SwordThrust(Animator animator)
+    public SwordThrust(Animator animator, int index)
         : base(new BasicObjectInformation(name, description), cooldown, AbilityType.meele, effectDamage, timeToCast, range) {
 
         this.Anim = animator;
+        this.Index = index;
 
-        this.PrefabPaths.Add(Resources.Load("Prefabs/Abilities/SwordThrust") as GameObject);
-        this.Behaviours.Add(new Meele(range, effectDamage));
+        Behaviours.Add(new Meele(range, effectDamage, sword));
 
-        // bleeding effect
-        //DamageOverTime dot = new DamageOverTime(effectDuration, dotDamage, dotDuration);
-        //this.Behaviours.Add(dot);
+        Behaviours.Add(new DamageOverTime(effectDuration, dotDamage, dotDuration, dot));
     }
 }

@@ -8,9 +8,9 @@ public class Ability {
 
     private BasicObjectInformation objectInfo;
     private List<AbilityBehaviours> behaviours;
-    protected List<GameObject> prefabPaths;
     private AbilityType abilityType;
     private bool useable;
+    private int index;
     private float damage,
                   cooldown,
                   castTime,
@@ -27,7 +27,6 @@ public class Ability {
         objectInfo = aBasicInfo;
         cooldown = cd;
         behaviours = new List<AbilityBehaviours>();
-        prefabPaths = new List<GameObject>();
         cooldown = cd;
         useable = true;
     }
@@ -37,7 +36,6 @@ public class Ability {
         cooldown = cd;
         abilityType = type;
         behaviours = new List<AbilityBehaviours>();
-        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
@@ -48,7 +46,6 @@ public class Ability {
         damage = dmg;
         castTime = timeToCast;
         behaviours = new List<AbilityBehaviours>();
-        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
@@ -60,19 +57,14 @@ public class Ability {
         castTime = timeToCast;
         range = abilityRange;
         behaviours = new List<AbilityBehaviours>();
-        prefabPaths = new List<GameObject>();
         useable = true;
     }
 
 
-    public void PerformAbility(GameObject player) {
+    public void PerformAbility(GameObject user) {
         foreach(AbilityBehaviours b in this.behaviours) {
-            if (prefabPaths != null) {
-                b.Action(player, prefabPaths, this);
-            }
-            else {
-                b.Action(player);
-            }
+                b.Action(user, this);
+                b.Action(user);
         }
     }
 
@@ -82,9 +74,9 @@ public class Ability {
     public AbilityType GetAbilityType { get { return abilityType; } }
     public float Damage { get { return damage; } }
     public float Cooldown { get { return cooldown; } }
+    public int Index { get { return index; } set { index = value; } }
     public float CastTime { get { return castTime; } }
     public float Range { get; set; }
-    public List<GameObject> PrefabPaths { get { return prefabPaths; } }
     public bool Useable { get { return useable; } set { useable = value; } }
     public Animator Anim { get; set; }
 }

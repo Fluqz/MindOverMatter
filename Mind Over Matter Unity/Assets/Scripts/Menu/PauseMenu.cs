@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
 
     public static bool paused;
+    PlayerInput playerInput;
 
     void Start() {
+        playerInput = gameObject.transform.Find("Player").GetComponent<Player>().PlayerInput;
     }
 
 	void FixedUpdate () {

@@ -11,15 +11,13 @@ public class Teleport : Ability {
                         travelDistance = 4f,
                         timeToCast = .2f;
 
-    public Teleport(Animator animator)
+    public Teleport(Animator animator, int index)
         : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, timeToCast) {
-
+        this.Index = index;
         this.Anim = animator;
 
-        SpaceTravel spaceTravel = new SpaceTravel(travelDistance);
-        this.Behaviours.Add(spaceTravel);
-        CollisionDamage collision = new CollisionDamage(effectDamage);
-        this.Behaviours.Add(collision);
+        this.Behaviours.Add(new SpaceTravel(travelDistance));
+        this.Behaviours.Add(new CollisionDamage(effectDamage));
     }
 
 }

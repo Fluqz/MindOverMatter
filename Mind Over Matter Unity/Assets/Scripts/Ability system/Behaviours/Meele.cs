@@ -12,28 +12,33 @@ public class Meele : AbilityBehaviours {
     private float range,
                     effectDamage,
                     hitLength;
+    private GameObject prefab;
 
     private float timeStamp;
     private Vector2 adjustToCenter = new Vector2(.5f, 1);
 
-    public Meele(float hitRange, float effectDmg)
+    public Meele(float hitRange, float effectDmg, GameObject prefab)
         : base(new BasicObjectInformation(name, description), impactTime) {
         range = hitRange;
         effectDamage = effectDmg;
+        this.prefab = prefab;
     }
 
-    public override void Action(GameObject player, List<GameObject> prefab, Ability ability) {
-        ability.Anim.SetTrigger("isAttacking");
+    public override void Action(GameObject user, Ability ability) {
+        Animator anim = user.GetComponent<Animator>();
+        anim.SetTrigger("isAttacking");
 
         Vector2 direction = PlayerInformation.Direction;
 
-        Vector2 degree = new Vector2(ability.Anim.GetFloat("DirectionX"), ability.Anim.GetFloat("DirectionY"));
+        Vector3 swordHitPosition = new Vector3(user.transform.position.x + adjustToCenter.x, user.transform.position.y + adjustToCenter.y, 0);
 
-        Vector3 swordHitPosition = new Vector3(player.transform.position.x + adjustToCenter.x, player.transform.position.y + adjustToCenter.y);
+        Vector3 position = new Vector3(swordHitPosition.x + (direction.x * range), swordHitPosition.y + (direction.y * range), 0);
 
-        Vector3 position = new Vector3(swordHitPosition.x + (degree.x * range), swordHitPosition.y + (degree.y * range), 0);
+        GameObject sword = GameObject.Instantiate(prefab, position, Quaternion.identity) as GameObject;
 
-        GameObject sword = GameObject.Instantiate(prefab[0], position, Quaternion.identity) as GameObject;
+        SwordCollider swordCol = sword.GetComponent<SwordCollider>();
+        swordCol.User = user;
+        swordCol.Action(ability.AbilityInfo.ObjectName);
     }
 
 
