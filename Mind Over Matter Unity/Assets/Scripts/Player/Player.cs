@@ -91,16 +91,7 @@ public class Player : MonoBehaviour {
         playerInput.Movement.MovementEnabled = false;
         anim.SetBool("Death", isDead);
     }
-        
-    void OnCollisionEnter2D(Collision2D other) {
-        if(other.transform.tag == "Environment") {
-            playerInput.Movement.OnWall = true;
-        }
-    }
-    void OnCollisionExit2D(Collision2D other) {
-        if (other.transform.tag == "Environment")
-            playerInput.Movement.OnWall = false;
-    }
+
 
     public int MaxHealth { get { return maxHealth; } }
     public int CurrentHealth { get; set; }

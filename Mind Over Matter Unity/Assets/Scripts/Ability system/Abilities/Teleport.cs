@@ -9,10 +9,11 @@ public class Teleport : Ability {
     private const float effectDamage = 50f,
                         cooldown = 1f,
                         travelDistance = 4f,
-                        timeToCast = .2f;
+                        timeToCast = .2f,
+                        abilityDuration = 2f;
 
     public Teleport(Animator animator, int index)
-        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.ranged, effectDamage, timeToCast) {
+        : base(name, description, effectDamage, timeToCast, abilityDuration, cooldown) {
         this.Index = index;
         this.Anim = animator;
 

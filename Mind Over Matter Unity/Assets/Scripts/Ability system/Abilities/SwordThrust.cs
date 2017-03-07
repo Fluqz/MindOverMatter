@@ -8,7 +8,7 @@ public class SwordThrust : Ability {
                           description = "A powerfull sword hit.";
     private const int effectDamage = 70;
     private const float dotDamage = 5,
-                        effectDuration = 2,
+                        effectDuration = 2f,
                         dotDuration = .3f,
                         cooldown = .2f,
                         range = .5f,
@@ -17,7 +17,7 @@ public class SwordThrust : Ability {
     private GameObject dot = Resources.Load("Prefabs/Abilities/DOT") as GameObject;
 
     public SwordThrust(Animator animator, int index)
-        : base(new BasicObjectInformation(name, description), cooldown, AbilityType.meele, effectDamage, timeToCast, range) {
+        : base(name, description, effectDamage, timeToCast, effectDuration, cooldown) {
 
         this.Anim = animator;
         this.Index = index;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-public class DamageOverTime : AbilityBehaviours {
+public class DamageOverTime : AbilityBehaviour {
 
     private const string name = "Damage Over Time",
                           description = "A damage over time effect";
@@ -23,32 +23,45 @@ public class DamageOverTime : AbilityBehaviours {
         this.prefab = prefab;
     }
 
-    public override void Action(GameObject user, Ability ability) {
+    public void InitDOT(GameObject user, GameObject victim, Ability ability) {
+        Vector3 victimPos = new Vector3(victim.transform.position.x, victim.transform.position.y, 0);
 
-        Vector3 playerPos = new Vector3(user.transform.position.x + adjustToCenter.x, user.transform.position.y + adjustToCenter.y, 0);
+        GameObject dot = GameObject.Instantiate(prefab, victimPos, Quaternion.identity) as GameObject;
+        dot.name = prefab.name;
+        dot.transform.parent = victim.transform;
 
-        //GameObject dot = GameObject.Instantiate(prefab[0], playerPos, Quaternion.identity) as GameObject;
-        //dot.transform.parent = user.transform;
+        DOTDamage dotScript = dot.GetComponent<DOTDamage>();
 
+        Transform victimChild = victim.transform.FindChild(prefab.name);
+        if (victimChild && victimChild != dot) {
+          //  if (victimChild.name == prefab.name)
+               // dotScript.DestroyGameObject(victimChild.gameObject);
+        }
+        dotScript.User = user;
+        dotScript.Victim = victim;
+        dotScript.Duration = effectDuration;
+        dotScript.Action(ability.Name);
         temp = 0;
-        Job.make(DOT(user));
+        Job.make(DOT(user, dotScript));
     }
 
-    private IEnumerator DOT(GameObject user) {
+    private IEnumerator DOT(GameObject user, DOTDamage dotScript) {
         durationTimer.Start();
         while (durationTimer.IsRunning && durationTimer.Elapsed.TotalSeconds <= damageTickDuration) {
             yield return null;
         }
 
         temp += damageTickDuration;
-        UnityEngine.Debug.Log(temp);
 
         durationTimer.Stop();
         durationTimer.Reset();
 
+        dotScript.MakeDamage(effectDamage);
+
         if (effectDuration >= temp) {
-            Job.make(DOT(user));
+            Job.make(DOT(user, dotScript));
         }
+
         yield break;
     }
 }

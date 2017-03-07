@@ -11,14 +11,16 @@ public class MindShield : Ability {
                         effectDuration = 3f,
                         effectDamage = 10f,
                         damageTickDuration = 1f,
-                        slowPercentage = 30f;
+                        slowPercentage = 30f,
+                        timeToCast = 1f,
+                        duration = 5f;
 
     private GameObject aoe = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
     private GameObject snare = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
     private GameObject shield = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
 
     public MindShield(Animator animator, int index)
-        : base(new BasicObjectInformation(name, description), cooldown) {
+        : base(name, description, effectDamage, timeToCast, duration, cooldown) {
 
         this.Anim = animator;
         this.Index = index;

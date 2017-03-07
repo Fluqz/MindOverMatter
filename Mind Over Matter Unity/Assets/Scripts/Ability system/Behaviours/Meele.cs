@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class Meele : AbilityBehaviours {
+public class Meele : AbilityBehaviour {
 
     private const string name = "Meele",
                             description = "A meele attack";
@@ -38,7 +38,7 @@ public class Meele : AbilityBehaviours {
 
         SwordCollider swordCol = sword.GetComponent<SwordCollider>();
         swordCol.User = user;
-        swordCol.Action(ability.AbilityInfo.ObjectName);
+        swordCol.Action(ability.Name);
     }
 
 

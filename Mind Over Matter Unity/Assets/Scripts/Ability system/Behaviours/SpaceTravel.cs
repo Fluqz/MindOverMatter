@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
-public class SpaceTravel : AbilityBehaviours {
+public class SpaceTravel : AbilityBehaviour {
 
     private const string name = "Space travel",
                           description = "Changes position of an object.";

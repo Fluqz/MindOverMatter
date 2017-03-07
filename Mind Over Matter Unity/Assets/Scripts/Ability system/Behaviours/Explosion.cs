@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Explosion : AbilityBehaviours {
+public class Explosion : AbilityBehaviour {
 
     private const string name = "Explosion",
                           description = "Radius of damage.";

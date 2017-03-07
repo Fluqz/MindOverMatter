@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-public class Snare : AbilityBehaviours {
+public class Snare : AbilityBehaviour {
 
     private const string name = "Snare",
                              description = "Slowing effect";

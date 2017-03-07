@@ -22,7 +22,7 @@ GameObject:
   - 223: {fileID: 223000013914785370}
   - 114: {fileID: 114000013248905402}
   - 114: {fileID: 114000011551533418}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: EnemyHUD
   m_TagString: UI
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - 114: {fileID: 114000011111655438}
   - 95: {fileID: 95000013884899862}
   - 114: {fileID: 114000010484092220}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy Painful Creature
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 224: {fileID: 224000013099185344}
   - 222: {fileID: 222000013446639778}
   - 114: {fileID: 114000013047815684}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CollisionDamage : AbilityBehaviours {
+public class CollisionDamage : AbilityBehaviour {
     private const string name = "Collision Damage",
                           description = "Damage on hit";
     private const ImpactTime impactTime = ImpactTime.Beginning;

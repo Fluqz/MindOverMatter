@@ -16,17 +16,21 @@ public class SwordCollider : MonoBehaviour {
         abilityName = name;
         if (user.transform.tag == "Player") {
             foreach (Ability a in PlayerInformation.Abilities) {
-                if (a.AbilityInfo.ObjectName == abilityName)
+                if (a.Name == abilityName) {
                     ability = a;
+                    break;
+                }
             }
         }
         else if (user.transform.tag == "Enemy") {
             foreach (Ability a in user.GetComponent<Enemy>().Abilities) {
-                if (a.AbilityInfo.ObjectName == abilityName)
+                if (a.Name == abilityName) {
                     ability = a;
+                    break;
+                }
             }
         }
-        timeStamp = Time.time + ability.CastTime;
+        timeStamp = Time.time + ability.AbilityDuration;
     }
     
     void Update () {

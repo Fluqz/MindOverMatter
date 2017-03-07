@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        //abilities.Add(new Teleport(anim, 0));
+        abilities.Add(new Teleport(anim, 0));
         abilities.Add(new EnergyShot(anim, 0));
 
         enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
@@ -57,10 +57,18 @@ public class Enemy : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.layer == 9)
+            movement.MovementEnabled = false;
+    }
+
+    void OnCollisionExit2D(Collision2D other) {
+        if (other.transform.tag == "Player")
+            movement.MovementEnabled = true;
 
     }
 
     public void TakeDamage(int damage) {
+        Debug.Log(damage + " on "+ gameObject.name);
         enemyInfo.CurrentHealth -= damage;
         anim.SetTrigger("isDamaged");
         ReduceHealthbar(enemyInfo.CurrentHealth, enemyInfo.MaxHealth, 0);

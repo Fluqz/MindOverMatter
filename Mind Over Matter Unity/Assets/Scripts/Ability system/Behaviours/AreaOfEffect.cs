@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 
-public class AreaOfEffect : AbilityBehaviours {
+public class AreaOfEffect : AbilityBehaviour {
 
     private const string name = "Area Of Effect",
                           description = "A wider attack";

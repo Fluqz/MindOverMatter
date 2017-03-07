@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010896105530}
   - 198: {fileID: 198000012468195700}
   - 199: {fileID: 199000010128559918}
+  - 114: {fileID: 114000012920471112}
   m_Layer: 8
   m_Name: DOT
   m_TagString: Ability
@@ -41,6 +42,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000012920471112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013824496870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccde9ec32f3c0b9469f13c97e742858c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: 
 --- !u!198 &198000012468195700
 ParticleSystem:
   m_ObjectHideFlags: 1

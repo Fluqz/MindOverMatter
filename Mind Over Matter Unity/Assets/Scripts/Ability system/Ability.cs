@@ -6,77 +6,62 @@ using System.Xml.Serialization;
 
 public class Ability {
 
-    private BasicObjectInformation objectInfo;
-    private List<AbilityBehaviours> behaviours;
-    private AbilityType abilityType;
+    private string name,
+                    description;
+    private float damage,
+                    castTime,
+                    abilityDuration,
+                    cooldown,
+                    range;
     private bool useable;
     private int index;
-    private float damage,
-                  cooldown,
-                  castTime,
-                    range;
+
+    private List<AbilityBehaviour> behaviours;
 
     private Animator anim;
 
-    public enum AbilityType {
-        ranged,
-        meele
+    public Ability(string name, string description, float damage, float castTime, float abilityDuration, float cooldown) {
+        this.name = name;
+        this.description = description;
+        this.damage = damage;
+        this.castTime = castTime;
+        this.abilityDuration = abilityDuration;
+        this.cooldown = cooldown;
+        this.range = 0f;
+        this.useable = true;
+        behaviours = new List<AbilityBehaviour>();
     }
 
-    public Ability(BasicObjectInformation aBasicInfo, float cd) {
-        objectInfo = aBasicInfo;
-        cooldown = cd;
-        behaviours = new List<AbilityBehaviours>();
-        cooldown = cd;
-        useable = true;
+    public Ability(string name, string description, float damage, float castTime, float abilityDuration, float cooldown, float range) {
+        this.name = name;
+        this.description = description;
+        this.damage = damage;
+        this.castTime = castTime;
+        this.abilityDuration = abilityDuration;
+        this.cooldown = cooldown;
+        this.range = range;
+        this.useable = true;
+        behaviours = new List<AbilityBehaviour>();
     }
-
-    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type) {
-        objectInfo = aBasicInfo;
-        cooldown = cd;
-        abilityType = type;
-        behaviours = new List<AbilityBehaviours>();
-        useable = true;
-    }
-
-    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type, float dmg, float timeToCast) {
-        objectInfo = aBasicInfo;
-        cooldown = cd;
-        abilityType = type;
-        damage = dmg;
-        castTime = timeToCast;
-        behaviours = new List<AbilityBehaviours>();
-        useable = true;
-    }
-
-    public Ability(BasicObjectInformation aBasicInfo, float cd, AbilityType type, float dmg, float timeToCast, float abilityRange) {
-        objectInfo = aBasicInfo;
-        cooldown = cd;
-        abilityType = type;
-        damage = dmg;
-        castTime = timeToCast;
-        range = abilityRange;
-        behaviours = new List<AbilityBehaviours>();
-        useable = true;
-    }
-
 
     public void PerformAbility(GameObject user) {
-        foreach(AbilityBehaviours b in this.behaviours) {
+        foreach(AbilityBehaviour b in this.behaviours) {
                 b.Action(user, this);
                 b.Action(user);
         }
     }
+    
+    public List<AbilityBehaviour> Behaviours { get { return behaviours; } }
 
-
-    public BasicObjectInformation AbilityInfo { get { return objectInfo; } }
-    public List<AbilityBehaviours> Behaviours { get { return behaviours; } }
-    public AbilityType GetAbilityType { get { return abilityType; } }
+    public string Name { get { return name; } }
+    public string Description { get { return description; } }
     public float Damage { get { return damage; } }
-    public float Cooldown { get { return cooldown; } }
-    public int Index { get { return index; } set { index = value; } }
     public float CastTime { get { return castTime; } }
-    public float Range { get; set; }
+    public float AbilityDuration { get { return abilityDuration; } }
+    public float Cooldown { get { return cooldown; } }
+    public float Range { get { return range; } }
     public bool Useable { get { return useable; } set { useable = value; } }
-    public Animator Anim { get; set; }
+    public int Index { get { return index; } set { index = value; } }
+    public Animator Anim { get { return anim; } set { anim = value; } }
+
 }

@@ -44,11 +44,11 @@ public class AI {
 
         if (!CheckTerritory(0.1f)) {
             inCombat = CheckTerritory(enemyInfo.TerretoryRadius);
-            movement.MovementEnabled = inCombat;
+            movement.Moving = inCombat;
 
             if (inCombat) {
                 anim.SetBool("EnteredTerretory", inCombat);
-                movement.move(checkDistance.CheckDistanceAToB(enemy.transform.position, player.transform.position));
+                movement.Move(checkDistance.CheckDistanceAToB(enemy.transform.position, player.transform.position));
 
                 foreach (Ability a in abilities) {
                     //if (CheckTerritory(a.Range)) {

@@ -7,6 +7,7 @@ public class Movement {
     private float reduceMovement;
     private bool isWalking;
     private bool movementEnabled;
+    private bool moving;
     private bool onWall;
     private Vector2 direction;
 
@@ -22,12 +23,13 @@ public class Movement {
 
         this.isWalking = false;
         this.movementEnabled = true;
+        this.moving = false;
         this.onWall = false;
         this.reduceMovement = 100;
         this.direction = new Vector2(0, -1);
     }
     	
-	public void move (Vector2 playerInput) {
+	public void Move (Vector2 playerInput) {
 
         if (MovementEnabled) {
 
@@ -60,4 +62,5 @@ public class Movement {
     public bool MovementEnabled { get { return movementEnabled; } set { rigid.velocity = Vector2.zero; movementEnabled = value; } }
     public bool OnWall { get { return onWall; } set { onWall = value; } }
     public float ReduceMovement { set { reduceMovement = value; } }
+    public bool Moving { set { moving = value; } }
 }

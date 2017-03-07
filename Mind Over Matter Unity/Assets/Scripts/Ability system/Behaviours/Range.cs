@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Range : AbilityBehaviours {
+public class Range : AbilityBehaviour {
 
     private const string name = "Ranged",
                             description = "A ranged attack";
@@ -38,7 +38,7 @@ public class Range : AbilityBehaviours {
         // pass parameters
         ShootingCollider col = bullet.GetComponent<ShootingCollider>();
         col.User = user;
-        col.Action(ability.AbilityInfo.ObjectName);
+        col.Action(ability.Name);
         // FIring bullet
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.velocity = direction.normalized * speed;

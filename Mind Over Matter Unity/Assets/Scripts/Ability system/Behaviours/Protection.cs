@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Protection : AbilityBehaviours {
+public class Protection : AbilityBehaviour {
 
     private const string name = "Protection",
                           description = "Blocks incoming damage from different sides";

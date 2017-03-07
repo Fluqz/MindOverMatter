@@ -5,14 +5,14 @@ using System.Diagnostics;
 
 public class EnemyAttack {
     private List<Ability> abilities;
-    private Stopwatch cooldownTimer;
+    private Stopwatch timer;
     private bool abilitiesDisabled,
                     isAttacking;
     private GameObject enemy;
 
     public EnemyAttack(GameObject enemy) {
         this.enemy = enemy;
-        cooldownTimer = new Stopwatch();
+        timer = new Stopwatch();
         isAttacking = false;
     }
 
@@ -25,23 +25,37 @@ public class EnemyAttack {
     }
     
     public void UseAbility(Ability ability) {
-        cooldownTimer = new Stopwatch();
-        cooldownTimer.Start();
+        timer = new Stopwatch();
+        timer.Start();
 
         ability.Useable = false;
         isAttacking = true;
         ability.Anim.SetTrigger("Ability " + (ability.Index + 1));
-        ability.PerformAbility(enemy);
 
+        Job.make(CastTime(ability));
+    }
+
+    private IEnumerator CastTime(Ability ability) {
+
+        while (ability.CastTime != 0f && timer.IsRunning && timer.Elapsed.TotalSeconds <= ability.CastTime) {
+            yield return null;
+        }
+        timer.Stop();
+        timer.Reset();
+
+        ability.PerformAbility(enemy);
+        timer.Start();
         Job.make(AbilityCooldown(ability));
+
+        yield break;
     }
 
     private IEnumerator AbilityCooldown(Ability ability) {
-        while (cooldownTimer.IsRunning && cooldownTimer.Elapsed.TotalSeconds <= ability.Cooldown) {
+        while (timer.IsRunning && timer.Elapsed.TotalSeconds <= ability.Cooldown) {
             yield return null;
         }
-        cooldownTimer.Stop();
-        cooldownTimer.Reset();
+        timer.Stop();
+        timer.Reset();
         ability.Useable = true;
 
         yield break;

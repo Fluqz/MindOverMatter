@@ -1168,6 +1168,21 @@ Prefab:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 60000012957982256, guid: 06905b0277aa0d2418f98762b6ff37b5,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 60000012957982256, guid: 06905b0277aa0d2418f98762b6ff37b5,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 60000010386126984, guid: 06905b0277aa0d2418f98762b6ff37b5,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 0}
@@ -1454,6 +1469,8 @@ GameObject:
   - 212: {fileID: 1619283121}
   - 61: {fileID: 1619283120}
   - 114: {fileID: 1619283123}
+  - 68: {fileID: 1619283125}
+  - 68: {fileID: 1619283124}
   m_Layer: 0
   m_Name: Steps
   m_TagString: Environment
@@ -1472,9 +1489,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.061520576, y: 0.022665262}
   serializedVersion: 2
-  m_Size: {x: 3.03125, y: 2.0625}
+  m_Size: {x: 3.0247736, y: 2.0171695}
 --- !u!212 &1619283121
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1532,6 +1549,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43a9c775c78403429a480a35ad2707d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!68 &1619283124
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619283119}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 6.06, y: 0}
+  m_Points:
+  - {x: -4.725384, y: -0.9443623}
+  - {x: -4.71997, y: 0.63168234}
+--- !u!68 &1619283125
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1619283119}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 1.73, y: 0}
+  m_Points:
+  - {x: -3.0152287, y: -0.94346106}
+  - {x: -3.0169942, y: 0.6512167}
 --- !u!1001 &1665933430
 Prefab:
   m_ObjectHideFlags: 0
@@ -1945,6 +1992,16 @@ Prefab:
     - target: {fileID: 1000013716403580, guid: 3aa5a46a6fceff5409618d67fc3608c4, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 60000014239701016, guid: 3aa5a46a6fceff5409618d67fc3608c4,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 60000013864772074, guid: 3aa5a46a6fceff5409618d67fc3608c4,
+        type: 2}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3aa5a46a6fceff5409618d67fc3608c4, type: 2}

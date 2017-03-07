@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AbilityBehaviours {
+public class AbilityBehaviour {
 
     private BasicObjectInformation objectInfo;
     private ImpactTime impactTime;
 
-    public AbilityBehaviours(BasicObjectInformation info, ImpactTime aImpactTime) {
+    public AbilityBehaviour(BasicObjectInformation info, ImpactTime aImpactTime) {
         objectInfo = info;
         impactTime = aImpactTime;
     }
