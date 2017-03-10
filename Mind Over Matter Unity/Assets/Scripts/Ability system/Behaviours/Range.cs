@@ -11,7 +11,6 @@ public class Range : AbilityBehaviour {
     private float distance,
                     speed,
                     effectDamage;
-    private Vector2 adjustToCenter = new Vector2(.5f, 1);
 
     private GameObject prefab;
 
@@ -31,7 +30,7 @@ public class Range : AbilityBehaviour {
         //Sprite rotation
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y*(-1), direction.x*(-1)) * Mathf.Rad2Deg);
         //Plaeyrposition adjusted in middle
-        Vector3 playerPos = new Vector3(user.transform.position.x + adjustToCenter.x, user.transform.position.y + adjustToCenter.y, 0);
+        Vector3 playerPos = new Vector3(user.transform.position.x, user.transform.position.y, 0);
         // instantiate bullet
         GameObject bullet = GameObject.Instantiate(prefab, playerPos, rotation) as GameObject;
         bullet.transform.parent = user.transform;

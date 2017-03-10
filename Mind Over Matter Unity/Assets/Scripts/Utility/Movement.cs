@@ -7,7 +7,6 @@ public class Movement {
     private float reduceMovement;
     private bool isWalking;
     private bool movementEnabled;
-    private bool moving;
     private bool onWall;
     private Vector2 direction;
 
@@ -23,26 +22,25 @@ public class Movement {
 
         this.isWalking = false;
         this.movementEnabled = true;
-        this.moving = false;
         this.onWall = false;
         this.reduceMovement = 100;
         this.direction = new Vector2(0, -1);
     }
     	
-	public void Move (Vector2 playerInput) {
+	public void Move (Vector2 input) {
 
         if (MovementEnabled) {
 
-            isWalking = (Mathf.Abs(playerInput.x) + Mathf.Abs(playerInput.y)) > 0;
+            isWalking = (Mathf.Abs(input.x) + Mathf.Abs(input.y)) > 0;
             anim.SetBool("isWalking", isWalking);
 
-            anim.SetFloat("x", playerInput.x);
-            anim.SetFloat("y", playerInput.y);
-            rigid.velocity = playerInput;
+            anim.SetFloat("x", input.x);
+            anim.SetFloat("y", input.y);
+            rigid.velocity = input;
 
             if (isWalking) {
                 this.rigid.velocity = this.rigid.velocity.normalized * ((movementSpeed / 100) * reduceMovement);
-                direction = new Vector2(playerInput.x, playerInput.y).normalized;
+                direction = new Vector2(input.x, input.y).normalized;
                 anim.SetFloat("DirectionX", direction.x);
                 anim.SetFloat("DirectionY", direction.y);
             }
@@ -62,5 +60,5 @@ public class Movement {
     public bool MovementEnabled { get { return movementEnabled; } set { rigid.velocity = Vector2.zero; movementEnabled = value; } }
     public bool OnWall { get { return onWall; } set { onWall = value; } }
     public float ReduceMovement { set { reduceMovement = value; } }
-    public bool Moving { set { moving = value; } }
+    public bool IsWalking { set { isWalking = value; } get { return isWalking; } }
 }

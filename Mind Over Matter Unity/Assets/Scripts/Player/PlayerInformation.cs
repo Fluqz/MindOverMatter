@@ -9,6 +9,7 @@ public static class PlayerInformation {
                         currentHealth;
     private static float movementSpeed;
 
+    private static Vector3 position;
     private static Vector2 direction;
 
     private static Ability[] abilities;
@@ -28,6 +29,7 @@ public static class PlayerInformation {
     public static int MaxHealth { get; set; }
     public static int CurrentHealth { get; set; }
     public static float MovementSpeed { get; set; }
+    public static Vector3 Position { get; set; }
     public static Vector2 Direction { get; set; }
     public static Ability[] Abilities { get; set; }
     public static GameObject PlayerGO { get; set; }

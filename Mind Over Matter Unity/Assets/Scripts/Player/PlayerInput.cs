@@ -58,7 +58,7 @@ public class PlayerInput {
     }
     // Y
     public void Ability3() {
-        if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
+        if (Input.GetButton("Jump") && PlayerInformation.Abilities[2].Useable) {
             Debug.Log(PlayerInformation.Abilities[2].Name + " " + PlayerInformation.Abilities[2].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
         }

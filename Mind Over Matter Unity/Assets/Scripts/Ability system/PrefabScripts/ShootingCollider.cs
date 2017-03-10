@@ -13,9 +13,11 @@ public class ShootingCollider : MonoBehaviour {
     private GameObject user;
 
     private List<int> colliders;
+    private Tool tool;
 
     void Awake() {
         spawned = false;
+        tool = new Tool();
     }
 	
     public void Action(string name) {
@@ -56,16 +58,9 @@ public class ShootingCollider : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
         if (spawned) {
-            
-            if (colliders != null) {
-                if (!colliders.Contains(other.gameObject.GetInstanceID()))
-                    colliders.Add(other.gameObject.GetInstanceID());
-                else return;
-            }
-            else {
-                colliders = new List<int>();
-                colliders.Add(other.gameObject.GetInstanceID());
-            }
+
+            if (tool.CheckCollidersAsOneGameObejct(other))
+                return;
 
             if (other.transform.tag != user.transform.tag) {
                 if (other.transform.tag == "Player" && user.transform.tag == "Enemy") {

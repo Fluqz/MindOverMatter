@@ -7,7 +7,7 @@ public class Teleport : Ability {
     public const string name = "Teleport",
                         description = "An instant travel throughout space";
     private const float effectDamage = 50f,
-                        cooldown = 1f,
+                        cooldown = 0f,
                         travelDistance = 4f,
                         timeToCast = .2f,
                         abilityDuration = 2f;

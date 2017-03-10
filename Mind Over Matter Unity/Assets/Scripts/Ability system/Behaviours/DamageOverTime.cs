@@ -50,15 +50,15 @@ public class DamageOverTime : AbilityBehaviour {
         while (durationTimer.IsRunning && durationTimer.Elapsed.TotalSeconds <= damageTickDuration) {
             yield return null;
         }
-
+        
+        dotScript.MakeDamage(effectDamage);
         temp += damageTickDuration;
 
         durationTimer.Stop();
         durationTimer.Reset();
 
-        dotScript.MakeDamage(effectDamage);
 
-        if (effectDuration >= temp) {
+        if (effectDuration > temp) {
             Job.make(DOT(user, dotScript));
         }
 

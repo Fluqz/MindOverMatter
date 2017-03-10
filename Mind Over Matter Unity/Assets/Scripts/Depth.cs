@@ -13,6 +13,9 @@ public class Depth : MonoBehaviour {
     private BoxCollider2D boxCol;
     private SpriteRenderer objSprite;
     private string oldSortingLayer;
+    private bool overlaps;
+    private Collider2D other = new Collider2D();
+    private Tool tool;
 
     
     void Start () {
@@ -21,34 +24,66 @@ public class Depth : MonoBehaviour {
         Physics2D.IgnoreCollision(obj, boxCol);
         objSprite = GetComponent<SpriteRenderer>();
         oldSortingLayer = objSprite.sortingLayerName;
+        overlaps = false;
+        tool = new Tool();
     }
 	
 	void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Enemy")) {
-            if (other.transform.position.y > transform.position.y)
-                other.GetComponent<SpriteRenderer>().sortingOrder -= 1;
-            else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
-        else if(other.CompareTag("Player")) {
-            if (other.transform.position.y > transform.position.y)
-                objSprite.sortingLayerName = "InFrontOfPlayer";
-            else objSprite.sortingLayerName = oldSortingLayer;
-        }
+        if (tool.CheckCollidersAsOneGameObejct(other))
+            return;
+        Debug.Log("Start");
+        this.other = other;
+        overlaps = true;
+        CheckPositionY(true);
+        StartCoroutine(UpdateWhileOverlapping());
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("Enemy")) {
-            if (other.transform.position.y < transform.position.y)
-                other.GetComponent<SpriteRenderer>().sortingOrder += 1;
-            else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        Debug.Log("End");
+        overlaps = false;
+        CheckPositionY(false);
+        tool.EmptyColliderList();
+        StopCoroutine(UpdateWhileOverlapping());
+    }
+
+
+    void CheckPositionY(bool entered) {
+        if (entered) {
+            if (other.CompareTag("Enemy")) {
+                if (other.transform.position.y > this.gameObject.transform.position.y)
+                    other.GetComponent<SpriteRenderer>().sortingOrder -= 1;
+                else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else if (other.CompareTag("Player")) {
+                if (other.transform.position.y > this.gameObject.transform.position.y)
+                    objSprite.sortingLayerName = "InFrontOfPlayer";
+                else objSprite.sortingLayerName = oldSortingLayer;
+            }
         }
-        else if (other.CompareTag("Player")) {
-            if (other.transform.position.y < transform.position.y)
-                objSprite.sortingLayerName = oldSortingLayer;
-            else objSprite.sortingLayerName = "InFrontOfPlayer";
+        else{
+            if (other.CompareTag("Enemy")) {
+                if (other.transform.position.y < transform.position.y)
+                    other.GetComponent<SpriteRenderer>().sortingOrder += 1;
+                else other.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else if (other.CompareTag("Player")) {
+                if (other.transform.position.y < transform.position.y)
+                    objSprite.sortingLayerName = oldSortingLayer;
+                else objSprite.sortingLayerName = "InFrontOfPlayer";
+            }
         }
     }
 
+    IEnumerator UpdateWhileOverlapping() {
+        while (overlaps) {
+            Debug.Log("While");
+            CheckPositionY(true);
+            yield return null;
+        }
+        StopCoroutine(UpdateWhileOverlapping());
+
+        yield break;
+    }
 
     public string GetSortingLayerNames(string layer) {
         Type internalEditorUtilityType = typeof(InternalEditorUtility);

@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
     private Vector2 input;
 
     private AI ai;
-    private Movement movement;
+    private EnemyMovement movement;
 
     private List<Ability> abilities = new List<Ability>();
     
@@ -26,11 +26,11 @@ public class Enemy : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        abilities.Add(new Teleport(anim, 0));
+        //abilities.Add(new Teleport(anim, 0));
         abilities.Add(new EnergyShot(anim, 0));
 
         enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
-        movement = new Movement(enemyInfo.MovementSpeed, this.gameObject);
+        movement = new EnemyMovement(enemyInfo.MovementSpeed, this.gameObject);
         ai = new AI(enemyInfo, this.gameObject, abilities, movement);
 
 
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour {
     }
 
 
-    public Movement Movement { get { return movement; } }
+    public EnemyMovement Movement { get { return movement; } }
     public EnemyInformation EnemyInfo { get { return enemyInfo; } }
     public List<Ability> Abilities { get { return abilities; } }
 

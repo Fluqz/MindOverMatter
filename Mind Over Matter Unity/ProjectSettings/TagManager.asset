@@ -21,8 +21,8 @@ TagManager:
   - 
   - Ability
   - Actors
-  - 
-  - 
+  - Environment
+  - Ground
   - 
   - 
   - 
@@ -50,6 +50,9 @@ TagManager:
   - name: Background
     uniqueID: 1434824369
     locked: 0
+  - name: Ground
+    uniqueID: 3537901623
+    locked: 0
   - name: Environment
     uniqueID: 2452784681
     locked: 0
@@ -62,8 +65,8 @@ TagManager:
   - name: InFrontOfPlayer
     uniqueID: 3816598419
     locked: 0
-  - name: Player
-    uniqueID: 2413066057
+  - name: Foreground
+    uniqueID: 968462129
     locked: 0
   - name: UI
     uniqueID: 3389444065

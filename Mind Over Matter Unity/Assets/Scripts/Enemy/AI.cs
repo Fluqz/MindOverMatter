@@ -15,17 +15,17 @@ public class AI {
     private Rigidbody2D rigid;
     private Animator anim;
 
-    private Movement movement;
+    private EnemyMovement movement;
     private EnemyAttack attack;
     private EnemyInformation enemyInfo;
-    private CheckDistance checkDistance;
+    private Tool checkDistance;
 
     private bool inCombat,
                     canAttack;
 
     private List<Ability> abilities;
 
-    public AI(EnemyInformation enemyInformation, GameObject enem, List<Ability> abs, Movement movemen) {
+    public AI(EnemyInformation enemyInformation, GameObject enem, List<Ability> abs, EnemyMovement movemen) {
         player = GameObject.FindWithTag("Player");
         enemyInfo = enemyInformation;
         enemy = enem;
@@ -33,7 +33,7 @@ public class AI {
         movement = movemen;
         anim = enemy.GetComponent<Animator>();
 
-        checkDistance = new CheckDistance();
+        checkDistance = new Tool();
         attack = new EnemyAttack(enem);
         inCombat = false;
         canAttack = false;
@@ -44,11 +44,12 @@ public class AI {
 
         if (!CheckTerritory(0.1f)) {
             inCombat = CheckTerritory(enemyInfo.TerretoryRadius);
-            movement.Moving = inCombat;
+            movement.IsWalking = inCombat;
 
             if (inCombat) {
                 anim.SetBool("EnteredTerretory", inCombat);
-                movement.Move(checkDistance.CheckDistanceAToB(enemy.transform.position, player.transform.position));
+                movement.Move(checkDistance.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), PlayerInformation.Position);
+
 
                 foreach (Ability a in abilities) {
                     //if (CheckTerritory(a.Range)) {
@@ -66,8 +67,8 @@ public class AI {
     }
     
     public bool CheckTerritory(float radius) {
-        float disToPlayer = Vector3.Distance(enemy.transform.position, player.transform.position);
-        UnityEngine.Debug.DrawLine(enemy.transform.position, player.transform.position, Color.cyan, 0, false);
+        float disToPlayer = Vector3.Distance(enemy.transform.position, PlayerInformation.Position);
+        UnityEngine.Debug.DrawLine(enemy.transform.position, PlayerInformation.Position, Color.cyan, 0, false);
         if (disToPlayer <= radius)
             return true;
         return false;

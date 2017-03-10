@@ -9,6 +9,8 @@ public class SwordCollider : MonoBehaviour {
     private string abilityName;
 
     private GameObject user;
+
+    private Tool tool;
     
     public void Action(string name) {
         timeStamp = 0;
@@ -31,6 +33,7 @@ public class SwordCollider : MonoBehaviour {
             }
         }
         timeStamp = Time.time + ability.AbilityDuration;
+        tool = new Tool();
     }
     
     void Update () {
@@ -39,6 +42,10 @@ public class SwordCollider : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
+
+        if (tool.CheckCollidersAsOneGameObejct(other))
+            return;
+
         if (!isCollided) {
             if (other.gameObject.tag != user.transform.tag) {
                 isCollided = true;
