@@ -24,9 +24,9 @@ GameObject:
   - 61: {fileID: 61000014172765412}
   - 114: {fileID: 114000013627686536}
   - 50: {fileID: 50000014125841348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ability
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,4 +122,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63aeed3912efbfc4e9f1ef121b45d51e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: 

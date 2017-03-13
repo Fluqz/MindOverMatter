@@ -6,77 +6,48 @@ public class ShootingCollider : MonoBehaviour {
 
     private Ability ability;
     private DamageOverTime dot;
-    public string abilityName;
     private bool spawned;
-    private float timeStamp;
 
     private GameObject user;
 
     private List<int> colliders;
-    private Tool tool;
 
     void Awake() {
         spawned = false;
-        tool = new Tool();
     }
 	
-    public void Action(string name) {
+    public void Action(Ability ability) {
+        this.ability = ability;
         spawned = true;
-        timeStamp = 0;
-        abilityName = name;
-        if (user.transform.tag == "Player") {
-            foreach (Ability a in PlayerInformation.Abilities) {
-                if (a.Name == abilityName) {
-                    ability = a;
-                    break;
-                }
-            }
-        }
-        else if (user.transform.tag == "Enemy") {
-            foreach (Ability a in user.GetComponent<Enemy>().Abilities) {
-                if (a.Name == abilityName) {
-                    ability = a;
-                    break;
-                }
-            }
-        }
 
         foreach (AbilityBehaviour ab in ability.Behaviours) {
             if (ab.AbilityBehaviorInfo.ObjectName == "Damage Over Time")
                 dot = (DamageOverTime)ab;
         }
 
-        timeStamp = Time.time + ability.AbilityDuration;
+        StartCoroutine(WaitAndDestroy(ability.AbilityDuration, this.gameObject));
     }
-
-
-
-	void Update () {
-        if (timeStamp <= Time.time) DestroyGameObject();
-    }
-
-
+    
     void OnTriggerEnter2D(Collider2D other) {
         if (spawned) {
 
-            if (tool.CheckCollidersAsOneGameObejct(other))
+            if (Tools.CheckCollidersAsOneGameObejct(other))
                 return;
 
-            if (other.transform.tag != user.transform.tag) {
-                if (other.transform.tag == "Player" && user.transform.tag == "Enemy") {
+            if (!other.CompareTag(user.transform.tag)) {
+                if (other.transform.CompareTag("Player") && user.CompareTag("Enemy")) {
                     other.GetComponent<Player>().TakeDamage((int)ability.Damage);
                     dot.InitDOT(user, other.gameObject, ability);
                 }
-                else if (other.transform.tag == "Enemy" && user.transform.tag == "Player") {
+                else if (other.CompareTag("Enemy") && user.CompareTag("Player")) {
                     other.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
                     dot.InitDOT(user, other.gameObject, ability);
                 }
 
-
-                if (other.transform.tag != "Environment")
-                    StartCoroutine(WaitAndDestroy(.2f, this.gameObject));
+                if (other.CompareTag("Ability")) 
+                    Physics2D.IgnoreCollision(other, this.gameObject.GetComponent<BoxCollider2D>());
             }
-            else if (other.transform.tag == user.transform.tag) {
+            else if (other.CompareTag(user.transform.tag)) {
                 Physics2D.IgnoreCollision(user.GetComponent<Collider2D>(), other);
             }
         }

@@ -15,8 +15,6 @@ public class Depth : MonoBehaviour {
     private string oldSortingLayer;
     private bool overlaps;
     private Collider2D other = new Collider2D();
-    private Tool tool;
-
     
     void Start () {
         boxCol = GetComponent<BoxCollider2D>();
@@ -25,13 +23,11 @@ public class Depth : MonoBehaviour {
         objSprite = GetComponent<SpriteRenderer>();
         oldSortingLayer = objSprite.sortingLayerName;
         overlaps = false;
-        tool = new Tool();
     }
 	
 	void OnTriggerEnter2D(Collider2D other) {
-        if (tool.CheckCollidersAsOneGameObejct(other))
+        if (Tools.CheckCollidersAsOneGameObejct(other))
             return;
-        Debug.Log("Start");
         this.other = other;
         overlaps = true;
         CheckPositionY(true);
@@ -39,10 +35,9 @@ public class Depth : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("End");
         overlaps = false;
         CheckPositionY(false);
-        tool.EmptyColliderList();
+        Tools.EmptyColliderList();
         StopCoroutine(UpdateWhileOverlapping());
     }
 
@@ -76,7 +71,6 @@ public class Depth : MonoBehaviour {
 
     IEnumerator UpdateWhileOverlapping() {
         while (overlaps) {
-            Debug.Log("While");
             CheckPositionY(true);
             yield return null;
         }

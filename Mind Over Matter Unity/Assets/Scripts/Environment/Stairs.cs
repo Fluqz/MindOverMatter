@@ -11,16 +11,16 @@ public class Stairs : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.transform.tag == "Player")
+        if (other.transform.CompareTag("Player"))
             other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(slow);
-        else if (other.transform.tag == "Enemy")
+        else if (other.CompareTag("Enemy"))
             other.GetComponent<Enemy>().Movement.UpdateVelocity(slow);
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        if (other.transform.tag == "Player")
+        if (other.CompareTag("Player"))
             other.GetComponent<Player>().PlayerInput.Movement.UpdateVelocity(100);
-        else if (other.transform.tag == "Enemy")
+        else if (other.CompareTag("Enemy"))
             other.GetComponent<Enemy>().Movement.UpdateVelocity(100);
     }
 }

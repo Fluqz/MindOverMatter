@@ -3,43 +3,22 @@ using System.Collections;
 
 public class DOTDamage : MonoBehaviour {
 
-    private Ability ability;
-    public string abilityName;
     private float timeStamp, duration;
 
     private GameObject user, victim;
 
 
-    public void Action(string name) {
-
+    public void Action() {
         timeStamp = 0;
-        abilityName = name;
-        if (user.transform.tag == "Player") {
-            foreach (Ability a in PlayerInformation.Abilities) {
-                if (a.Name == abilityName) {
-                    ability = a;
-                    break;
-                }
-            }
-        }
-        else if (user.transform.tag == "Enemy") {
-            foreach (Ability a in user.GetComponent<Enemy>().Abilities) {
-                if (a.Name == abilityName) { 
-                    ability = a;
-                    break;
-                }
-            }
-        }
-
 
         timeStamp = Time.time + duration;
     }
 
     public void MakeDamage(float damage) {
         if (victim && user) {
-            if (victim.transform.tag == "Player" && user.transform.tag == "Enemy")
+            if (victim.CompareTag("Player") && user.transform.CompareTag("Enemy"))
                 victim.GetComponent<Player>().TakeDamage((int)damage);
-            else if (victim.transform.tag == "Enemy" && user.transform.tag == "Player")
+            else if (victim.CompareTag("Enemy") && user.CompareTag("Player"))
                 victim.GetComponent<Enemy>().TakeDamage((int)damage);
         }
     }

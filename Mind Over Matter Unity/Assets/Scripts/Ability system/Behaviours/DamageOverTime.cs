@@ -40,7 +40,7 @@ public class DamageOverTime : AbilityBehaviour {
         dotScript.User = user;
         dotScript.Victim = victim;
         dotScript.Duration = effectDuration;
-        dotScript.Action(ability.Name);
+        dotScript.Action();
         temp = 0;
         Job.make(DOT(user, dotScript));
     }

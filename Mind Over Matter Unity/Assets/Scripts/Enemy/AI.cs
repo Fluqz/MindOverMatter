@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-public class AI {
+public class AI : MonoBehaviour{
 
     private Stopwatch stopwatch;
 
@@ -18,10 +18,12 @@ public class AI {
     private EnemyMovement movement;
     private EnemyAttack attack;
     private EnemyInformation enemyInfo;
-    private Tool checkDistance;
 
     private bool inCombat,
                     canAttack;
+
+    private Vector2 destination;
+    private float timeStamp, checkRate;
 
     private List<Ability> abilities;
 
@@ -33,23 +35,30 @@ public class AI {
         movement = movemen;
         anim = enemy.GetComponent<Animator>();
 
-        checkDistance = new Tool();
         attack = new EnemyAttack(enem);
         inCombat = false;
         canAttack = false;
+        checkRate = .6f;
+        timeStamp = Time.time + checkRate;
     }
 
     public void FixedUpdate() {
-            
 
-        if (!CheckTerritory(0.1f)) {
+        if(timeStamp < Time.time) {
+            destination = PlayerInformation.Position;
+            timeStamp = Time.time + checkRate;
+        }
+
+
+            
+        if (!CheckTerritory(0.5f)) {
             inCombat = CheckTerritory(enemyInfo.TerretoryRadius);
             movement.IsWalking = inCombat;
 
             if (inCombat) {
                 anim.SetBool("EnteredTerretory", inCombat);
-                movement.Move(checkDistance.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), PlayerInformation.Position);
-
+                movement.Move(Tools.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), destination);
+                enemyInfo.Direction = movement.Direction;
 
                 foreach (Ability a in abilities) {
                     //if (CheckTerritory(a.Range)) {
@@ -61,11 +70,8 @@ public class AI {
                 }
             }
         }
-        else {
-
-        }
     }
-    
+
     public bool CheckTerritory(float radius) {
         float disToPlayer = Vector3.Distance(enemy.transform.position, PlayerInformation.Position);
         UnityEngine.Debug.DrawLine(enemy.transform.position, PlayerInformation.Position, Color.cyan, 0, false);
@@ -73,7 +79,6 @@ public class AI {
             return true;
         return false;
     }
-
 
     public List<Ability> Abilities { set { abilities = value; } }
 }

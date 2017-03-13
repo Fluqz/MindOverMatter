@@ -30,17 +30,18 @@ public class Range : AbilityBehaviour {
         //Sprite rotation
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y*(-1), direction.x*(-1)) * Mathf.Rad2Deg);
         //Plaeyrposition adjusted in middle
-        Vector3 playerPos = new Vector3(user.transform.position.x, user.transform.position.y, 0);
+        Vector3 userPos = new Vector3(user.transform.position.x, user.transform.position.y, 0);
         // instantiate bullet
-        GameObject bullet = GameObject.Instantiate(prefab, playerPos, rotation) as GameObject;
+        GameObject bullet = GameObject.Instantiate(prefab, userPos, rotation) as GameObject;
         bullet.transform.parent = user.transform;
         // pass parameters
         ShootingCollider col = bullet.GetComponent<ShootingCollider>();
-        col.User = user;
-        col.Action(ability.Name);
         // FIring bullet
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         rigid.velocity = direction.normalized * speed;
+
+        col.User = user;
+        col.Action(ability);
 }
 
     private float GetDegree(Vector2 direction) {

@@ -28,14 +28,14 @@ public class Player : MonoBehaviour {
         PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.MovementSpeed = movementSpeed = 2.5f;
+        PlayerInformation.MovementSpeed = movementSpeed = 4f;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
 
-        playerAbilities.SetAbility(new Teleport(anim, 0), 0);
-        playerAbilities.SetAbility(new MindShield(anim, 1), 1);
+        playerAbilities.SetAbility(new SwordThrust(anim, 0), 0);
+        playerAbilities.SetAbility(new Teleport(anim, 1), 1);
         playerAbilities.SetAbility(new EnergyShot(anim, 2), 2);
-        playerAbilities.SetAbility(new SwordThrust(anim, 3), 3);
+        playerAbilities.SetAbility(new MindShield(anim, 3), 3);
     }
 
 
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
         playerAbilities = playerInput.PlayerAbilities;
 
         InitPlayer();
-        playerInput.Movement = new Movement(movementSpeed, this.gameObject);
+        playerInput.Movement = new PlayerMovement(movementSpeed, this.gameObject);
 
     }
 
@@ -73,9 +73,9 @@ public class Player : MonoBehaviour {
     }
 
 
-    public void TakeDamage(int damage) {
-        Debug.Log(damage + " on player");
-        currentHealth -= damage;
+    public void TakeDamage(float damage) {
+        //Debug.Log(damage + " on player");
+        currentHealth -= (int)damage;
         isDamaged = true;
         healthbar.GetComponent<Healthbar>().ReduceHealthbar(currentHealth, maxHealth, 0);
     }

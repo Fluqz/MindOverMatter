@@ -38,7 +38,7 @@ public class Meele : AbilityBehaviour {
 
         SwordCollider swordCol = sword.GetComponent<SwordCollider>();
         swordCol.User = user;
-        swordCol.Action(ability.Name);
+        swordCol.Action(ability);
     }
 
 

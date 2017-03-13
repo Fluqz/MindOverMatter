@@ -17,8 +17,8 @@ public class Teleport : Ability {
         this.Index = index;
         this.Anim = animator;
 
-        this.Behaviours.Add(new SpaceTravel(travelDistance));
         this.Behaviours.Add(new CollisionDamage(effectDamage));
+        this.Behaviours.Add(new SpaceTravel(travelDistance));
     }
 
 }

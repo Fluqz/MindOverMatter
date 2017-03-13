@@ -9,31 +9,12 @@ public class SwordCollider : MonoBehaviour {
     private string abilityName;
 
     private GameObject user;
-
-    private Tool tool;
     
-    public void Action(string name) {
+    public void Action(Ability ability) {
+        this.ability = ability;
         timeStamp = 0;
         isCollided = false;
-        abilityName = name;
-        if (user.transform.tag == "Player") {
-            foreach (Ability a in PlayerInformation.Abilities) {
-                if (a.Name == abilityName) {
-                    ability = a;
-                    break;
-                }
-            }
-        }
-        else if (user.transform.tag == "Enemy") {
-            foreach (Ability a in user.GetComponent<Enemy>().Abilities) {
-                if (a.Name == abilityName) {
-                    ability = a;
-                    break;
-                }
-            }
-        }
         timeStamp = Time.time + ability.AbilityDuration;
-        tool = new Tool();
     }
     
     void Update () {
@@ -43,19 +24,19 @@ public class SwordCollider : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
 
-        if (tool.CheckCollidersAsOneGameObejct(other))
+        if (Tools.CheckCollidersAsOneGameObejct(other))
             return;
 
         if (!isCollided) {
-            if (other.gameObject.tag != user.transform.tag) {
+            if (!other.CompareTag(user.transform.tag)) {
                 isCollided = true;
                 Debug.Log(other.transform.name);
-                if (other.gameObject.tag == "Player")
+                if (other.CompareTag("Player"))
                     user.GetComponent<Player>().TakeDamage((int)ability.Damage);
-                else if(other.gameObject.tag == "Enemy")
+                else if(other.gameObject.CompareTag("Enemy"))
                     other.transform.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
             }
-            else if (other.gameObject.tag == user.transform.tag)
+            else if (other.gameObject.CompareTag(user.transform.tag))
                 Physics2D.IgnoreCollision(other, user.GetComponent<Collider2D>());
         }
         else isCollided = false;

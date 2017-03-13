@@ -57,19 +57,19 @@ public class Enemy : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.layer == 9)
+        if (other.transform.CompareTag("Player"))
             movement.MovementEnabled = false;
     }
 
     void OnCollisionExit2D(Collision2D other) {
-        if (other.transform.tag == "Player")
+        if (other.transform.CompareTag("Player"))
             movement.MovementEnabled = true;
 
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(float damage) {
         Debug.Log(damage + " on "+ gameObject.name);
-        enemyInfo.CurrentHealth -= damage;
+        enemyInfo.CurrentHealth -= (int)damage;
         anim.SetTrigger("isDamaged");
         ReduceHealthbar(enemyInfo.CurrentHealth, enemyInfo.MaxHealth, 0);
     }

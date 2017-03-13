@@ -5,7 +5,7 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 public class SpaceTravel : AbilityBehaviour {
 
-    private const string name = "Space travel",
+    private const string name = "Space Travel",
                           description = "Changes position of an object.";
     private const ImpactTime impactTime = ImpactTime.Beginning;
     private float distance;
@@ -23,4 +23,6 @@ public class SpaceTravel : AbilityBehaviour {
         Vector3 currentPosition = user.transform.position;
         user.transform.position = currentPosition + new Vector3(direction.x * distance, direction.y * distance, 0);
     }
+
+    public float Distance { get { return distance; } }
 }

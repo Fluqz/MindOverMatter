@@ -1,21 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Movement {
-
-    private float movementSpeed;
-    private float reduceMovement;
-    private bool isWalking;
-    private bool movementEnabled;
-    private bool onWall;
-    private Vector2 direction;
-
-    private Animator anim;
-    private Transform transf;
-    private Rigidbody2D rigid;
-
-    public Movement(float speed, GameObject go) {
-        this.movementSpeed = speed;
+public class PlayerMovement : Movement {
+    
+    public PlayerMovement(float speed, GameObject go) {
+        this.movementSpeed = 0;
+        this.MaxMovementSpeed = speed;
         this.anim = go.GetComponent<Animator>();
         this.rigid = go.GetComponent<Rigidbody2D>();
         this.transf = go.GetComponent<Transform>();
@@ -25,9 +15,10 @@ public class Movement {
         this.onWall = false;
         this.reduceMovement = 100;
         this.direction = new Vector2(0, -1);
+        this.accelaration = .5f;
     }
-    	
-	public void Move (Vector2 input) {
+
+    public override void Move(Vector2 input) {
 
         if (MovementEnabled) {
 
@@ -39,13 +30,23 @@ public class Movement {
             rigid.velocity = input;
 
             if (isWalking) {
+                if (MovementSpeed < MaxMovementSpeed) {
+                    movementSpeed += accelaration;
+                }
                 this.rigid.velocity = this.rigid.velocity.normalized * ((movementSpeed / 100) * reduceMovement);
                 direction = new Vector2(input.x, input.y).normalized;
                 anim.SetFloat("DirectionX", direction.x);
                 anim.SetFloat("DirectionY", direction.y);
             }
+            else {
+                rigid.velocity = Vector2.zero;
+                movementSpeed = 0f;
+            }
         }
-        else this.rigid.velocity = Vector2.zero;
+        else {
+            this.rigid.velocity = Vector2.zero;
+            movementSpeed = 0;
+        }
     }
 
     public void UpdateVelocity(float reduce) {

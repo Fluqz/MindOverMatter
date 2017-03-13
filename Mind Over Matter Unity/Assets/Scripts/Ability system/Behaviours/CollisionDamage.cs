@@ -12,7 +12,11 @@ public class CollisionDamage : AbilityBehaviour {
         baseEffectDamage = baseEffectDmg;
     }
 
-    public override void Action(GameObject player) {
+    public override void Action(GameObject user, Ability ability) {
+        Animator anim = user.GetComponent<Animator>();
 
+        AbilityCollision ac = user.AddComponent<AbilityCollision>();
+        ac.User = user;
+        ac.Action(ability);
     }
 }

@@ -16,6 +16,7 @@ public class EnemyInformation {
                     movementSpeed;
     private bool isDead,
                     isDamaged;
+    private Vector2 direcion;
     
     public EnemyInformation(string eName, string eDescription, int mHealth, int eWeight, int eBaseDamage, float attackRad, float terretory, float speed) {
         this.name = eName;
@@ -45,4 +46,5 @@ public class EnemyInformation {
     public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool IsDamaged { get { return isDamaged; } set { isDamaged = value; } }
+    public Vector2 Direction{ get { return direcion; } set { direcion = value; } }
 }

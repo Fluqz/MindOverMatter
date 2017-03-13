@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerInput {
 
-    private Movement movement;
+    private PlayerMovement movement;
     private PlayerAbilities playerAbilities;
 
     private Vector2 input;
@@ -58,7 +58,7 @@ public class PlayerInput {
     }
     // Y
     public void Ability3() {
-        if (Input.GetButton("Jump") && PlayerInformation.Abilities[2].Useable) {
+        if (Input.GetButtonDown("Jump") && PlayerInformation.Abilities[2].Useable) {
             Debug.Log(PlayerInformation.Abilities[2].Name + " " + PlayerInformation.Abilities[2].Index);
             playerAbilities.UseAbility(PlayerInformation.Abilities[2]);
         }
@@ -86,7 +86,7 @@ public class PlayerInput {
     
 
 
-    public Movement Movement { get { return movement; } set { movement = value; } }
+    public PlayerMovement Movement { get { return movement; } set { movement = value; } }
     public PlayerAbilities PlayerAbilities { get { return playerAbilities; } set { playerAbilities = value; } }
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool InGame { get { return inGame; } set { inGame = value; } }

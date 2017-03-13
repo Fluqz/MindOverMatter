@@ -8,7 +8,7 @@ public class SwordThrust : Ability {
                           description = "A powerfull sword hit.";
     private const int effectDamage = 70;
     private const float dotDamage = 5,
-                        effectDuration = 2f,
+                        effectDuration = .4f,
                         dotDuration = .3f,
                         cooldown = .2f,
                         range = .5f,
