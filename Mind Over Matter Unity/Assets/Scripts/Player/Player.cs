@@ -22,6 +22,9 @@ public class Player : MonoBehaviour {
     private PlayerInput playerInput;
     private PlayerAbilities playerAbilities;
 
+    private GameObject shit;
+
+
     void InitPlayer() {
 
         isDead = false;
@@ -50,6 +53,8 @@ public class Player : MonoBehaviour {
         InitPlayer();
         playerInput.Movement = new PlayerMovement(movementSpeed, this.gameObject);
 
+
+        shit = Resources.Load("Prefabs/Abilities/Shit") as GameObject;
     }
 
     void Start() {
@@ -64,6 +69,16 @@ public class Player : MonoBehaviour {
         PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
         PlayerInformation.Position = this.gameObject.transform.position;
 
+        if (Input.GetKeyDown(KeyCode.R)) {
+            if (PlayerInformation.Items.Count >= 0) {
+                PlayerInformation.Items.RemoveAt(PlayerInformation.Items.Count - 1);
+                Vector3 position = new Vector3(this.transf.position.x + ((-1) * (PlayerInformation.Direction.x * 1.5f)), this.transf.position.y + ((-1) * (PlayerInformation.Direction.y * 1.5f)), 0);
+
+                Rigidbody2D shiet = Instantiate(shit, position, Quaternion.identity) as Rigidbody2D;
+            }
+        }
+
+
         if (currentHealth <= 0)
             Death();
     }
@@ -72,6 +87,12 @@ public class Player : MonoBehaviour {
         playerInput.FixedUpdate();
     }
 
+    void OnGUI() {
+        string text = "";
+        if(PlayerInformation.Items.Count > 0)
+            text = GUI.TextField(new Rect(400, 200, 100, 50), PlayerInformation.Items.Count.ToString());
+        
+    }
 
     public void TakeDamage(float damage) {
         //Debug.Log(damage + " on player");

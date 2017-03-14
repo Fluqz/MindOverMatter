@@ -15,7 +15,6 @@ public class Meele : AbilityBehaviour {
     private GameObject prefab;
 
     private float timeStamp;
-    private Vector2 adjustToCenter = new Vector2(.5f, 1);
 
     public Meele(float hitRange, float effectDmg, GameObject prefab)
         : base(new BasicObjectInformation(name, description), impactTime) {
@@ -30,7 +29,7 @@ public class Meele : AbilityBehaviour {
 
         Vector2 direction = PlayerInformation.Direction;
 
-        Vector3 swordHitPosition = new Vector3(user.transform.position.x + adjustToCenter.x, user.transform.position.y + adjustToCenter.y, 0);
+        Vector3 swordHitPosition = new Vector3(user.transform.position.x, user.transform.position.y, 0);
 
         Vector3 position = new Vector3(swordHitPosition.x + (direction.x * range), swordHitPosition.y + (direction.y * range), 0);
 

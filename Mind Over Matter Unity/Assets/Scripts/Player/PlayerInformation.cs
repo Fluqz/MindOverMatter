@@ -15,6 +15,8 @@ public static class PlayerInformation {
     private static Ability[] abilities;
 
     private static GameObject playerGO;
+
+    private static List<Item> items = new List<Item>();
     
     public static void TakeDamage(int damage) {
         currentHealth -= damage;
@@ -22,6 +24,14 @@ public static class PlayerInformation {
 
     public static void GetHeal(int heal) {
         currentHealth += heal;
+    }
+
+    public static void AddItem(Item item) {
+        items.Add(item);
+    }
+
+    public static void RemoveItem(Item item) {
+        items.Remove(item);
     }
 
     public static string Name { get; set; }
@@ -33,4 +43,5 @@ public static class PlayerInformation {
     public static Vector2 Direction { get; set; }
     public static Ability[] Abilities { get; set; }
     public static GameObject PlayerGO { get; set; }
+    public static List<Item> Items { get { return items; } }
 }

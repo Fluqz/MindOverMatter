@@ -53,9 +53,6 @@ public class Enemy : MonoBehaviour {
         ai.FixedUpdate();
     }
 
-    void OnGUI() {
-    }
-
     void OnCollisionEnter2D(Collision2D other) {
         if (other.transform.CompareTag("Player"))
             movement.MovementEnabled = false;
