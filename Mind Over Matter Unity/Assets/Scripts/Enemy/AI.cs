@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-public class AI : MonoBehaviour{
+public class AI {
 
     private Stopwatch stopwatch;
 
@@ -43,26 +43,30 @@ public class AI : MonoBehaviour{
     }
 
     public void FixedUpdate() {
+        if (inCombat) {
+            movement.Move(Tools.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), destination);
+            enemyInfo.Direction = movement.Direction;
 
-        if(timeStamp < Time.time) {
+        }
+    }
+
+    public void Update() {
+
+        if (timeStamp < Time.time) {
             destination = PlayerInformation.Position;
             timeStamp = Time.time + checkRate;
         }
 
-
-            
         if (!CheckTerritory(0.5f)) {
             inCombat = CheckTerritory(enemyInfo.TerretoryRadius);
             movement.IsWalking = inCombat;
 
             if (inCombat) {
                 anim.SetBool("EnteredTerretory", inCombat);
-                movement.Move(Tools.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), destination);
-                enemyInfo.Direction = movement.Direction;
 
                 foreach (Ability a in abilities) {
                     //if (CheckTerritory(a.Range)) {
-                    if (CheckTerritory(10f) && !CheckTerritory(5f) && a.Useable) { 
+                    if (CheckTerritory(10f) && !CheckTerritory(5f) && a.Useable) {
                         canAttack = true;
                         attack.UseAbility(a);
                     }

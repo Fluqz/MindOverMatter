@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour {
     private Camera cam;
     private Vector3 currentCameraPosition;
     private float followSpeed = 2.7f;
-    private int ppu = 64;
+    private int ppu = 128;
     private Player p;
 
 	void Awake(){

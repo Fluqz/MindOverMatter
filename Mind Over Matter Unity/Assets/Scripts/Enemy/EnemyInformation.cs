@@ -17,17 +17,27 @@ public class EnemyInformation {
     private bool isDead,
                     isDamaged;
     private Vector2 direcion;
+
     
-    public EnemyInformation(string eName, string eDescription, int mHealth, int eWeight, int eBaseDamage, float attackRad, float terretory, float speed) {
-        this.name = eName;
-        this.description = eDescription;
-        this.maxHealth = mHealth;
-        this.weight = eWeight;
-        this.damage = eBaseDamage;
-        this.attackRadius = attackRad;
-        this.terretoryRadius = terretory;
-        this.movementSpeed = speed;
-        
+    public EnemyInformation(string name) {
+        EnemyXMLContainer enemies = EnemyStorage.Enemies;
+        foreach(EnemyXML e in enemies.enemies) {
+            if (name == e.name) {
+                Load(e);
+            }
+        }        
+    }
+
+    void Load(EnemyXML enemy) {
+        this.name = enemy.name;
+        this.description = enemy.description;
+        this.maxHealth = enemy.health;
+        this.weight = enemy.weight;
+        this.damage = enemy.attackDamage;
+        this.attackRadius = enemy.attackRadius;
+        this.terretoryRadius = enemy.terretoryRadius;
+        this.movementSpeed = float.Parse(enemy.movementSpeed);
+
         this.currentHealth = this.maxHealth;
         this.isDead = false;
         this.isDamaged = false;

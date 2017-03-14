@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EnemyContainer>
+  <Enemies>
+    <Enemy name="Tek">
+      <Description>Fast, not funny guy</Description>
+      <Health>200</Health>
+      <Weight>60</Weight>
+      <AttackDamage>20</AttackDamage>
+      <AttackRadius>3</AttackRadius>
+      <TerretoryRadius>14</TerretoryRadius>
+      <MovementSpeed>4</MovementSpeed>
+    </Enemy>
+    <Enemy name="Crawling Guy">
+      <Description>Slow fucker</Description>
+      <Health>100</Health>
+      <Weight>40</Weight>
+      <AttackDamage>16</AttackDamage>
+      <AttackRadius>3</AttackRadius>
+      <TerretoryRadius>10</TerretoryRadius>
+      <MovementSpeed>3</MovementSpeed>
+    </Enemy>
+    <Enemy name="Painful Creature">
+      <Description>Big terrible creature</Description>
+      <Health>350</Health>
+      <Weight>100</Weight>
+      <AttackDamage>40</AttackDamage>
+      <AttackRadius>5</AttackRadius>
+      <TerretoryRadius>17</TerretoryRadius>
+      <MovementSpeed>2</MovementSpeed>
+    </Enemy>
+    <Enemy name="Dancing Men">
+      <Description>2 Men Dancing</Description>
+      <Health>400</Health>
+      <Weight>150</Weight>
+      <AttackDamage>30</AttackDamage>
+      <AttackRadius>6</AttackRadius>
+      <TerretoryRadius>12</TerretoryRadius>
+      <MovementSpeed>1</MovementSpeed>
+    </Enemy>
+  </Enemies>
+</EnemyContainer>

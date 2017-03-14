@@ -26,10 +26,14 @@ public class Enemy : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        
+    }
+
+    void Start() {
         //abilities.Add(new Teleport(anim, 0));
         abilities.Add(new EnergyShot(anim, 0));
 
-        enemyInfo = EnemyStorage.LoadEnemyInformation(transf.name);
+        enemyInfo = new EnemyInformation(this.gameObject.name);
         movement = new EnemyMovement(enemyInfo.MovementSpeed, this.gameObject);
         ai = new AI(enemyInfo, this.gameObject, abilities, movement);
 
@@ -40,10 +44,8 @@ public class Enemy : MonoBehaviour {
         healthbar.fillAmount = 1;
     }
 
-    void Start() {
-    }
-
     void Update() {
+        ai.Update();
 
         if (enemyInfo.CurrentHealth <= 0)
             Death();

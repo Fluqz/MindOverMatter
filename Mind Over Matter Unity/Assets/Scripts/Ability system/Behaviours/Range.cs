@@ -25,7 +25,6 @@ public class Range : AbilityBehaviour {
 
     public override void Action(GameObject user, Ability ability) {
         Animator anim = user.GetComponent<Animator>();
-        anim.SetTrigger("isAttacking");
         Vector2 direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
         //Sprite rotation
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y*(-1), direction.x*(-1)) * Mathf.Rad2Deg);

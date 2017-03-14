@@ -30,7 +30,7 @@ public class EnemyAttack {
 
         ability.Useable = false;
         isAttacking = true;
-        ability.Anim.SetTrigger("Ability " + (ability.Index + 1));
+        //ability.Anim.SetTrigger("Ability " + (ability.Index + 1));
 
         Job.make(CastTime(ability));
     }
