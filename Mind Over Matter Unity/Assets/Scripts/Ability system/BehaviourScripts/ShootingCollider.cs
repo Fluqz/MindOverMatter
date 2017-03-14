@@ -57,6 +57,7 @@ public class ShootingCollider : MonoBehaviour {
 
     void DestroyGameObject() {
         colliders = null;
+        Tools.EmptyColliderList();
         Destroy(this.gameObject);
     }
 

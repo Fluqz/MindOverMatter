@@ -34,6 +34,7 @@ public class Meele : AbilityBehaviour {
         Vector3 position = new Vector3(swordHitPosition.x + (direction.x * range), swordHitPosition.y + (direction.y * range), 0);
 
         GameObject sword = GameObject.Instantiate(prefab, position, Quaternion.identity) as GameObject;
+        sword.transform.parent = user.transform;
 
         SwordCollider swordCol = sword.GetComponent<SwordCollider>();
         swordCol.User = user;

@@ -57,6 +57,9 @@ TagManager:
   - name: Environment
     uniqueID: 2452784681
     locked: 0
+  - name: Ability
+    uniqueID: 1588427641
+    locked: 0
   - name: Enemy
     uniqueID: 4184558005
     locked: 0
