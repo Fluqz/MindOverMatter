@@ -74,17 +74,18 @@ public class Player : MonoBehaviour {
                 PlayerInformation.Items.RemoveAt(PlayerInformation.Items.Count - 1);
                 Vector3 position = new Vector3(this.transf.position.x + ((-1) * (PlayerInformation.Direction.x * 1.5f)), this.transf.position.y + ((-1) * (PlayerInformation.Direction.y * 1.5f)), 0);
 
-                Rigidbody2D shiet = Instantiate(shit, position, Quaternion.identity) as Rigidbody2D;
+                GameObject shiet = Instantiate(shit, position, Quaternion.identity);
             }
         }
 
+        playerInput.Update();
 
         if (currentHealth <= 0)
             Death();
     }
 
 	void FixedUpdate () {
-        playerInput.FixedUpdate();
+        playerInput.Move();
     }
 
     void OnGUI() {

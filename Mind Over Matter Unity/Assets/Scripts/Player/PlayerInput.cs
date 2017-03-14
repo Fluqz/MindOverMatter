@@ -17,26 +17,24 @@ public class PlayerInput {
         isDead = false;
     }
 
-    public void FixedUpdate() {
+    public void Update() {
         if (!isDead && inGame) {
-
-            Move();
 
             Ability1();
             Ability2();
             Ability3();
             Ability4();
-
-            
         }
     }
 
     // WALK - LeftStick
     public void Move() {
-        this.input.x = Input.GetAxisRaw("Horizontal");
-        this.input.y = Input.GetAxisRaw("Vertical");
-        movement.Move(this.input);
-        movement.SetPlayerDirection();
+        if (!isDead && inGame) {
+            this.input.x = Input.GetAxisRaw("Horizontal");
+            this.input.y = Input.GetAxisRaw("Vertical");
+            movement.Move(this.input);
+            movement.SetPlayerDirection();
+        }
     }
 
     // 

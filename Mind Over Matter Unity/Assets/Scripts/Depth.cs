@@ -36,7 +36,7 @@ public class Depth : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D other) {
         overlaps = false;
-        CheckPositionY(false);
+        //CheckPositionY(false);
         Tools.EmptyColliderList();
         StopCoroutine(UpdateWhileOverlapping());
     }
