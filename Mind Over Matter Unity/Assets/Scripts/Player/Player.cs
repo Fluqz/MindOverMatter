@@ -4,6 +4,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    Bleeding blood;
+
+
     private int maxHealth, currentHealth;
     private bool isDead, isDamaged;
     // Movement speed
@@ -97,6 +100,7 @@ public class Player : MonoBehaviour {
 
     public void TakeDamage(int damage) {
         Debug.Log(damage + "Damage on player with " + currentHealth);
+        
         currentHealth -= damage;
         isDamaged = true;
         healthbar.ReduceHealthbar(currentHealth, maxHealth);
