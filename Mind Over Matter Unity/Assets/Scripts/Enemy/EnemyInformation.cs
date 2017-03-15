@@ -22,7 +22,7 @@ public class EnemyInformation {
     public EnemyInformation(string name) {
         EnemyXMLContainer enemies = EnemyStorage.Enemies;
         foreach(EnemyXML e in enemies.enemies) {
-            if (name == e.name) {
+            if (name.Contains(e.name)) {
                 Load(e);
             }
         }        
