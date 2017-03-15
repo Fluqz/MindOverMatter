@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 60288027285723958}
   - component: {fileID: 60433573672455398}
   m_Layer: 13
-  m_Name: Crawling Guy
+  m_Name: Crawling guy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
