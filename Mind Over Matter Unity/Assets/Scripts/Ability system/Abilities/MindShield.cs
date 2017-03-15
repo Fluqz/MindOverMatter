@@ -8,12 +8,12 @@ public class MindShield : Ability {
     private const float blockingDamage = 100f,
                         cooldown = 7f,
                         radius = 2f,
-                        effectDuration = 3f,
-                        effectDamage = 10f,
                         damageTickDuration = 1f,
                         slowPercentage = 30f,
                         timeToCast = 1f,
                         duration = 5f;
+    private const int effectDuration = 3;
+    private const int effectDamage = 10;
 
     private GameObject aoe = Resources.Load("Prefabs/Abilities/AOE") as GameObject;
     private GameObject snare = Resources.Load("Prefabs/Abilities/AOE") as GameObject;

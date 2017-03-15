@@ -6,8 +6,8 @@ public class EnergyShot : Ability {
 
     public const string name = "Energy Shot",
                         description = "A energy shot dealing high damage.";
-    private const float effectDamage = 10f,
-                        abilityDuration = 10f,
+    private const int effectDamage = 10;
+    private const float abilityDuration = 10f,
                         cooldown = 0f,
                         castTime = 3f,
                         distance = 30f,

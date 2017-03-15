@@ -6,7 +6,7 @@ public class Healthbar : MonoBehaviour {
 
     public Image content;
 
-    public void ReduceHealthbar(float currentHealth, float MaxHealth, float minHealth) {
-        content.fillAmount = ((currentHealth - minHealth) * (1 - 0) / (MaxHealth - minHealth) + 0);
+    public void ReduceHealthbar(float currentHealth, float MaxHealth) {
+        content.fillAmount = ((currentHealth - 0) * (1 - 0) / (MaxHealth - 0) + 0);
     }
 }

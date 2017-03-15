@@ -6,7 +6,6 @@ public class SmokeBomb : Ability {
     private const string name = "Smoke Bomb",
                             description = "";
     private const float cooldown = 5f,
-                        damage = 5f,
                         abilityDuration = 5f,
                         effectDuration = 4f,
                         tickDuration = 1f,
@@ -15,6 +14,8 @@ public class SmokeBomb : Ability {
                         timeToCast = 1f,
                         range = 9f, 
                         travelSpeed = 5f;
+    private const int damage = 5;
+
     private GameObject shotPrefab = Resources.Load("") as GameObject;
     private GameObject slowPrefab = Resources.Load("") as GameObject;
     private GameObject dotPrefab = Resources.Load("") as GameObject;

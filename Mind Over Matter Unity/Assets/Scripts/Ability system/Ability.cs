@@ -8,8 +8,8 @@ public class Ability {
 
     private string name,
                     description;
-    private float damage,
-                    castTime,
+    private int damage;
+    private float castTime,
                     abilityDuration,
                     cooldown,
                     range;
@@ -22,7 +22,7 @@ public class Ability {
     private Animator anim;
     private GameObject user;
 
-    public Ability(string name, string description, float damage, float castTime, float abilityDuration, float cooldown) {
+    public Ability(string name, string description, int damage, float castTime, float abilityDuration, float cooldown) {
         this.name = name;
         this.description = description;
         this.damage = damage;
@@ -34,7 +34,7 @@ public class Ability {
         behaviours = new List<AbilityBehaviour>();
     }
 
-    public Ability(string name, string description, float damage, float castTime, float abilityDuration, float cooldown, float range) {
+    public Ability(string name, string description, int damage, float castTime, float abilityDuration, float cooldown, float range) {
         this.name = name;
         this.description = description;
         this.damage = damage;
@@ -106,7 +106,7 @@ public class Ability {
     public string Description { get { return description; } }
     public string LayerMaskName{ get { return layerMaskName; } }
     public string EnemyTag { get { return enemyTag; } }
-    public float Damage { get { return damage; } }
+    public int Damage { get { return damage; } }
     public float CastTime { get { return castTime; } }
     public float AbilityDuration { get { return abilityDuration; } }
     public float Cooldown { get { return cooldown; } }

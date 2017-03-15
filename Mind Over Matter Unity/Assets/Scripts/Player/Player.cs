@@ -13,7 +13,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rigid;
     private Animator anim;
     private Transform transf;
-    private GameObject healthbar;
+    private Healthbar healthbar;
 
     private Vector3 startingPosition;
     private Vector2 startingDirection;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour {
 		rigid = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
         transf = GetComponent<Transform>();
-        healthbar = GameObject.Find("UI/Healthbar");
+        healthbar = GameObject.Find("UI/Healthbar").GetComponent<Healthbar>();
         playerInput = new PlayerInput();
         playerAbilities = playerInput.PlayerAbilities;
 
@@ -95,11 +95,11 @@ public class Player : MonoBehaviour {
         
     }
 
-    public void TakeDamage(float damage) {
-        //Debug.Log(damage + " on player");
-        currentHealth -= (int)damage;
+    public void TakeDamage(int damage) {
+        Debug.Log(damage + "Damage on player with " + currentHealth);
+        currentHealth -= damage;
         isDamaged = true;
-        healthbar.GetComponent<Healthbar>().ReduceHealthbar(currentHealth, maxHealth, 0);
+        healthbar.ReduceHealthbar(currentHealth, maxHealth);
     }
 
     private void BlockDamage(int damage) { }
