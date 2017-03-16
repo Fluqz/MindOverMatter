@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: test
+  m_Name: shit_mat
   m_Shader: {fileID: 4800000, guid: 233baea093beb45d9a4fc0b48f6d19b9, type: 3}
   m_ShaderKeywords: PIXELSNAP_ON _EMISSION _NORMALMAP
   m_LightmapFlags: 1
