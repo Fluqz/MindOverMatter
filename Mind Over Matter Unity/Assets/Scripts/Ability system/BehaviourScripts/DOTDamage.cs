@@ -17,7 +17,7 @@ public class DOTDamage : MonoBehaviour {
     public void MakeDamage(float damage) {
         if (victim && user) {
             if (victim.CompareTag("Player") && user.transform.CompareTag("Enemy"))
-                victim.GetComponent<Player>().TakeDamage((int)damage);
+				victim.GetComponent<Player>().TakeDamage((int)damage, user);
             else if (victim.CompareTag("Enemy") && user.CompareTag("Player"))
                 victim.GetComponent<Enemy>().TakeDamage((int)damage);
         }
