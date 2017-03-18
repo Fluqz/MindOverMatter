@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: 726ea0fc48c52477da465292b7b4b84f
-timeCreated: 1489588223
+guid: 2ee9f78f14309b24eb7e6c7ebc2b928b
+timeCreated: 1489834187
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: derShit_0
-    21300002: derShit_1
-    21300004: derShit_2
-    21300006: derShit_3
-    21300008: derShit_4
-    21300010: derShit_5
+    21300000: birdhouse2_0
+    21300002: birdhouse2_1
+    21300004: birdhouse2_2
+    21300006: birdhouse2_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -41,7 +39,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 14
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -60,7 +58,7 @@ TextureImporter:
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 0
-    compressionQuality: 50
+    compressionQuality: 8
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
@@ -68,23 +66,7 @@ TextureImporter:
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: iPhone
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
+    compressionQuality: 8
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
@@ -92,26 +74,52 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: derShit_0
+      name: birdhouse2_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 33
-        width: 25
-        height: 30
+        x: 0
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: derShit_3
+      name: birdhouse2_1
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1
-        width: 25
-        height: 30
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: birdhouse2_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: birdhouse2_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

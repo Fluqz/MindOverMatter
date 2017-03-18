@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
         PlayerInformation.Position = this.gameObject.transform.position;
 
         if (Input.GetKeyDown(KeyCode.R)) {
-            if (PlayerInformation.Items.Count >= 0) {
+            if (PlayerInformation.Items.Count > 0) {
                 PlayerInformation.Items.RemoveAt(PlayerInformation.Items.Count - 1);
                 Vector3 position = new Vector3(this.transf.position.x + ((-1) * (PlayerInformation.Direction.x * 1.5f)), this.transf.position.y + ((-1) * (PlayerInformation.Direction.y * 1.5f)), 0);
 
@@ -98,9 +98,11 @@ public class Player : MonoBehaviour {
         
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage, GameObject attacker) {
         Debug.Log(damage + "Damage on player with " + currentHealth);
-        
+
+        blood.CreateBloodSplatter(attacker, PlayerInformation.Direction);
+
         currentHealth -= damage;
         isDamaged = true;
         healthbar.ReduceHealthbar(currentHealth, maxHealth);

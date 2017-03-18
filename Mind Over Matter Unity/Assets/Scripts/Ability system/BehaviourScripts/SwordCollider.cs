@@ -32,7 +32,7 @@ public class SwordCollider : MonoBehaviour {
                 isCollided = true;
                 Debug.Log(other.transform.name);
                 if (other.CompareTag("Player"))
-                    user.GetComponent<Player>().TakeDamage((int)ability.Damage);
+                    user.GetComponent<Player>().TakeDamage((int)ability.Damage, user);
                 else if(other.gameObject.CompareTag("Enemy"))
                     other.transform.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
             }

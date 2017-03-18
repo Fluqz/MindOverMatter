@@ -10,21 +10,25 @@ public class CameraControl : MonoBehaviour {
     private Camera cam;
     private Vector3 currentCameraPosition;
     private float followSpeed = 2.7f;
-    private int ppu = 128;
+    private int ppu = 64;
     private Player p;
 
 	void Awake(){
 		cam = GetComponent<Camera> ();
         setCamToOrthographicSize();
-        if (player == null)
-            player = gameObject.transform.Find("Player");
-        p = player.GetComponent<Player>();
 
 
         Debug.Log ("Ortho camera pixel perfect size is: " + cam.orthographicSize);
 
         currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         transform.position = currentPlayerPosition;
+    }
+
+    void Start() {
+
+        if (player == null)
+            player = gameObject.transform.Find("Player");
+        p = player.GetComponent<Player>();
     }
 
 	void Update () {

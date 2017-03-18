@@ -36,7 +36,7 @@ public class ShootingCollider : MonoBehaviour {
 
             if (!other.CompareTag(user.transform.tag)) {
                 if (other.transform.CompareTag("Player") && user.CompareTag("Enemy")) {
-                    other.GetComponent<Player>().TakeDamage((int)ability.Damage);
+                    other.GetComponent<Player>().TakeDamage((int)ability.Damage, user);
                     dot.InitDOT(user, other.gameObject, ability);
                 }
                 else if (other.CompareTag("Enemy") && user.CompareTag("Player")) {
