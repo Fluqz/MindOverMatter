@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Bleeding {
 
-    private GameObject prefab;
+    private Sprite[] sprites;
 
-    public Bleeding(GameObject prefab) {
-        this.prefab = prefab;
+    public Bleeding(Sprite[] sprites) {
+        this.sprites = sprites;
     }
 
-    public void CreateBloodSplatter(Vector3 position, Vector2 direction) {
+    public void CreateBloodSplatter(GameObject victim, Vector2 direction) {
 
         Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y*(-1), direction.x*(-1)) * Mathf.Rad2Deg);
 
-        position = new Vector3(position.x + direction.x * Random.Range(0f, 2f), position.y + direction.y * Random.Range(0f, 2f), position.z);
+        Vector3 position = new Vector3(victim.transform.position.x + direction.x * Random.Range(0f, 2f), victim.transform.position.y + direction.y * Random.Range(0f, 2f), victim.transform.position.z);
 
-        GameObject blood = GameObject.Instantiate(prefab, position, rotation);
+        GameObject blood = GameObject.Instantiate(new GameObject("Blood"), position, rotation);
+        blood.GetComponent<SpriteRenderer>().sprite = null;
     }
 }

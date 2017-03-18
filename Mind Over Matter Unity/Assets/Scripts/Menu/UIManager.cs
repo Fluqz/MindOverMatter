@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour {
 
     public static bool paused;
     private Animator anim;
-    public GameObject pauseMenu, player;
+    public GameObject pauseMenu;
+    private GameObject player;
     PlayerInput playerInput;
 
     void Start() {
