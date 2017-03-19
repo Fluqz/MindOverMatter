@@ -51,7 +51,7 @@ public class DamageOverTime : AbilityBehaviour {
             yield return null;
         }
         
-        dotScript.MakeDamage(effectDamage);
+        dotScript.Damage(effectDamage);
         temp += damageTickDuration;
 
         durationTimer.Stop();
