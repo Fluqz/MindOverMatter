@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
-    public Image healthbar;
 
     EnemyInformation enemyInfo;
 
@@ -22,6 +21,7 @@ public class Enemy : MonoBehaviour {
     private List<Ability> abilities = new List<Ability>();
     
     void Awake() {
+
         transf = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -40,8 +40,6 @@ public class Enemy : MonoBehaviour {
 
         enemyInfo.CurrentHealth = enemyInfo.MaxHealth;
         movement.MovementEnabled = true;
-
-        healthbar.fillAmount = 1;
     }
 
     void Update() {
@@ -70,11 +68,10 @@ public class Enemy : MonoBehaviour {
         Debug.Log(damage + " on "+ gameObject.name);
         enemyInfo.CurrentHealth -= (int)damage;
         anim.SetTrigger("isDamaged");
-        ReduceHealthbar(enemyInfo.CurrentHealth, enemyInfo.MaxHealth, 0);
+        this.gameObject.GetComponentInChildren<Healthbar>().ReduceHealthbar(enemyInfo.CurrentHealth, enemyInfo.MaxHealth);
     }
 
     public void ReduceHealthbar(float currentHealth, float MaxHealth, float minHealth) {
-        healthbar.fillAmount = ((currentHealth - minHealth) * (1 - 0) / (MaxHealth - minHealth) + 0);
     }
 
     private void Death() {

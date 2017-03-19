@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour {
 
     private Camera cam;
     private Vector3 currentCameraPosition;
-    private float followSpeed = 2.7f;
+    private float followSpeed = 2f;
     private int ppu = 64;
     private Player p;
 
@@ -25,7 +25,6 @@ public class CameraControl : MonoBehaviour {
     }
 
     void Start() {
-
         if (player == null)
             player = gameObject.transform.Find("Player");
         p = player.GetComponent<Player>();

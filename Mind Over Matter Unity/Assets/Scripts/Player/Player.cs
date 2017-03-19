@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
 
     void Awake () {
         Instance = this;
+
 		rigid = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
         transf = GetComponent<Transform>();

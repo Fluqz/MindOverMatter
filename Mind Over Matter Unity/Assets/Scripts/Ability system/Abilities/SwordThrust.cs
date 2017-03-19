@@ -7,12 +7,12 @@ public class SwordThrust : Ability {
     private const string name = "Sword Thrust",
                           description = "A powerfull sword hit.";
     private const int effectDamage = 70;
-    private const float dotDamage = 5,
-                        effectDuration = .2f,
+    private const float effectDuration = .2f,
                         dotDuration = .3f,
                         cooldown = .2f,
                         range = .2f,
                         timeToCast = .1f;
+    private int dotDamage = 5;
     private GameObject sword = Resources.Load("Prefabs/Abilities/SwordThrust") as GameObject;
     private GameObject dot = Resources.Load("Prefabs/Abilities/DOT") as GameObject;
 
