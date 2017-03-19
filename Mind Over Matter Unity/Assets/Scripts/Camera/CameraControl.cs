@@ -40,7 +40,8 @@ public class CameraControl : MonoBehaviour {
 
             if (p.PlayerInput.Movement.IsWalking) {
                 currentPlayerPosition -= new Vector3(input.x, input.y, 0);
-                transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed * Time.deltaTime);
+                float distance = Vector3.Distance(currentCameraPosition, currentPlayerPosition);
+                transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed * distance * Time.deltaTime);
             }
             transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed / 2 * Time.deltaTime);
         }
