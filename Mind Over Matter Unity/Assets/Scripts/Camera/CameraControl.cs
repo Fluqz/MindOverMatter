@@ -36,7 +36,7 @@ public class CameraControl : MonoBehaviour {
     IEnumerator SetSwingPoint() {
         while (true) {
             swingPosition = new Vector3(Random.Range(.1f, 1.5f), Random.Range(.1f, 1.5f), 0);
-            Debug.Log(swingPosition);
+
             float wait = Random.Range(2, 6);
             yield return new WaitForSeconds(wait);
         }
