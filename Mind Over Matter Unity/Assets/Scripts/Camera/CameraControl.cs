@@ -12,6 +12,7 @@ public class CameraControl : MonoBehaviour {
     private float followSpeed = 2f;
     private int ppu = 64;
     private Player p;
+    private Vector3 swingPosition;
 
 	void Awake(){
 		cam = GetComponent<Camera> ();
@@ -28,22 +29,40 @@ public class CameraControl : MonoBehaviour {
         if (player == null)
             player = gameObject.transform.Find("Player");
         p = player.GetComponent<Player>();
+
+        Job.make(SetSwingPoint());
+    }
+
+    IEnumerator SetSwingPoint() {
+        while (true) {
+            swingPosition = new Vector3(Random.Range(.1f, 1.5f), Random.Range(.1f, 1.5f), 0);
+            Debug.Log(swingPosition);
+            float wait = Random.Range(2, 6);
+            yield return new WaitForSeconds(wait);
+        }
+    }
+
+    void UpdateSwing() {
+        Vector3.MoveTowards(transform.position, swingPosition, 1f);
     }
 
 	void Update () {
-        Vector2 input = (-1)*(PlayerInformation.Direction * 2f);
 
-		if (player) {
-            currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
-
-
-            if (p.PlayerInput.Movement.IsWalking) {
-                currentPlayerPosition -= new Vector3(input.x, input.y, 0);
-                float distance = Vector3.Distance(currentCameraPosition, currentPlayerPosition);
-                transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed * distance * Time.deltaTime);
-            }
-            transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed / 2 * Time.deltaTime);
+        if (player) {
+            MoveTowardsPlayer();
         }
+    }
+
+    void MoveTowardsPlayer() {
+        Vector2 input = (-1) * (PlayerInformation.Direction * 2f);
+        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+
+        if (p.PlayerInput.Movement.IsWalking) {
+            currentPlayerPosition -= new Vector3(input.x, input.y, 0);
+            float distance = Vector3.Distance(currentCameraPosition, currentPlayerPosition);
+            transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed * distance * Time.deltaTime);
+        }
+        transform.position = currentCameraPosition = Vector3.MoveTowards(transform.position, currentPlayerPosition, followSpeed / 2 * Time.deltaTime);
     }
 
     float smoothstep(float edge0, float edge1, float x) {
