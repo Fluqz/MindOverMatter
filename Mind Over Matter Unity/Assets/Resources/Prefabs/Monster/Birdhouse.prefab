@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 60680912195428466}
   - component: {fileID: 60410552169607816}
   - component: {fileID: 114487679425649356}
-  - component: {fileID: 114261115167737558}
   m_Layer: 13
   m_Name: Birdhouse
   m_TagString: Enemy
@@ -168,9 +167,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.51761675, y: 0.08937073}
-      - {x: 0.60871315, y: 0.6948519}
-      - {x: -0.0010714531, y: 1.0630264}
-      - {x: -0.59717894, y: 0.6703787}
+      - {x: 0.61885166, y: 1.1764307}
+      - {x: 0.009067059, y: 1.5192595}
+      - {x: -0.59717894, y: 1.1722345}
       - {x: -0.55408907, y: 0.16200733}
       - {x: -0.32936907, y: -0.35690117}
       - {x: -0.20242262, y: -0.5492039}
@@ -216,17 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj: {fileID: 60410552169607816}
   objTrigger: {fileID: 60680912195428466}
---- !u!114 &114261115167737558
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1083648694295892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8b5377dac9a241f8864ac5dab099158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114351858990806526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -380,7 +368,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110409291
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ee9f78f14309b24eb7e6c7ebc2b928b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44baa2e017706584da99be273033c4dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
