@@ -55,7 +55,7 @@
       <TerretoryRadius>12</TerretoryRadius>
       <MovementSpeed>2</MovementSpeed>
     </Enemy>
-    <Enemy name="swampwe">
+    <Enemy name="swamper">
       <Description>swamper</Description>
       <Health>400</Health>
       <Weight>150</Weight>
