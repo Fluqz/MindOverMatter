@@ -40,6 +40,7 @@ public class Chest : MonoBehaviour {
     void DestroyChest() {
         render.sprite = brokenChest;
         SpawnLoot(prefab);
+        Destroy(this.gameObject.GetComponent<BoxCollider2D>());
     }
 
     void SpawnLoot(GameObject loot) {
