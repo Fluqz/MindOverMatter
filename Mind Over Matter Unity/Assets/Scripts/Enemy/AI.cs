@@ -22,10 +22,21 @@ public class AI {
     private bool inCombat,
                     canAttack;
 
-    private Vector2 destination;
+    private Vector2 input;
     private float timeStamp, checkRate;
 
     private List<Ability> abilities;
+
+    private AIState state;
+    public enum AIState {
+        IDLE,
+        ISWALKING,
+        ATTACKING,
+        DAMAGED,
+        BLEEDING,
+        RUNNING,
+        DEFENDING
+    }
 
     public AI(EnemyInformation enemyInformation, GameObject enem, List<Ability> abs, EnemyMovement movemen) {
         player = GameObject.FindWithTag("Player");
@@ -40,27 +51,35 @@ public class AI {
         canAttack = false;
         checkRate = .6f;
         timeStamp = Time.time + checkRate;
+        state = AIState.IDLE;
     }
 
     public void FixedUpdate() {
         if (inCombat) {
-            movement.Move(Tools.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position), destination);
+            movement.Move(input);
             enemyInfo.Direction = movement.Direction;
 
         }
     }
 
     public void Update() {
-
         if (timeStamp < Time.time) {
-            destination = PlayerInformation.Position;
             timeStamp = Time.time + checkRate;
         }
 
-        if (!CheckTerritory(0.5f)) {
-            inCombat = CheckTerritory(enemyInfo.TerretoryRadius);
-            movement.IsWalking = inCombat;
+        if (AIState.IDLE == state) {
+            justMoveIt();
+        }
 
+
+
+
+
+
+
+        
+
+        /*
             if (inCombat) {
                 anim.SetBool("EnteredTerretory", inCombat);
 
@@ -72,8 +91,19 @@ public class AI {
                     }
                     else canAttack = false;
                 }
-            }
+            }*/
+    }
+
+
+
+
+    public Vector2 RayCastToPlayer() {
+        int layer = LayerMask.NameToLayer(player.tag);
+        RaycastHit2D hit = Physics2D.Raycast(enemy.transform.position, enemyInfo.Direction, enemyInfo.TerretoryRadius, 1 << layer);
+        if (hit.collider != null) {
+            return Tools.CheckDistanceAToB(enemy.transform.position, hit.collider.transform.position);
         }
+        return Vector2.zero;
     }
 
     public bool CheckTerritory(float radius) {
@@ -82,6 +112,14 @@ public class AI {
         if (disToPlayer <= radius)
             return true;
         return false;
+    }
+
+    public void justMoveIt() {
+        float rndDistance = Random.Range(0, 5);
+        Vector2 rndDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        input = Tools.CheckDistanceAToB(enemy.transform.position, PlayerInformation.Position);
+
+        movement.Move(input);
     }
 
     public List<Ability> Abilities { set { abilities = value; } }

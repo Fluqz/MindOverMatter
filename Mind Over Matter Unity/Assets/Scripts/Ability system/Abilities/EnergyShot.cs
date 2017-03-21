@@ -13,8 +13,8 @@ public class EnergyShot : Ability {
                         distance = 30f,
                         travelSpeed = 14f,
                         dotDuration = 5f,
-                        dotTickDuration = 1f,
-                        dotDamage = 3f;
+                        dotTickDuration = 1f;
+    private int dotDamage = 3;
     private GameObject shot = Resources.Load("Prefabs/Abilities/EnergyShot") as GameObject;
     private GameObject dot = Resources.Load("Prefabs/Abilities/DOT") as GameObject;
 

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212617280760873436}
   - component: {fileID: 111138071236058356}
   - component: {fileID: 95458099525293394}
+  - component: {fileID: 114659587929714196}
   m_Layer: 12
   m_Name: Fackel
   m_TagString: Environment
@@ -39,6 +40,7 @@ GameObject:
   - component: {fileID: 4830012519894986}
   - component: {fileID: 108585221761808124}
   - component: {fileID: 95484668260205462}
+  - component: {fileID: 114480877968803400}
   m_Layer: 12
   m_Name: Point light
   m_TagString: Untagged
@@ -66,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1299732661434254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.589, y: 0, z: -0.264}
+  m_LocalPosition: {x: 0, y: 0, z: -0.264}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4830012519894986}
@@ -99,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 1524442686350594}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0f4f5945312254379b71080fbe7ccf56, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,7 +120,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.97794116, g: 0.7661861, b: 0.53930575, a: 1}
   m_Intensity: 4.8
-  m_Range: 2.02
+  m_Range: 2.61
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -155,6 +157,30 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114480877968803400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524442686350594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45660d05a108549a0926739c4f2463ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 2
+  maxIntensity: 4
+--- !u!114 &114659587929714196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299732661434254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b5377dac9a241f8864ac5dab099158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212617280760873436
 SpriteRenderer:
   m_ObjectHideFlags: 1

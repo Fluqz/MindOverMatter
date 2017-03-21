@@ -14,7 +14,7 @@ public class AbilityCollision : MonoBehaviour {
 
     RaycastHit2D hit;
 
-    Vector2 direcion;
+    Vector2 direction;
 
     public void Action(Ability ability) {
         this.ability = ability;
@@ -25,11 +25,11 @@ public class AbilityCollision : MonoBehaviour {
 
         if (user.CompareTag("Player")) {
             Player player = user.GetComponent<Player>();
-            direcion = PlayerInformation.Direction;
+            direction = PlayerInformation.Direction;
         }
         else if (user.CompareTag("Enemy")) {
             Enemy enemy = user.GetComponent<Enemy>();
-            direcion = enemy.EnemyInfo.Direction;
+            direction = enemy.EnemyInfo.Direction;
         }
 
         RayCast();
@@ -43,7 +43,7 @@ public class AbilityCollision : MonoBehaviour {
 	void RayCast() {
         string tag = ability.GetOppositeTag(user.tag);
         int layer = LayerMask.NameToLayer(tag);
-        hit = Physics2D.Raycast(transform.position, direcion, spaceTravelBehaviour.Distance, 1 << layer);
+        hit = Physics2D.Raycast(transform.position, direction, spaceTravelBehaviour.Distance, 1 << layer);
 
         if (hit.collider == null)
             return;

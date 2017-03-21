@@ -18,7 +18,7 @@ public class EnemyMovement : Movement {
         this.accelaration = .05f;
     }
 
-    public override void Move(Vector2 input, Vector3 destination) {
+    public override void Move(Vector2 input) {
 
         if (MovementEnabled) {
 
@@ -32,7 +32,8 @@ public class EnemyMovement : Movement {
                 if (movementSpeed < MaxMovementSpeed) {
                     movementSpeed += accelaration;
                 }
-                transf.position = Vector3.MoveTowards(transf.position, destination, ((movementSpeed / 100) * reduceMovement) / 45);
+                transf.position = Vector3.MoveTowards(transf.position, PlayerInformation.Position, ((movementSpeed / 100) * reduceMovement) / 45);
+                transf.position = new Vector3(transf.position.x, transf.position.y, transf.position.y);
                 direction = new Vector2(input.x, input.y).normalized;
                 anim.SetFloat("DirectionX", direction.x);
                 anim.SetFloat("DirectionY", direction.y);

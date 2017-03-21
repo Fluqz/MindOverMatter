@@ -14,10 +14,10 @@ public class DOTDamage : MonoBehaviour {
         timeStamp = Time.time + duration;
     }
 
-    public void MakeDamage(float damage) {
+    public void Damage(float damage) {
         if (victim && user) {
             if (victim.CompareTag("Player") && user.transform.CompareTag("Enemy"))
-				victim.GetComponent<Player>().TakeDamage((int)damage, user);
+                victim.GetComponent<Player>().TakeDamage((int)damage, user);
             else if (victim.CompareTag("Enemy") && user.CompareTag("Player"))
                 victim.GetComponent<Enemy>().TakeDamage((int)damage);
         }

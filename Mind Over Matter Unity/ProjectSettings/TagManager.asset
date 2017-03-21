@@ -78,3 +78,6 @@ TagManager:
   - name: Menu
     uniqueID: 2874158961
     locked: 0
+  - name: Actor
+    uniqueID: 158308377
+    locked: 0
