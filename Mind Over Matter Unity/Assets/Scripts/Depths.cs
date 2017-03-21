@@ -5,8 +5,9 @@ using UnityEngine;
 public class Depths : MonoBehaviour {
     	
 	void Start () {
-        if(this.gameObject.GetComponent<Rigidbody2D>())
+        if (this.gameObject.GetComponent<Rigidbody2D>())
             InvokeRepeating("UpdateDepths", 0, 0.1f);
+        else UpdateDepths();
 	}
 
     void UpdateDepths() {

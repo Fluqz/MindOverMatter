@@ -345,57 +345,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &234730866
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 234730867}
-  - component: {fileID: 234730868}
-  m_Layer: 12
-  m_Name: Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &234730867
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234730866}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5608952}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &234730868
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 234730866}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -0.0072529316, y: 0.0350399}
-      - {x: 0.14211512, y: -0.04289055}
-      - {x: 0.166121, y: -0.29736042}
-      - {x: 0.09413314, y: -0.36070824}
-      - {x: 0.0022451878, y: -0.36921692}
-      - {x: -0.10748744, y: -0.3525095}
-      - {x: -0.17200685, y: -0.3011732}
-      - {x: -0.14568949, y: -0.041259766}
 --- !u!1 &249791227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,21 +1523,6 @@ Prefab:
     - target: {fileID: 4000012267579556, guid: 06905b0277aa0d2418f98762b6ff37b5, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 60000010386126984, guid: 06905b0277aa0d2418f98762b6ff37b5,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 60164392463602564, guid: 06905b0277aa0d2418f98762b6ff37b5,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 60000010386126984, guid: 06905b0277aa0d2418f98762b6ff37b5,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06905b0277aa0d2418f98762b6ff37b5, type: 2}
