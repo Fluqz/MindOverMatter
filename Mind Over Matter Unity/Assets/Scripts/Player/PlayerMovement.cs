@@ -8,6 +8,7 @@ public class PlayerMovement : Movement {
         this.MaxMovementSpeed = speed > 0 ? speed : 1;
         this.anim = go.GetComponent<Animator>();
         this.rigid = go.GetComponent<Rigidbody2D>();
+        this.transf = go.GetComponent<Transform>();
 
         this.isWalking = false;
         this.movementEnabled = true;
@@ -22,17 +23,20 @@ public class PlayerMovement : Movement {
 
             isWalking = (Mathf.Abs(input.x) + Mathf.Abs(input.y)) > 0;
 
-            rigid.velocity += Vector2.right * ((MaxMovementSpeed / 100) * reduceMovement) * input.x * Time.fixedDeltaTime;
-            rigid.velocity += Vector2.up * ((MaxMovementSpeed / 100) * reduceMovement) * input.y * Time.fixedDeltaTime;
+            rigid.velocity += (((MaxMovementSpeed / 100) * reduceMovement) * input.normalized * Time.fixedDeltaTime);        
+            PlayerInformation.Position = new Vector3(transf.position.x, transf.position.y, transf.position.y/40f);
+
 
             anim.SetBool("isWalking", isWalking);
             anim.SetFloat("x", input.x);
             anim.SetFloat("y", input.y);
 
             direction = new Vector2(input.x, input.y).normalized;
-            PlayerInformation.Direction = direction;
-            anim.SetFloat("DirectionX", direction.x);
-            anim.SetFloat("DirectionY", direction.y);
+            if (direction != Vector2.zero) {
+                PlayerInformation.Direction = direction;
+                anim.SetFloat("DirectionX", direction.x);
+                anim.SetFloat("DirectionY", direction.y);
+            }
         }
         else {
             this.rigid.velocity = Vector2.zero;

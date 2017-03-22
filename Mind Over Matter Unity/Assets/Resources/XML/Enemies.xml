@@ -53,7 +53,7 @@
       <AttackDamage>30</AttackDamage>
       <AttackRadius>6</AttackRadius>
       <TerretoryRadius>12</TerretoryRadius>
-      <MovementSpeed>2</MovementSpeed>
+      <MovementSpeed>15</MovementSpeed>
     </Enemy>
     <Enemy name="swamper">
       <Description>swamper</Description>

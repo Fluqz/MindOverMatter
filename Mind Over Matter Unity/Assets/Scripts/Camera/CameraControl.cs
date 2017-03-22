@@ -22,8 +22,8 @@ public class CameraControl : MonoBehaviour {
 
         Debug.Log ("Ortho camera pixel perfect size is: " + cam.orthographicSize);
 
-        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, camY);
-        transform.position = currentPlayerPosition;
+        currentCameraPosition = new Vector3(player.transform.position.x, player.transform.position.y, camY);
+        transform.position = currentCameraPosition;
     }
 
     void Start() {

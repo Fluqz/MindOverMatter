@@ -24,9 +24,6 @@ public class SwordCollider : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other) {
 
-        if (Tools.CheckCollidersAsOneGameObejct(other))
-            return;
-
         if (!isCollided) {
             if (!other.CompareTag(user.transform.tag)) {
                 isCollided = true;
@@ -34,7 +31,7 @@ public class SwordCollider : MonoBehaviour {
                 if (other.CompareTag("Player"))
                     user.GetComponent<Player>().TakeDamage((int)ability.Damage, user);
                 else if(other.gameObject.CompareTag("Enemy"))
-                    other.transform.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
+                    other.GetComponentInParent<Enemy>().TakeDamage((int)ability.Damage);
             }
             else if (other.gameObject.CompareTag(user.transform.tag))
                 Physics2D.IgnoreCollision(other, user.GetComponent<Collider2D>());

@@ -11,6 +11,6 @@ public class Depths : MonoBehaviour {
 	}
 
     void UpdateDepths() {
-        this.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+        this.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y/40);
     }
 }

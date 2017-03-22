@@ -2,10 +2,13 @@
 using System.Collections;
 
 public class EnemyMovement : Movement {
-    
-    public EnemyMovement(float speed, GameObject go) {
+
+    private EnemyInformation enemyInfo;
+
+    public EnemyMovement(EnemyInformation enemyInfo, GameObject go) {
+        this.enemyInfo = enemyInfo;
         this.movementSpeed = 0;
-        this.MaxMovementSpeed = speed;
+        this.MaxMovementSpeed = enemyInfo.MovementSpeed;
         this.anim = go.GetComponent<Animator>();
         this.rigid = go.GetComponent<Rigidbody2D>();
         this.transf = go.GetComponent<Transform>();
@@ -15,33 +18,31 @@ public class EnemyMovement : Movement {
         this.onWall = false;
         this.reduceMovement = 100;
         this.direction = new Vector2(0, -1);
-        this.accelaration = .05f;
     }
 
     public override void Move(Vector2 input) {
 
+
         if (MovementEnabled) {
 
             isWalking = (Mathf.Abs(input.x) + Mathf.Abs(input.y)) > 0;
-            anim.SetBool("isWalking", isWalking);
 
+            rigid.velocity += ((MaxMovementSpeed / 100) * reduceMovement) * input.normalized * Time.fixedDeltaTime;
+            enemyInfo.Position = new Vector3(transf.position.x, transf.position.y, transf.position.y/40);
+            
+            anim.SetBool("isWalking", isWalking);
             anim.SetFloat("x", input.x);
             anim.SetFloat("y", input.y);
 
-            if (isWalking) {
-                if (movementSpeed < MaxMovementSpeed) {
-                    movementSpeed += accelaration;
-                }
-                transf.position = Vector3.MoveTowards(transf.position, PlayerInformation.Position, ((movementSpeed / 100) * reduceMovement) / 45);
-                transf.position = new Vector3(transf.position.x, transf.position.y, transf.position.y);
-                direction = new Vector2(input.x, input.y).normalized;
+            direction = new Vector2(input.x, input.y).normalized;
+            if (direction != Vector2.zero) {
                 anim.SetFloat("DirectionX", direction.x);
                 anim.SetFloat("DirectionY", direction.y);
+                enemyInfo.Direction = direction;
             }
         }
         else {
-            if(movementSpeed <= 0)
-                movementSpeed -= accelaration;
+            this.rigid.velocity = Vector2.zero;
         }
     }
 

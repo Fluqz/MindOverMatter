@@ -49,7 +49,7 @@ public class AbilityCollision : MonoBehaviour {
             return;
         else {
             if (tag == "Enemy") {
-                hit.collider.GetComponent<Enemy>().TakeDamage(ability.Damage);
+                hit.collider.GetComponentInParent<Enemy>().TakeDamage(ability.Damage);
             }
             else hit.collider.GetComponent<Player>().TakeDamage(ability.Damage, user);
         }

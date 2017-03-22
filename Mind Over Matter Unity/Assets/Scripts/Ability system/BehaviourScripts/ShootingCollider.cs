@@ -31,16 +31,13 @@ public class ShootingCollider : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (spawned) {
 
-            if (Tools.CheckCollidersAsOneGameObejct(other))
-                return;
-
             if (!other.CompareTag(user.transform.tag)) {
                 if (other.transform.CompareTag("Player") && user.CompareTag("Enemy")) {
                     other.GetComponent<Player>().TakeDamage((int)ability.Damage, user);
                     dot.InitDOT(user, other.gameObject, ability);
                 }
                 else if (other.CompareTag("Enemy") && user.CompareTag("Player")) {
-                    other.GetComponent<Enemy>().TakeDamage((int)ability.Damage);
+                    other.GetComponentInParent<Enemy>().TakeDamage((int)ability.Damage);
                     dot.InitDOT(user, other.gameObject, ability);
                 }
 
@@ -57,7 +54,6 @@ public class ShootingCollider : MonoBehaviour {
 
     void DestroyGameObject() {
         colliders = null;
-        Tools.EmptyColliderList();
         Destroy(this.gameObject);
     }
 

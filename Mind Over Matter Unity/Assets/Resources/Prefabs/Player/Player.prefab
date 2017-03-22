@@ -54,10 +54,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4859071314927712}
-  - component: {fileID: 60235058195543464}
+  - component: {fileID: 58878034229569094}
   m_Layer: 12
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010418179134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.14, y: -8.79, z: 0}
+  m_LocalPosition: {x: 2.884, y: -9.886, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4953857442096002}
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3.83
+  m_LinearDrag: 4.6
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -123,8 +123,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &60235058195543464
-PolygonCollider2D:
+--- !u!58 &58878034229569094
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -134,17 +134,9 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  m_Points:
-    m_Paths:
-    - - {x: -0.013762951, y: 0.29218483}
-      - {x: 0.18768573, y: 0.21100044}
-      - {x: 0.22796631, y: 0.024886131}
-      - {x: 0.13319254, y: -0.07101345}
-      - {x: 0.0022454262, y: -0.11858177}
-      - {x: -0.14329195, y: -0.07257843}
-      - {x: -0.2371068, y: 0.07966328}
-      - {x: -0.17823982, y: 0.23867035}
+  m_Offset: {x: 0, y: 0.12}
+  serializedVersion: 2
+  m_Radius: 0.29
 --- !u!95 &95000014037204820
 Animator:
   serializedVersion: 3
@@ -173,7 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6959bbdc37764599c364f837b810a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
 --- !u!212 &212000012540751358
 SpriteRenderer:
   m_ObjectHideFlags: 1

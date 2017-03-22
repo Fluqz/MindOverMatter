@@ -4,7 +4,6 @@ using System.Collections;
 public class Movement {
     protected float movementSpeed;
     protected float MaxMovementSpeed;
-    protected float accelaration;
     protected float reduceMovement;
     protected bool isWalking;
     protected bool movementEnabled;

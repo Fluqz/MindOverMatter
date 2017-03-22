@@ -53,16 +53,8 @@ public class AI {
         timeStamp = Time.time + checkRate;
         state = AIState.IDLE;
     }
-
+    
     public void FixedUpdate() {
-        if (inCombat) {
-            movement.Move(input);
-            enemyInfo.Direction = movement.Direction;
-
-        }
-    }
-
-    public void Update() {
         if (timeStamp < Time.time) {
             timeStamp = Time.time + checkRate;
         }

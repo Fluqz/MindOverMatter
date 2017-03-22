@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.MovementSpeed = movementSpeed = 15f;
+        PlayerInformation.MovementSpeed = movementSpeed = 18f;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
 
@@ -71,8 +71,7 @@ public class Player : MonoBehaviour {
     }
 
 	void Update() {
-        PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
-        PlayerInformation.Position = new Vector3(transf.position.x, transf.position.y, transf.position.y);
+        PlayerInformation.Position = new Vector3(transf.position.x, transf.position.y, transf.position.y/40);
         transf.position = PlayerInformation.Position;
 
         if (Input.GetKeyDown(KeyCode.R)) {

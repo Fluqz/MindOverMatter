@@ -32,7 +32,6 @@ public class Range : AbilityBehaviour {
         Vector3 userPos = new Vector3(user.transform.position.x, user.transform.position.y, 0);
         // instantiate bullet
         GameObject bullet = GameObject.Instantiate(prefab, userPos, rotation) as GameObject;
-        bullet.transform.parent = user.transform;
         // pass parameters
         ShootingCollider col = bullet.GetComponent<ShootingCollider>();
         // FIring bullet

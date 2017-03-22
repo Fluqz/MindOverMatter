@@ -17,6 +17,7 @@ public class EnemyInformation {
     private bool isDead,
                     isDamaged;
     private Vector2 direcion;
+    private Vector3 position;
 
     
     public EnemyInformation(string name) {
@@ -57,4 +58,5 @@ public class EnemyInformation {
     public bool IsDead { get { return isDead; } set { isDead = value; } }
     public bool IsDamaged { get { return isDamaged; } set { isDamaged = value; } }
     public Vector2 Direction{ get { return direcion; } set { direcion = value; } }
+    public Vector3 Position{ get { return position; } set { position = value; } }
 }

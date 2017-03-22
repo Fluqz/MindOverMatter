@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour {
     PlayerInput playerInput;
 
     void Start() {
-        player = GameObject.FindWithTag("Player");
+        player = PlayerInformation.PlayerGO;
         playerInput = player.GetComponent<Player>().PlayerInput;
         anim = pauseMenu.GetComponentInChildren<Animator>();
         paused = false;

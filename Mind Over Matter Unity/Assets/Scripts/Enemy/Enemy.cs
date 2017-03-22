@@ -12,21 +12,13 @@ public class Enemy : MonoBehaviour {
     protected Animator anim;
     private Transform transf;
 
-    private Vector3 startingPosition;
-    private Vector2 input;
-
     private AI ai;
     private EnemyMovement movement;
 
     private List<Ability> abilities = new List<Ability>();
     
     void Awake() {
-
-        transf = GetComponent<Transform>();
-        rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-
-        
+        anim = GetComponent<Animator>();        
     }
 
     void Start() {
@@ -34,7 +26,7 @@ public class Enemy : MonoBehaviour {
         abilities.Add(new EnergyShot(anim, 0));
 
         enemyInfo = new EnemyInformation(this.gameObject.name);
-        movement = new EnemyMovement(enemyInfo.MovementSpeed, this.gameObject);
+        movement = new EnemyMovement(enemyInfo, this.gameObject);
         ai = new AI(enemyInfo, this.gameObject, abilities, movement);
 
 
@@ -43,7 +35,6 @@ public class Enemy : MonoBehaviour {
     }
 
     void Update() {
-        ai.Update();
 
         if (enemyInfo.CurrentHealth <= 0)
             Death();
