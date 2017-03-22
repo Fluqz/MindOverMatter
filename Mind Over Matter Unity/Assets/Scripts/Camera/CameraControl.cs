@@ -10,6 +10,7 @@ public class CameraControl : MonoBehaviour {
     private Camera cam;
     private Vector3 currentCameraPosition;
     private float followSpeed = 2f;
+    private float camY = -1000;
     private int ppu = 64;
     private Player p;
     private Vector3 swingPosition;
@@ -21,7 +22,7 @@ public class CameraControl : MonoBehaviour {
 
         Debug.Log ("Ortho camera pixel perfect size is: " + cam.orthographicSize);
 
-        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.y);
+        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, camY);
         transform.position = currentPlayerPosition;
     }
 
@@ -35,7 +36,7 @@ public class CameraControl : MonoBehaviour {
 
     IEnumerator SetSwingPoint() {
         while (true) {
-            swingPosition = new Vector3(Random.Range(.1f, 1.5f), Random.Range(.1f, 1.5f), 0);
+            swingPosition = new Vector3(Random.Range(.1f, 1.5f), Random.Range(.1f, 1.5f), camY);
 
             float wait = Random.Range(2, 6);
             yield return new WaitForSeconds(wait);
@@ -55,7 +56,7 @@ public class CameraControl : MonoBehaviour {
 
     void MoveTowardsPlayer() {
         Vector2 input = (-1) * (PlayerInformation.Direction * 2f);
-        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        currentPlayerPosition = new Vector3(player.transform.position.x, player.transform.position.y, camY);
 
         if (p.PlayerInput.Movement.IsWalking) {
             currentPlayerPosition -= new Vector3(input.x, input.y, 0);
