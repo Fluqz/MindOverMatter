@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour {
 		//Move ();
 		rb.velocity += Vector2.right * moveSpeed * Input.GetAxis ("Horizontal") * Time.deltaTime;
 		rb.velocity += Vector2.up * moveSpeed * Input.GetAxis ("Vertical") * Time.deltaTime;
+
+        Debug.Log(Vector2.right);
+        Debug.Log(Vector2.up);
 	}
 
 	void Move() {

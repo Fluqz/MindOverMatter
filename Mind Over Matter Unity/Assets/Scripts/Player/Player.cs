@@ -11,8 +11,7 @@ public class Player : MonoBehaviour {
 
     private int maxHealth, currentHealth;
     private bool isDead, isDamaged;
-    // Movement speed
-    [SerializeField]
+
     private float movementSpeed;
 
 	private Rigidbody2D rigid;
@@ -35,7 +34,7 @@ public class Player : MonoBehaviour {
         PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.MovementSpeed = movementSpeed = 4f;
+        PlayerInformation.MovementSpeed = movementSpeed;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
 
