@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         PlayerInformation.MaxHealth = PlayerInformation.CurrentHealth = currentHealth = maxHealth = 100;
         PlayerInformation.Name = "Kaphale";
         PlayerInformation.Description = "Brain Village guy";
-        PlayerInformation.MovementSpeed = movementSpeed;
+        PlayerInformation.MovementSpeed = movementSpeed = 15f;
         PlayerInformation.PlayerGO = this.gameObject;
         PlayerInformation.Abilities = new Ability[4];
 
