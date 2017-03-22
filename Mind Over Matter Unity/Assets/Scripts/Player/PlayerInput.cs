@@ -33,7 +33,6 @@ public class PlayerInput {
             this.input.x = Input.GetAxisRaw("Horizontal");
             this.input.y = Input.GetAxisRaw("Vertical");
             movement.Move(this.input);
-            movement.SetPlayerDirection();
         }
     }
 
