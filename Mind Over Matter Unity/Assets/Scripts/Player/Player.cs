@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
     private Transform transf;
     private Healthbar healthbar;
 
-    private Vector3 startingPosition;
     private Vector2 startingDirection;
     private Vector2 input;
 
@@ -74,12 +73,13 @@ public class Player : MonoBehaviour {
 
 	void Update() {
         PlayerInformation.Direction = new Vector2(anim.GetFloat("DirectionX"), anim.GetFloat("DirectionY"));
-        PlayerInformation.Position = this.gameObject.transform.position;
+        PlayerInformation.Position = new Vector3(transf.position.x, transf.position.y, transf.position.y);
+        transf.position = PlayerInformation.Position;
 
         if (Input.GetKeyDown(KeyCode.R)) {
             if (PlayerInformation.Items.Count > 0) {
                 PlayerInformation.Items.RemoveAt(PlayerInformation.Items.Count - 1);
-                Vector3 position = new Vector3(this.transf.position.x + ((-1) * (PlayerInformation.Direction.x * 1.5f)), this.transf.position.y + ((-1) * (PlayerInformation.Direction.y * 1.5f)), 0);
+                Vector3 position = new Vector3(this.transf.position.x + ((-1) * (PlayerInformation.Direction.x * 1.5f)), this.transf.position.y + ((-1) * (PlayerInformation.Direction.y * 1.5f)), this.transf.position.y);
 
                 GameObject shiet = Instantiate(shit, position, Quaternion.identity);
             }

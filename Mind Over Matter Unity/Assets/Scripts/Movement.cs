@@ -15,6 +15,7 @@ public class Movement {
     protected Animator anim;
     protected Transform transf;
     protected Rigidbody2D rigid;
+    protected SpriteRenderer render;
 
     public virtual void Move() { }
     public virtual void Move(Vector2 input) { }
